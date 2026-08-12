@@ -13,7 +13,6 @@ func main() {
 	var command string
 	fmt.Scan(&command)
 	if command != "" {
-		command = command + ": command not found"
-		fmt.Println(command)
+		fmt.Println(command[:len(command)-1], ": command not found")
 	}
 }
