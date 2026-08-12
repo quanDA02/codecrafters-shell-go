@@ -61,7 +61,7 @@ func type_command(s string) {
 }
 
 func find_path(file string) string {
-	path, err := exec.LookPath("string")
+	path, err := exec.LookPath(file)
 	if err != nil {
 		return ""
 	}
