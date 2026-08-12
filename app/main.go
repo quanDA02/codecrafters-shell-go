@@ -9,11 +9,14 @@ var _ = fmt.Print
 
 func main() {
 	// TODO: Uncomment the code below to pass the first stage
-	fmt.Print("$ ")
-	var command string
-	fmt.Scan(&command)
-	if command != "" {
-		command = command + ": command not found"
-		fmt.Println(command)
+	for {
+		fmt.Print("$ ")
+		var command string
+		fmt.Scan(&command)
+		if command != "" {
+			command = command + ": command not found"
+			fmt.Println(command)
+		}
 	}
+
 }
