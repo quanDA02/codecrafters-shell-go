@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"os/exec"
 	"slices"
 	"strings"
 )
@@ -38,6 +39,31 @@ func type_command(s string) {
 	if slices.Contains(builtins, s) {
 		fmt.Println(s, "is a shell builtin")
 	} else {
-		fmt.Println(s, "not found")
+		path := find_path(s)
+		if path != "" {
+			fmt.Println(s, "is", path)
+		} else {
+			fmt.Println(s, "not found")
+		}
 	}
+	// found := false
+
+	// for _, command := range builtins {
+	// 	if strings.HasPrefix(s, command) {
+	// 		found = true
+	// 		fmt.Println(command, "is a shell builtin")
+	// 		break
+	// 	}
+	// }
+	// if !found {
+
+	// }
+}
+
+func find_path(file string) string {
+	path, err := exec.LookPath("string")
+	if err != nil {
+		return ""
+	}
+	return path
 }
