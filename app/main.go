@@ -11,7 +11,7 @@ func main() {
 	// TODO: Uncomment the code below to pass the first stage
 	fmt.Print("$ ")
 	var command string
-	fmt.Scan(command)
+	fmt.Scan(&command)
 	if command != "" {
 		fmt.Println(command, ": command not found")
 	}
