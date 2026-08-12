@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 	"strings"
 )
 
@@ -9,12 +11,11 @@ import (
 var _ = fmt.Print
 
 func main() {
-	// TODO: Uncomment the code below to pass the first stage
+	reader := bufio.NewReader(os.Stdin)
 	for {
-		fmt.Print("$ ")
-		var command string
-		fmt.Scan(&command)
 
+		fmt.Print("$ ")
+		command, _ := reader.ReadString('\n')
 		command = strings.TrimSpace(command)
 		//check if command : exit
 		if command == "exit" {
