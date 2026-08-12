@@ -22,9 +22,27 @@ func main() {
 			break
 		} else if strings.HasPrefix(command, "echo ") {
 			fmt.Println(command[5:])
+		} else if strings.HasPrefix(command, "type ") {
+			type_command(command[5:])
 		} else {
 			fmt.Println(command + ": command not found")
 		}
 	}
+}
 
+func type_command(s string) {
+	commands := []string{
+		"type", "exit", "echo",
+	}
+	found := false
+	for _, command := range commands {
+		if strings.HasPrefix(s, command) {
+			found = true
+			fmt.Println(command, "is a shell builtin")
+			break
+		}
+	}
+	if !found {
+		fmt.Println(s, "not found")
+	}
 }
