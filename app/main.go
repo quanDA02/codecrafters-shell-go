@@ -16,6 +16,7 @@ func main() {
 		fmt.Scan(&command)
 
 		command = strings.TrimSpace(command)
+		fmt.Println(command)
 		//check if command : exit
 		if command == "exit" {
 			break
