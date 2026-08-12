@@ -18,9 +18,16 @@ func main() {
 		//check if command : exit
 		if command == "exit" {
 			break
+		} else if strings.HasPrefix(command, "echo ") {
+			echo(command[5:])
+		} else {
+			command = strings.TrimSpace(command)
+			fmt.Println(command + ": command not found")
 		}
-		command = strings.TrimSpace(command)
-		fmt.Println(command + ": command not found")
 	}
 
+}
+
+func echo(s string) {
+	fmt.Println(s)
 }
