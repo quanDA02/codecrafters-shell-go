@@ -28,7 +28,7 @@ func main() {
 		if command == "exit" {
 			break
 		} else if strings.HasPrefix(command, "echo ") {
-			fmt.Println(strings.Join(tokens[1:], ""))
+			fmt.Println(strings.Join(tokens[1:], " "))
 		} else if strings.HasPrefix(command, "type ") {
 			typeCommand(command[5:])
 		} else {
