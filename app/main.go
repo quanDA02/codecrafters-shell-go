@@ -43,8 +43,9 @@ func main() {
 func echo(s []string) {
 	text := strings.Join(s, " ")
 	for i, cmd := range s {
+		fmt.Println(cmd)
 		if cmd == ">" || cmd == "1>" {
-			fmt.Println(cmd)
+
 			err := os.WriteFile(s[i], []byte(text), 0666)
 			if err != nil {
 				log.Fatal(err)
