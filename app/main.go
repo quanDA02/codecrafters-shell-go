@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"slices"
 	"strings"
 
@@ -52,9 +53,18 @@ func echo(s string) {
 	}
 	text := strings.Join(result, "")
 	for i, cmd := range tokens {
-		if strings.HasPrefix(cmd, ">") {
-			fmt.Println("yes")
-			err := os.WriteFile(tokens[i+1], []byte(text), 0666)
+		if cmd == ">" || cmd == "1>" {
+			fmt.Println(i)
+
+			filename := tokens[i+1]
+			fmt.Println(filename)
+			//create directory
+			err := os.MkdirAll(filepath.Dir(filename), 0750)
+			if err != nil {
+				log.Fatal(err)
+			}
+			//create file
+			err = os.WriteFile(filename, []byte(text), 0666)
 			if err != nil {
 				log.Fatal(err)
 			}
