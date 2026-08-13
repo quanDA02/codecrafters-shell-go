@@ -42,11 +42,19 @@ func main() {
 
 func echo(s string) {
 	tokens := strings.Split(s, " ")
-	text := strings.Join(tokens, " ")
+
+	t, _ := shlex.Split(s)
+	var result []string
+	for i, cmd := range t {
+		if strings.HasPrefix(cmd, ">") {
+			result = t[1:i]
+		}
+	}
+	fmt.Println(strings.Join(result, ""))
 	for i, cmd := range tokens {
 		if strings.HasPrefix(cmd, ">") {
 			fmt.Println("yes")
-			err := os.WriteFile(tokens[i], []byte(text), 0666)
+			err := os.WriteFile(tokens[i+1], []byte("cum"), 0666)
 			if err != nil {
 				log.Fatal(err)
 			}
@@ -55,7 +63,7 @@ func echo(s string) {
 		}
 	}
 
-	fmt.Println(text)
+	fmt.Println()
 }
 
 func typeCommand(s string) {
