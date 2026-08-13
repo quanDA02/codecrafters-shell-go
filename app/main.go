@@ -54,7 +54,6 @@ func echo(s string) {
 		}
 	}
 
-	fmt.Println(text)
 }
 
 func typeCommand(s string) {
