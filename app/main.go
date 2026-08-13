@@ -43,10 +43,6 @@ func main() {
 	}
 }
 
-func echo(s string) {
-
-}
-
 func typeCommand(s string) {
 	builtins := []string{
 		"type", "exit", "echo",
@@ -88,23 +84,4 @@ func execute(name string, args []string) {
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	cmd.Run()
-}
-
-func filter(s string) string {
-	var tokens []string
-	if strings.HasPrefix(s, "'") {
-		start := strings.Index(s, "'")
-		end := strings.Index(s[start+1:], "'")
-		tokens = append(tokens, s[start+1:start+1+end])
-	} else if strings.HasPrefix(s, "'") {
-	}
-
-	result := strings.Join(tokens, "")
-	return result
-}
-
-func singeQuotes(s string) string {
-	//check for singe quote
-	quote := strings.Trim(s, "'")
-	return quote
 }
