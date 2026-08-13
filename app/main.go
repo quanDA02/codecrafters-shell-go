@@ -7,6 +7,8 @@ import (
 	"os/exec"
 	"slices"
 	"strings"
+
+	"github.com/google/shlex"
 )
 
 // Ensures gofmt doesn't remove the "fmt" import in stage 1 (feel free to remove this!)
@@ -20,8 +22,8 @@ func main() {
 		command, _ := reader.ReadString('\n')
 		command = strings.TrimSpace(command)
 
-		tokens := strings.Split(command, " ")
-
+		tokens, _ := shlex.Split(command)
+		fmt.Println(tokens)
 		//check if command : exit
 		if command == "exit" {
 			break
@@ -86,12 +88,15 @@ func execute(name string, args []string) {
 }
 
 func filter(s string) string {
-	var result string
+	var tokens []string
 	if strings.HasPrefix(s, "'") {
 		start := strings.Index(s, "'")
 		end := strings.Index(s[start+1:], "'")
-		result += s[start+1 : start+1+end]
+		tokens = append(tokens, s[start+1:start+1+end])
+	} else if strings.HasPrefix(s) {
 	}
+
+	result := strings.Join(tokens, "")
 	return result
 }
 
