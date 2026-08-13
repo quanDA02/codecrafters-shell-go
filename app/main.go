@@ -26,7 +26,8 @@ func main() {
 		if command == "exit" {
 			break
 		} else if strings.HasPrefix(command, "echo ") {
-			fmt.Println(command[5:])
+			text := singeQuotes(command[5:])
+			fmt.Println(text)
 		} else if strings.HasPrefix(command, "type ") {
 			typeCommand(command[5:])
 		} else {
@@ -85,6 +86,7 @@ func execute(name string, args []string) {
 }
 
 func singeQuotes(input string) string {
-	var quote string
+	//check for singe quote
+	quote := strings.Trim(input, "'")
 	return quote
 }
