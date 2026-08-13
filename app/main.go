@@ -42,7 +42,7 @@ func main() {
 
 func echo(s string) {
 	tokens := strings.Split(s, " ")
-	text := strings.Join(s, " ")
+	text := strings.Join(tokens, " ")
 	for i, cmd := range tokens {
 		fmt.Println(cmd)
 		if cmd == ">" || cmd == "1>" {
