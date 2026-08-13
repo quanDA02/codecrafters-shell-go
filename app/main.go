@@ -22,12 +22,13 @@ func main() {
 		command, _ := reader.ReadString('\n')
 		command = strings.TrimSpace(command)
 
+		//literally the strings split but on crack
 		tokens, _ := shlex.Split(command)
 		//check if command : exit
 		if command == "exit" {
 			break
 		} else if strings.HasPrefix(command, "echo ") {
-			fmt.Println(command[5:])
+			fmt.Println(strings.Join(tokens[1:], ""))
 		} else if strings.HasPrefix(command, "type ") {
 			typeCommand(command[5:])
 		} else {
@@ -40,6 +41,10 @@ func main() {
 
 		}
 	}
+}
+
+func echo(s string) {
+
 }
 
 func typeCommand(s string) {
