@@ -78,5 +78,10 @@ func findPath(file string) string {
 }
 
 func execute(name string, args []string) {
-	exec.Command(name, args...)
+	// exec.Command(name, args...)
+	num := 1
+	for range args {
+		num++
+	}
+	fmt.Println("Program was passed ")
 }
