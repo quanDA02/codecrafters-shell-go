@@ -44,16 +44,18 @@ func echo(s string) {
 	tokens := strings.Split(s, " ")
 	text := strings.Join(tokens, " ")
 	for i, cmd := range tokens {
-		if cmd == ">" || cmd == "1>" {
+		if strings.HasPrefix(cmd, ">") {
 			fmt.Println("yes")
 			err := os.WriteFile(tokens[i], []byte(text), 0666)
 			if err != nil {
 				log.Fatal(err)
 			}
+
 			return
 		}
 	}
 
+	fmt.Println(text)
 }
 
 func typeCommand(s string) {
