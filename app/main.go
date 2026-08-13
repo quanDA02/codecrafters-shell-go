@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"os"
 	"os/exec"
 	"slices"
@@ -28,7 +29,7 @@ func main() {
 		if command == "exit" {
 			break
 		} else if strings.HasPrefix(command, "echo ") {
-			fmt.Println(strings.Join(tokens[1:], " "))
+			echo(tokens[1:])
 		} else if strings.HasPrefix(command, "type ") {
 			typeCommand(command[5:])
 		} else {
@@ -41,6 +42,21 @@ func main() {
 
 		}
 	}
+}
+
+func echo(s []string) {
+	text := strings.Join(s, " ")
+	for i, cmd := range s {
+		if cmd == ">" || cmd == "1>" {
+			err := os.WriteFile(s[i], []byte(text), 0666)
+			if err != nil {
+				log.Fatal(err)
+			}
+			return
+		}
+	}
+
+	fmt.Println(text)
 }
 
 func typeCommand(s string) {
