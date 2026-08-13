@@ -31,9 +31,9 @@ func main() {
 			typeCommand(command[5:])
 		} else {
 			path := findPath(tokens[0])
-			fmt.Println(path)
+			fmt.Println(tokens[0])
 			if path != "" {
-				execute(tokens[0], tokens[1], tokens[2])
+				execute(tokens[0], tokens[1:])
 			} else {
 				fmt.Println(command + ": command not found")
 			}
@@ -78,6 +78,6 @@ func findPath(file string) string {
 	return path
 }
 
-func execute(name string, arg1 string, arg2 string) {
-	exec.Command(name, arg1, arg2)
+func execute(name string, args []string) {
+	exec.Command(name, args...)
 }
