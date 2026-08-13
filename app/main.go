@@ -23,13 +23,11 @@ func main() {
 		command = strings.TrimSpace(command)
 
 		tokens, _ := shlex.Split(command)
-		fmt.Println(tokens)
 		//check if command : exit
 		if command == "exit" {
 			break
 		} else if strings.HasPrefix(command, "echo ") {
-			text := filter(command[5:])
-			fmt.Println(text)
+			fmt.Println(command[5:])
 		} else if strings.HasPrefix(command, "type ") {
 			typeCommand(command[5:])
 		} else {
