@@ -79,5 +79,6 @@ func findPath(file string) string {
 
 func execute(name string, args []string) {
 	cmd := exec.Command(name, args...)
+	cmd.Stdout = os.Stdout
 	cmd.Run()
 }
