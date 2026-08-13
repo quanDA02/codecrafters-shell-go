@@ -44,9 +44,8 @@ func echo(s string) {
 	tokens := strings.Split(s, " ")
 	text := strings.Join(tokens, " ")
 	for i, cmd := range tokens {
-		fmt.Println(cmd)
 		if cmd == ">" || cmd == "1>" {
-
+			fmt.Println("yes")
 			err := os.WriteFile(tokens[i], []byte(text), 0666)
 			if err != nil {
 				log.Fatal(err)
