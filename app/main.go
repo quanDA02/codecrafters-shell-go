@@ -93,7 +93,7 @@ func filter(s string) string {
 		start := strings.Index(s, "'")
 		end := strings.Index(s[start+1:], "'")
 		tokens = append(tokens, s[start+1:start+1+end])
-	} else if strings.HasPrefix(s) {
+	} else if strings.HasPrefix(s, "'") {
 	}
 
 	result := strings.Join(tokens, "")
