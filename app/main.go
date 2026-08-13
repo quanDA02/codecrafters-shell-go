@@ -31,6 +31,7 @@ func main() {
 			typeCommand(command[5:])
 		} else {
 			path := findPath(tokens[0])
+			fmt.Println(path)
 			if path != "" {
 				execute(tokens[0], tokens[1], tokens[2])
 			} else {
