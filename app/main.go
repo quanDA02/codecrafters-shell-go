@@ -19,27 +19,36 @@ func main() {
 		fmt.Print("$ ")
 		command, _ := reader.ReadString('\n')
 		command = strings.TrimSpace(command)
+
+		tokens := strings.Split(command, "")
+
 		//check if command : exit
 		if command == "exit" {
 			break
 		} else if strings.HasPrefix(command, "echo ") {
 			fmt.Println(command[5:])
 		} else if strings.HasPrefix(command, "type ") {
-			type_command(command[5:])
+			typeCommand(command[5:])
 		} else {
-			fmt.Println(command + ": command not found")
+			path := findPath(tokens[0])
+			if path != "" {
+				execute(tokens[0], tokens[1], tokens[2])
+			} else {
+				fmt.Println(command + ": command not found")
+			}
+
 		}
 	}
 }
 
-func type_command(s string) {
+func typeCommand(s string) {
 	builtins := []string{
 		"type", "exit", "echo",
 	}
 	if slices.Contains(builtins, s) {
 		fmt.Println(s, "is a shell builtin")
 	} else {
-		path := find_path(s)
+		path := findPath(s)
 		if path != "" {
 			fmt.Println(s, "is", path)
 		} else {
@@ -60,10 +69,14 @@ func type_command(s string) {
 	// }
 }
 
-func find_path(file string) string {
+func findPath(file string) string {
 	path, err := exec.LookPath(file)
 	if err != nil {
 		return ""
 	}
 	return path
+}
+
+func execute(name string, arg1 string, arg2 string) {
+	exec.Command(name, arg1, arg2)
 }
