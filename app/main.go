@@ -20,7 +20,7 @@ func main() {
 		command, _ := reader.ReadString('\n')
 		command = strings.TrimSpace(command)
 
-		tokens := strings.Split(command, "")
+		tokens := strings.Split(command, " ")
 
 		//check if command : exit
 		if command == "exit" {
@@ -31,7 +31,6 @@ func main() {
 			typeCommand(command[5:])
 		} else {
 			path := findPath(tokens[0])
-			fmt.Println(tokens[0])
 			if path != "" {
 				execute(tokens[0], tokens[1:])
 			} else {
