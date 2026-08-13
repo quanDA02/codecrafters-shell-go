@@ -83,5 +83,5 @@ func execute(name string, args []string) {
 	for range args {
 		num++
 	}
-	fmt.Println("Program was passed ", num, " args")
+	fmt.Println("Program was passed", num, "args (including program name).")
 }
