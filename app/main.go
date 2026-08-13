@@ -50,11 +50,11 @@ func echo(s string) {
 			result = t[1:i]
 		}
 	}
-	fmt.Println(strings.Join(result, ""))
+	text := strings.Join(result, "")
 	for i, cmd := range tokens {
 		if strings.HasPrefix(cmd, ">") {
 			fmt.Println("yes")
-			err := os.WriteFile(tokens[i+1], []byte("cum"), 0666)
+			err := os.WriteFile(tokens[i+1], []byte(text), 0666)
 			if err != nil {
 				log.Fatal(err)
 			}
@@ -63,7 +63,7 @@ func echo(s string) {
 		}
 	}
 
-	fmt.Println()
+	fmt.Println(text)
 }
 
 func typeCommand(s string) {
