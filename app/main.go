@@ -25,7 +25,7 @@ func main() {
 		if command == "exit" {
 			break
 		} else if strings.HasPrefix(command, "echo ") {
-			echo(tokens[1:])
+			echo(command)
 		} else if strings.HasPrefix(command, "type ") {
 			typeCommand(command[5:])
 		} else {
@@ -40,13 +40,14 @@ func main() {
 	}
 }
 
-func echo(s []string) {
+func echo(s string) {
+	tokens := strings.Split(s, " ")
 	text := strings.Join(s, " ")
-	for i, cmd := range s {
+	for i, cmd := range tokens {
 		fmt.Println(cmd)
 		if cmd == ">" || cmd == "1>" {
 
-			err := os.WriteFile(s[i], []byte(text), 0666)
+			err := os.WriteFile(tokens[i], []byte(text), 0666)
 			if err != nil {
 				log.Fatal(err)
 			}
