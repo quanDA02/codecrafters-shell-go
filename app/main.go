@@ -84,10 +84,7 @@ func execute(name string, token []string) error {
 		stdout = outputFile
 		args = args[:len(args)-2]
 	}
-	_, err := exec.LookPath(args[0])
-	if err != nil {
-		return err
-	}
+
 	cmd := exec.Command(args[0], args[1:]...)
 	cmd.Stdout = stdout
 	cmd.Stderr = os.Stderr
@@ -115,7 +112,7 @@ func main() {
 			typeCommand(command[5:])
 		default:
 			if err := execute(command, tokens); err != nil {
-				fmt.Println(tokens[0] + ": command not found")
+				fmt.Println(err, tokens[0]+": command not found")
 			}
 		}
 
