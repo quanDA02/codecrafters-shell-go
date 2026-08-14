@@ -26,10 +26,7 @@ func echo(s string) {
 	text := strings.Join(result, "")
 	for i, cmd := range tokens {
 		if cmd == ">" || cmd == "1>" {
-			fmt.Println(i)
-
 			filename := tokens[i+1]
-			fmt.Println(filename)
 			filename = strings.ReplaceAll(filename, "\"", "")
 			//create directory
 			err := os.MkdirAll(filepath.Dir(filename), 0750)
