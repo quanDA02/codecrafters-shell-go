@@ -43,7 +43,7 @@ func echo(s string) {
 		}
 	}
 
-	fmt.Println(strings.Join(tokens, " "))
+	fmt.Println(strings.Join(tokens[1:], " "))
 }
 
 func typeCommand(s string) {
