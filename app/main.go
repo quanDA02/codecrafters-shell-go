@@ -85,6 +85,7 @@ func execute(name string) {
 	// enable echo
 	var e = true
 	args, _ := shlex.Split(name)
+	//redirect stdout to file
 	if len(args) > 2 && (args[len(args)-2] == ">" || args[len(args)-2] == "1>") {
 		outputFile, err := os.Create(args[len(args)-1])
 		if err != nil {
@@ -114,9 +115,7 @@ func execute(name string) {
 		typeCommand(name[5:])
 		return
 	case "echo":
-		if e {
-			echo(strings.Join(args[1:], " "))
-		}
+		echo(strings.Join(args[1:], " "))
 		return
 	}
 
@@ -129,7 +128,6 @@ func execute(name string) {
 	cmd.Stdout = stdout
 	cmd.Stderr = os.Stderr
 	cmd.Run()
-	return
 }
 
 func main() {
