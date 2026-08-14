@@ -75,8 +75,21 @@ func findPath(file string) string {
 
 func execute(name string, token []string) error {
 	// cmd := exec.Command(strings.Join(token, " "))
+	var stdout *os.File = os.Stdout
+
+	args := strings.Split(name, " ")
+	if len(args) > 2 && (args[len(args)-2] == ">" || args[len(args)-2] == "1>") {
+		outputFile, err := os.Create(args[len(args)-1])
+		if err != nil {
+			panic(err)
+		}
+		defer outputFile.Close()
+		stdout = outputFile
+		args = args[:len(args)-2]
+	}
+
 	cmd := exec.Command(name)
-	cmd.Stdout = os.Stdout
+	cmd.Stdout = stdout
 	cmd.Stderr = os.Stderr
 	return cmd.Run()
 }
