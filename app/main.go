@@ -100,7 +100,7 @@ func execute(name string, token []string) error {
 		return err
 	}
 
-	switch tokens[0] {
+	switch token[0] {
 	case "exit":
 		os.Exit(0)
 	case "echo":
