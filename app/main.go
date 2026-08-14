@@ -23,7 +23,7 @@ func echo(s string) {
 			result = t[1:i]
 		}
 	}
-	text := strings.Join(result, "")
+	text := strings.Join(result, " ")
 	for i, cmd := range tokens {
 		if cmd == ">" || cmd == "1>" {
 			filename := tokens[i+1]
