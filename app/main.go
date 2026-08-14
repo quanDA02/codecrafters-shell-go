@@ -42,8 +42,9 @@ func echo(s string) {
 			return
 		}
 	}
-	c := strings.Split(s, " ")
-	fmt.Println(c[1])
+	s = s[5:]
+	s = strings.TrimSuffix(s, "\"")
+	fmt.Println(s)
 }
 
 func typeCommand(s string) {
