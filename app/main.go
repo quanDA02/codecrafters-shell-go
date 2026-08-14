@@ -58,6 +58,7 @@ func echo(s string) {
 
 			filename := tokens[i+1]
 			fmt.Println(filename)
+			filename = strings.ReplaceAll(filename, "\"", "")
 			//create directory
 			err := os.MkdirAll(filepath.Dir(filename), 0750)
 			if err != nil {
@@ -117,4 +118,8 @@ func execute(name string, args []string) {
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	cmd.Run()
+}
+
+func redirect() {
+
 }
