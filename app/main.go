@@ -52,7 +52,7 @@ func echo(s string) {
 	// 	}
 	// }
 
-	fmt.Println(strings.Join(tokens[1:], " "))
+	fmt.Println(s)
 }
 
 func typeCommand(s string) {
