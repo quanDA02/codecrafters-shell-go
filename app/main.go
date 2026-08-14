@@ -43,7 +43,9 @@ func execute(name string) {
 	stdout := os.Stdout
 
 	args, _ := shlex.Split(name)
+	//operators checking
 	//redirect stdout to file
+	//create
 	if len(args) > 2 && (args[len(args)-2] == ">" || args[len(args)-2] == "1>") {
 		outputFile, err := os.Create(args[len(args)-1])
 		if err != nil {
@@ -53,7 +55,7 @@ func execute(name string) {
 		stdout = outputFile
 		args = args[:len(args)-2]
 	}
-
+	//error
 	if len(args) > 2 && args[len(args)-2] == "2>" {
 		outputErrorFile, err := os.Create(args[len(args)-1])
 		if err != nil {
@@ -63,7 +65,16 @@ func execute(name string) {
 		os.Stderr = outputErrorFile
 		args = args[:len(args)-2]
 	}
-
+	//append
+	if len(args) > 2 && (args[len(args)-2] == ">>" || args[len(args)-2] == "1>>") {
+		outputFile, err := os.OpenFile("text.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+		if err != nil {
+			return
+		}
+		defer outputFile.Close()
+		stdout = outputFile
+		args = args[:len(args)-2]
+	}
 	// check if it is a built in command
 	switch args[0] {
 	case "exit":
