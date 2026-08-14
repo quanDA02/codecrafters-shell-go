@@ -82,7 +82,7 @@ func findPath(file string) string {
 func execute(name string) {
 	// cmd := exec.Command(strings.Join(token, " "))
 	var stdout *os.File = os.Stdout
-	var e = false
+	var e = true
 	args, _ := shlex.Split(name)
 	if len(args) > 2 && (args[len(args)-2] == ">" || args[len(args)-2] == "1>") {
 		outputFile, err := os.Create(args[len(args)-1])
@@ -92,7 +92,7 @@ func execute(name string) {
 		defer outputFile.Close()
 		stdout = outputFile
 		args = args[:len(args)-2]
-		e = true
+		e = false
 	}
 
 	if len(args) > 2 && args[len(args)-2] == "2>" {
