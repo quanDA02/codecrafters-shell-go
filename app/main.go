@@ -86,7 +86,7 @@ func findPath(file string) string {
 }
 
 func execute(name string, token []string) error {
-	cmd := exec.Command(name)
+	cmd := exec.Command(name, token...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	return cmd.Run()
