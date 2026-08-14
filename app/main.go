@@ -116,7 +116,7 @@ func main() {
 		} else {
 			path := findPath(tokens[0])
 			if path != "" {
-				execute(tokens[0], tokens[1:])
+				// execute(tokens[0], tokens[1:])
 			} else {
 				fmt.Println(command + ": command not found")
 			}
