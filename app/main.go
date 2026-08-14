@@ -86,17 +86,13 @@ func execute(name string, token []string) error {
 	}
 
 	if len(args) > 2 && args[len(args)-2] == "2>" {
-		outputFile, err := os.Create(args[len(args)-1])
-		// if err != nil {
-		// 	return err
-		// }
-		defer outputFile.Close()
-		stdout = outputFile
-		args = args[:len(args)-3]
+		outputErrorFile, err := os.Create(args[len(args)-1])
 		if err != nil {
-			fmt.Printf("%s: %s: No such file or directory\n", token[0], token[2])
+			fmt.Fprintf(os.Stderr, "Couldn't create file: %v", err)
 		}
-
+		defer outputErrorFile.Close()
+		os.Stderr = outputErrorFile
+		args = args[:len(args)-2]
 	}
 
 	if _, err := exec.LookPath(args[0]); err != nil {
@@ -110,10 +106,6 @@ func execute(name string, token []string) error {
 
 }
 
-func redirection() {
-
-}
-
 func main() {
 	reader := bufio.NewReader(os.Stdin)
 	for {
@@ -121,7 +113,6 @@ func main() {
 		command, _ := reader.ReadString('\n')
 		command = strings.TrimSpace(command)
 
-		//literally the strings split but on crack
 		tokens, _ := shlex.Split(command)
 
 		//check if command : exit
