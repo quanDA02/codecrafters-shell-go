@@ -63,18 +63,6 @@ func typeCommand(s string) {
 			fmt.Println(s, "not found")
 		}
 	}
-	// found := false
-
-	// for _, command := range builtins {
-	// 	if strings.HasPrefix(s, command) {
-	// 		found = true
-	// 		fmt.Println(command, "is a shell builtin")
-	// 		break
-	// 	}
-	// }
-	// if !found {
-
-	// }
 }
 
 func findPath(file string) string {
@@ -86,7 +74,7 @@ func findPath(file string) string {
 }
 
 func execute(name string, token []string) error {
-	cmd := exec.Command(token[0], token[1:]...)
+	cmd := exec.Command(strings.Join(token, " "))
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	return cmd.Run()
