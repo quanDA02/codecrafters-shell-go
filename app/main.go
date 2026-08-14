@@ -52,7 +52,7 @@ func echo(s string) {
 	// 	}
 	// }
 
-	fmt.Println(s)
+	fmt.Printf("%s\n", s)
 }
 
 func typeCommand(s string) {
