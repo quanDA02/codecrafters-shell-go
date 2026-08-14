@@ -19,7 +19,7 @@ func echo(s string) {
 	t, _ := shlex.Split(s)
 	var result []string
 	for i, cmd := range t {
-		if strings.HasPrefix(cmd, ">") {
+		if strings.HasPrefix(cmd, ">") || strings.HasPrefix(cmd, "1>") {
 			result = t[1:i]
 		}
 	}
