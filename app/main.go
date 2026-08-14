@@ -86,7 +86,7 @@ func execute(name string) {
 			fmt.Fprintf(os.Stderr, "Couldn't create file: %v", err)
 		}
 		defer outputErrorFile.Close()
-		stdout = outputErrorFile
+		os.Stderr = outputErrorFile
 		args = args[:len(args)-2]
 	}
 	// check if it is a built in command
