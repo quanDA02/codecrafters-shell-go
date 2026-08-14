@@ -93,7 +93,10 @@ func execute(name string, token []string) error {
 		defer outputFile.Close()
 		stdout = outputFile
 		args = args[:len(args)-3]
-		fmt.Printf("%s: %s: No such file or directory\n", token[0], token[2])
+		if err != nil {
+			fmt.Printf("%s: %s: No such file or directory\n", token[0], token[2])
+		}
+
 	}
 
 	if _, err := exec.LookPath(args[0]); err != nil {
