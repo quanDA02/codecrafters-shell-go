@@ -81,7 +81,7 @@ func findPath(file string) string {
 	return path
 }
 
-func execute(name string, token []string) error {
+func execute(name string) error {
 	// cmd := exec.Command(strings.Join(token, " "))
 	var stdout *os.File = os.Stdout
 
@@ -123,20 +123,19 @@ func main() {
 		fmt.Print("$ ")
 		command, _ := reader.ReadString('\n')
 		command = strings.TrimSpace(command)
-
-		tokens, _ := shlex.Split(command)
+		execute(command)
 
 		//check if command : exit
-		switch tokens[0] {
-		case "exit":
-			os.Exit(0)
-		case "echo":
-			echo(command)
-		case "type":
-			typeCommand(command[5:])
-		default:
-			execute(command, tokens)
-		}
+		// switch tokens[0] {
+		// case "exit":
+		// 	os.Exit(0)
+		// case "echo":
+		// 	echo(command)
+		// case "type":
+		// 	typeCommand(command[5:])
+		// default:
+		// 	execute(command, tokens)
+		// }
 
 		// if command == "exit" {
 		// 	break
