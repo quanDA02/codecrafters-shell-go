@@ -14,7 +14,7 @@ import (
 )
 
 func echo(s string) {
-	tokens := strings.Split(s, " ")
+	tokens, _ := shlex.Split(s)
 
 	t, _ := shlex.Split(s)
 	var result []string
