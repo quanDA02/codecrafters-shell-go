@@ -111,7 +111,7 @@ func main() {
 		case "type":
 			typeCommand(command[5:])
 		default:
-			if err := execute(command, tokens); err == nil {
+			if err := execute(command, tokens); err != nil {
 				fmt.Println(err, tokens[0]+": command not found")
 			}
 		}
