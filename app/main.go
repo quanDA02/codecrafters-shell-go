@@ -106,6 +106,15 @@ func execute(name string) error {
 		args = args[:len(args)-2]
 	}
 
+	switch args[0] {
+	case "exit":
+		os.Exit(0)
+	case "type":
+		typeCommand(name[5:])
+	case "echo":
+		echo(name)
+	}
+
 	if _, err := exec.LookPath(args[0]); err != nil {
 		fmt.Printf("%s: command not found\n", args[0])
 		return err
