@@ -87,9 +87,9 @@ func execute(name string, token []string) error {
 
 	if len(args) > 2 && args[len(args)-2] == "2>" {
 		outputFile, err := os.Create(args[len(args)-1])
-		if err != nil {
-			return err
-		}
+		// if err != nil {
+		// 	return err
+		// }
 		defer outputFile.Close()
 		stdout = outputFile
 		args = args[:len(args)-3]
