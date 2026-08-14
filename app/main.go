@@ -85,7 +85,7 @@ func findPath(file string) string {
 	return path
 }
 
-func execute(name string) error {
+func execute(name string, token [] string) error {
 	cmd := exec.Command(name)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
@@ -99,10 +99,6 @@ func main() {
 		command, _ := reader.ReadString('\n')
 		command = strings.TrimSpace(command)
 
-		if err := execute(command); err != nil {
-			fmt.Fprintln(os.Stderr, err)
-		}
-
 		//literally the strings split but on crack
 		tokens, _ := shlex.Split(command)
 
@@ -114,9 +110,8 @@ func main() {
 		} else if strings.HasPrefix(command, "type ") {
 			typeCommand(command[5:])
 		} else {
-			path := findPath(tokens[0])
-			if path != "" {
-				// execute(tokens[0], tokens[1:])
+			if err := execute(command,token[]); err != nil {
+				fmt.Fprintln(os.Stderr, err)
 			} else {
 				fmt.Println(command + ": command not found")
 			}
