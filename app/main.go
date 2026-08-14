@@ -74,7 +74,7 @@ func execute(name string, token []string) error {
 	// cmd := exec.Command(strings.Join(token, " "))
 	var stdout *os.File = os.Stdout
 
-	args := strings.Split(name, " ")
+	args, _ := shlex.Split(name)
 	if len(args) > 2 && (args[len(args)-2] == ">" || args[len(args)-2] == "1>") {
 		outputFile, err := os.Create(args[len(args)-1])
 		if err != nil {
