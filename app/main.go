@@ -43,7 +43,7 @@ func echo(s string) {
 		}
 	}
 	c := strings.Split(s, " ")
-	fmt.Println(c)
+	fmt.Println(c[1])
 }
 
 func typeCommand(s string) {
