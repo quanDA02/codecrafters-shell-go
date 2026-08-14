@@ -84,6 +84,18 @@ func execute(name string, token []string) error {
 		stdout = outputFile
 		args = args[:len(args)-2]
 	}
+
+	if len(args) > 2 && args[len(args)-2] == "2>" {
+		outputFile, err := os.Create(args[len(args)-1])
+		if err != nil {
+			return err
+		}
+		defer outputFile.Close()
+		stdout = outputFile
+		args = args[:len(args)-2]
+		fmt.Println(err)
+	}
+
 	if _, err := exec.LookPath(args[0]); err != nil {
 		fmt.Printf("%s: command not found\n", args[0])
 		return err
@@ -92,6 +104,10 @@ func execute(name string, token []string) error {
 	cmd.Stdout = stdout
 	cmd.Stderr = os.Stderr
 	return cmd.Run()
+
+}
+
+func redirection() {
 
 }
 
