@@ -110,7 +110,9 @@ func main() {
 		case "type":
 			typeCommand(command[5:])
 		default:
-			execute(command, tokens)
+			if err := execute(command, tokens); err != nil {
+				fmt.Println(command + ": command not found")
+			}
 		}
 
 		// if command == "exit" {
