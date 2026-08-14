@@ -41,17 +41,6 @@ func echo(s string) {
 
 			return
 		}
-		if cmd == "2>" {
-			outputErrorFile, err := os.Create(tokens[len(tokens)-1])
-			if err != nil {
-				fmt.Fprintf(os.Stderr, "Couldn't create file: %v", err)
-			}
-			defer outputErrorFile.Close()
-			os.Stderr = outputErrorFile
-			tokens = tokens[:len(tokens)-2]
-			fmt.Println(strings.Join(tokens[1:i], " "))
-			return
-		}
 	}
 
 	fmt.Println(strings.Join(tokens[1:], " "))
@@ -123,7 +112,6 @@ func execute(name string) error {
 	cmd.Stdout = stdout
 	cmd.Stderr = os.Stderr
 	return cmd.Run()
-
 }
 
 func main() {
