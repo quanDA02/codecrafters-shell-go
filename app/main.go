@@ -52,7 +52,7 @@ func echo(s string, output *os.File) {
 	// 	}
 	// }
 
-	fmt.Printf(output, "%s\n", s)
+	fmt.Fprintf(output, "%s\n", s)
 }
 
 func typeCommand(s string) {
