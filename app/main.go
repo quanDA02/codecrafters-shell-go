@@ -117,10 +117,11 @@ func execute(name string) error {
 		fmt.Printf("%s: command not found\n", args[0])
 		return err
 	}
-	cmd := exec.Command(args[0])
-	cmd.Stdout = stdout
-	cmd.Stderr = os.Stderr
-	return cmd.Run()
+	// cmd := exec.Command(args[0], args[1:]...)
+	// cmd.Stdout = stdout
+	// cmd.Stderr = os.Stderr
+	// return cmd.Run()
+	return nil
 }
 
 func main() {
