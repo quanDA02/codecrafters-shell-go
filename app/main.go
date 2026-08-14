@@ -12,46 +12,6 @@ import (
 )
 
 func echo(s string, output *os.File) {
-	// tokens, _ := shlex.Split(s)
-
-	// t, _ := shlex.Split(s)
-	// var result []string
-	// for i, cmd := range t {
-	// 	if strings.HasPrefix(cmd, ">") || strings.HasPrefix(cmd, "1>") {
-	// 		result = t[1:i]
-	// 	}
-	// }
-	// text := strings.Join(result, " ")
-	// for i, cmd := range tokens {
-	// 	if cmd == ">" || cmd == "1>" {
-	// 		filename := tokens[i+1]
-	// 		filename = strings.ReplaceAll(filename, "\"", "")
-	// 		//create directory
-	// 		err := os.MkdirAll(filepath.Dir(filename), 0750)
-	// 		if err != nil {
-	// 			log.Fatal(err)
-	// 		}
-	// 		//create file
-	// 		err = os.WriteFile(filename, []byte(text+"\n"), 0666)
-	// 		if err != nil {
-	// 			log.Fatal(err)
-	// 		}
-
-	// 		return
-	// 	}
-	// 	if cmd == "2>" {
-	// 		outputErrorFile, err := os.Create(tokens[len(tokens)-1])
-	// 		if err != nil {
-	// 			fmt.Fprintf(os.Stderr, "Couldn't create file: %v", err)
-	// 		}
-	// 		defer outputErrorFile.Close()
-	// 		os.Stderr = outputErrorFile
-	// 		tokens = tokens[:len(tokens)-2]
-	// 		fmt.Println(strings.Join(tokens[1:i], " "))
-	// 		return
-	// 	}
-	// }
-
 	fmt.Fprintf(output, "%s\n", s)
 }
 
@@ -80,9 +40,8 @@ func findPath(file string) string {
 }
 
 func execute(name string) {
-	// cmd := exec.Command(strings.Join(token, " "))
 	stdout := os.Stdout
-	// enable echo
+
 	args, _ := shlex.Split(name)
 	//redirect stdout to file
 	if len(args) > 2 && (args[len(args)-2] == ">" || args[len(args)-2] == "1>") {
@@ -105,6 +64,7 @@ func execute(name string) {
 		args = args[:len(args)-2]
 	}
 
+	// check if it is a built in command
 	switch args[0] {
 	case "exit":
 		os.Exit(0)
@@ -135,32 +95,5 @@ func main() {
 		command, _ := reader.ReadString('\n')
 		command = strings.TrimSpace(command)
 		execute(command)
-
-		//check if command : exit
-		// switch tokens[0] {
-		// case "exit":
-		// 	os.Exit(0)
-		// case "echo":
-		// 	echo(command)
-		// case "type":
-		// 	typeCommand(command[5:])
-		// default:
-		// 	execute(command, tokens)
-		// }
-
-		// if command == "exit" {
-		// 	break
-		// } else if strings.HasPrefix(command, "echo ") {
-		// 	echo(command)
-		// } else if strings.HasPrefix(command, "type ") {
-		// 	typeCommand(command[5:])
-		// } else {
-		// 	if err := execute(command, tokens); err != nil {
-		// 		fmt.Fprintln(os.Stderr, err)
-		// 	} else {
-		// 		fmt.Println(command + ": command not found")
-		// 	}
-
-		// }
 	}
 }
