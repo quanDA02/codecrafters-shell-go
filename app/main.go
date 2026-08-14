@@ -91,19 +91,30 @@ func main() {
 		tokens, _ := shlex.Split(command)
 
 		//check if command : exit
-		if command == "exit" {
-			break
-		} else if strings.HasPrefix(command, "echo ") {
+		switch tokens[0] {
+		case "exit":
+			os.Exit(0)
+		case "echo":
 			echo(command)
-		} else if strings.HasPrefix(command, "type ") {
+		case "type":
 			typeCommand(command[5:])
-		} else {
-			if err := execute(command, tokens); err != nil {
-				fmt.Fprintln(os.Stderr, err)
-			} else {
-				fmt.Println(command + ": command not found")
-			}
-
+		default:
+			execute(command, tokens)
 		}
+
+		// if command == "exit" {
+		// 	break
+		// } else if strings.HasPrefix(command, "echo ") {
+		// 	echo(command)
+		// } else if strings.HasPrefix(command, "type ") {
+		// 	typeCommand(command[5:])
+		// } else {
+		// 	if err := execute(command, tokens); err != nil {
+		// 		fmt.Fprintln(os.Stderr, err)
+		// 	} else {
+		// 		fmt.Println(command + ": command not found")
+		// 	}
+
+		// }
 	}
 }
