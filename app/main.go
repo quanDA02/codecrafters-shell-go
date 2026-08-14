@@ -11,7 +11,7 @@ import (
 	"github.com/google/shlex"
 )
 
-func echo(s string) {
+func echo(s string, output *os.File) {
 	// tokens, _ := shlex.Split(s)
 
 	// t, _ := shlex.Split(s)
@@ -52,7 +52,7 @@ func echo(s string) {
 	// 	}
 	// }
 
-	fmt.Printf("%s\n", s)
+	fmt.Printf(output, "%s\n", s)
 }
 
 func typeCommand(s string) {
@@ -113,7 +113,7 @@ func execute(name string) {
 		typeCommand(name[5:])
 		return
 	case "echo":
-		echo(strings.Join(args[1:], " "))
+		echo(strings.Join(args[1:], " "), stdout)
 		return
 	}
 
