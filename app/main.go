@@ -43,7 +43,7 @@ func echo(s string) {
 		}
 	}
 
-	fmt.Println(s)
+	fmt.Println(s[5:])
 }
 
 func typeCommand(s string) {
