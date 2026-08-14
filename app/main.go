@@ -88,9 +88,8 @@ func execute(name string, token []string) {
 	cmd := exec.Command(args[0], args[1:]...)
 	cmd.Stdout = stdout
 	cmd.Stderr = os.Stderr
-	if err := cmd.Run(); err != nil {
-		fmt.Println(name + ": command not found")
-	}
+	cmd.Run()
+
 }
 
 func main() {
