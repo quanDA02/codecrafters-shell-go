@@ -67,7 +67,9 @@ func execute(name string) {
 	}
 	//append
 	if len(args) > 2 && (args[len(args)-2] == ">>" || args[len(args)-2] == "1>>") {
-		outputFile, err := os.OpenFile("text.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+		outputFile, err := os.OpenFile(args[len(args)-1],
+			os.O_APPEND|os.O_CREATE|os.O_WRONLY,
+			0644)
 		if err != nil {
 			return
 		}
