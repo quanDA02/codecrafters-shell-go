@@ -110,7 +110,7 @@ func execute(name string) error {
 	case "type":
 		typeCommand(name[5:])
 	case "echo":
-		echo(name)
+		echo(strings.Join(args[1:], " "))
 	}
 
 	if _, err := exec.LookPath(args[0]); err != nil {
