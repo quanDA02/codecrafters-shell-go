@@ -99,6 +99,16 @@ func execute(name string, token []string) error {
 		fmt.Printf("%s: command not found\n", args[0])
 		return err
 	}
+
+	switch tokens[0] {
+	case "exit":
+		os.Exit(0)
+	case "echo":
+		echo(name)
+	case "type":
+		typeCommand(name[5:])
+	}
+
 	cmd := exec.Command(args[0], args[1:]...)
 	cmd.Stdout = stdout
 	cmd.Stderr = os.Stderr
@@ -116,16 +126,8 @@ func main() {
 		tokens, _ := shlex.Split(command)
 
 		//check if command : exit
-		switch tokens[0] {
-		case "exit":
-			os.Exit(0)
-		case "echo":
-			echo(command)
-		case "type":
-			typeCommand(command[5:])
-		default:
-			execute(command, tokens)
-		}
+
+		execute(command, tokens)
 
 		// if command == "exit" {
 		// 	break
