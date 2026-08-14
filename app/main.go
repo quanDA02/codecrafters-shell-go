@@ -85,7 +85,7 @@ func findPath(file string) string {
 	return path
 }
 
-func execute(name string, token [] string) error {
+func execute(name string, token []string) error {
 	cmd := exec.Command(name)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
@@ -110,7 +110,7 @@ func main() {
 		} else if strings.HasPrefix(command, "type ") {
 			typeCommand(command[5:])
 		} else {
-			if err := execute(command,token[]); err != nil {
+			if err := execute(command, tokens); err != nil {
 				fmt.Fprintln(os.Stderr, err)
 			} else {
 				fmt.Println(command + ": command not found")
