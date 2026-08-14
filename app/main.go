@@ -77,6 +77,18 @@ func execute(name string) {
 		stdout = outputFile
 		args = args[:len(args)-2]
 	}
+	//append error
+	if len(args) > 2 && args[len(args)-2] == "2>>" {
+		outputErrorFile, err := os.OpenFile(args[len(args)-1],
+			os.O_APPEND|os.O_CREATE|os.O_WRONLY,
+			0644)
+		if err != nil {
+			return
+		}
+		defer outputErrorFile.Close()
+		stdout = outputErrorFile
+		args = args[:len(args)-2]
+	}
 	// check if it is a built in command
 	switch args[0] {
 	case "exit":
