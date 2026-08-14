@@ -83,7 +83,7 @@ func execute(name string) {
 			os.O_APPEND|os.O_CREATE|os.O_WRONLY,
 			0644)
 		if err != nil {
-			return
+			fmt.Fprintf(os.Stderr, "Couldn't create file: %v", err)
 		}
 		defer outputErrorFile.Close()
 		stdout = outputErrorFile
