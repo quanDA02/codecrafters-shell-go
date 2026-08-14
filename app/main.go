@@ -42,8 +42,8 @@ func echo(s string) {
 			return
 		}
 	}
-
-	fmt.Println(s)
+	c := strings.Split(s, " ")
+	fmt.Println(c)
 }
 
 func typeCommand(s string) {
