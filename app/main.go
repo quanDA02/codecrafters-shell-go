@@ -78,7 +78,6 @@ func execute(name string, token []string) error {
 	var stdout *os.File = os.Stdout
 
 	args := strings.Split(name, " ")
-	fmt.Println(args[len(args)-2])
 	if len(args) > 2 && (args[len(args)-2] == ">" || args[len(args)-2] == "1>") {
 		outputFile, err := os.Create(args[len(args)-1])
 		if err != nil {
@@ -89,7 +88,7 @@ func execute(name string, token []string) error {
 		args = args[:len(args)-2]
 	}
 
-	cmd := exec.Command(name)
+	cmd := exec.Command(args[0], args[1:]...)
 	cmd.Stdout = stdout
 	cmd.Stderr = os.Stderr
 	return cmd.Run()
