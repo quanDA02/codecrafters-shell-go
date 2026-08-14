@@ -82,7 +82,7 @@ func findPath(file string) string {
 func execute(name string) {
 	// cmd := exec.Command(strings.Join(token, " "))
 	var stdout *os.File = os.Stdout
-
+	var e = false
 	args, _ := shlex.Split(name)
 	if len(args) > 2 && (args[len(args)-2] == ">" || args[len(args)-2] == "1>") {
 		outputFile, err := os.Create(args[len(args)-1])
@@ -92,6 +92,7 @@ func execute(name string) {
 		defer outputFile.Close()
 		stdout = outputFile
 		args = args[:len(args)-2]
+		e = true
 	}
 
 	if len(args) > 2 && args[len(args)-2] == "2>" {
@@ -112,7 +113,9 @@ func execute(name string) {
 		typeCommand(name[5:])
 		return
 	case "echo":
-		echo(strings.Join(args[1:], " "))
+		if e {
+			echo(strings.Join(args[1:], " "))
+		}
 		return
 	}
 
@@ -120,6 +123,7 @@ func execute(name string) {
 		fmt.Printf("%s: command not found\n", args[0])
 		return
 	}
+
 	cmd := exec.Command(args[0], args[1:]...)
 	cmd.Stdout = stdout
 	cmd.Stderr = os.Stderr
