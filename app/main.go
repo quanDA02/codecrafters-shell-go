@@ -114,6 +114,7 @@ func execute(name string) {
 		return
 	case "echo":
 		echo(strings.Join(args[1:], " "))
+		return
 	}
 
 	if _, err := exec.LookPath(args[0]); err != nil {
