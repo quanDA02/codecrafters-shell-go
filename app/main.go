@@ -85,7 +85,7 @@ func execute(name string, token []string) error {
 		args = args[:len(args)-2]
 	}
 	if _, err := exec.LookPath(args[0]); err != nil {
-		fmt.Println(strings.TrimRight(args[0], " "), ": command not found")
+		fmt.Printf("%s: command not found\n", args[0])
 		return err
 	}
 	cmd := exec.Command(args[0], args[1:]...)
