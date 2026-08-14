@@ -34,7 +34,7 @@ func echo(s string) {
 				log.Fatal(err)
 			}
 			//create file
-			err = os.WriteFile(filename, []byte(text), 0666)
+			err = os.WriteFile(filename, []byte(text+"\n"), 0666)
 			if err != nil {
 				log.Fatal(err)
 			}
