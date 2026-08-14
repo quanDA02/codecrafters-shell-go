@@ -88,7 +88,6 @@ func execute(name string, token []string) error {
 	cmd := exec.Command(args[0], args[1:]...)
 	cmd.Stdout = stdout
 	cmd.Stderr = os.Stderr
-	fmt.Println()
 	return cmd.Run()
 }
 
