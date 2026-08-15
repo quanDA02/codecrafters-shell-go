@@ -128,7 +128,7 @@ func main() {
 		default:
 			fmt.Print("hello")
 		}
-		fmt.Printf("%c", 0x07)
+		fmt.Printf("\a")
 		execute(command)
 	}
 }
