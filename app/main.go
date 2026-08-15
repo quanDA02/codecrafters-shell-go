@@ -122,6 +122,10 @@ func main() {
 	for {
 		command, _ := l.Readline()
 		command = strings.TrimSpace(command)
+		args, _ := shlex.Split(command)
+		if args[0] != "exit" || args[0] != "type" || args[0] != "echo" {
+			fmt.Print("\x07")
+		}
 		execute(command)
 	}
 }
