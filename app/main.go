@@ -121,8 +121,9 @@ func main() {
 	)
 
 	l, err := readline.NewEx(&readline.Config{
-		Prompt:       "$ ",
-		AutoComplete: completer,
+		Prompt:              "$ ",
+		AutoComplete:        completer,
+		FuncFilterInputRune: filterInput,
 	})
 	if err != nil {
 		panic(err)
