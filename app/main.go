@@ -130,6 +130,8 @@ func main() {
 		// }
 		// l.Terminal.Bell()
 		// fmt.Print("\x07")
+		bell := []byte{0x07}
+		os.Stdout.Write(bell)
 		fmt.Printf("%c", 0x07)
 		execute(command)
 	}
