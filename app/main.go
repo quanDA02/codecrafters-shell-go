@@ -128,22 +128,10 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	l.Terminal.EnterRawMode()
 	for {
 		command, _ := l.Readline()
-		// command = strings.TrimSpace(command)
-		// args, _ := shlex.Split(command)
-		// switch args[0] {
-		// case "exit", "type", "echo":
-		// default:
-		// 	fmt.Print("hello")
-		// }
-		// l.Terminal.Bell()
-		// fmt.Print("\x07")
-		const x07 = 0x07
-		var bell = []byte{x07}
-		os.Stdout.Write(bell)
-		fmt.Print("\n")
+		command = strings.TrimSpace(command)
+
 		execute(command)
 	}
 }
