@@ -119,10 +119,8 @@ func main() {
 		panic(err)
 	}
 
-	// reader := bufio.NewReader(os.Stdin)
 	for {
 		command, _ := l.Readline()
-		// command, _ := reader.ReadString('\n')
 		command = strings.TrimSpace(command)
 		execute(command)
 	}
