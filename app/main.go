@@ -70,9 +70,11 @@ func redirect(args []string, stdout, stderr *os.File) ([]string, *os.File, *os.F
 }
 
 func execute(name string) {
-	stdout := os.Stdout
 
 	args, _ := shlex.Split(name)
+
+	args, stdout, stderr := redirect(args, os.Stdout, os.Stderr)
+
 	//operators checking
 	//redirect stdout to file
 	//create
@@ -139,7 +141,7 @@ func execute(name string) {
 
 	cmd := exec.Command(args[0], args[1:]...)
 	cmd.Stdout = stdout
-	cmd.Stderr = os.Stderr
+	cmd.Stderr = stderr
 	cmd.Run()
 }
 
