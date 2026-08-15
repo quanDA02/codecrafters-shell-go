@@ -128,7 +128,7 @@ func main() {
 		default:
 			fmt.Print("hello")
 		}
-		fmt.Printf("\a")
+		l.Terminal.Bell()
 		execute(command)
 	}
 }
