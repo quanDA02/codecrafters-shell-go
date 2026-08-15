@@ -8,6 +8,7 @@ import (
 	"slices"
 	"strings"
 
+	"github.com/chzyer/readline"
 	"github.com/google/shlex"
 )
 
@@ -104,10 +105,25 @@ func execute(name string) {
 }
 
 func main() {
+
+	var completer = readline.NewPrefixCompleter(
+		readline.PcItem("exit"),
+		readline.PcItem("type"),
+		readline.PcItem("echo"),
+	)
+
+	l, err := readline.NewEx(&readline.Config{
+		AutoComplete: completer,
+	})
+	if err != nil {
+		panic(err)
+	}
+
 	reader := bufio.NewReader(os.Stdin)
 	for {
 		fmt.Print("$ ")
-		command, _ := reader.ReadString('\n')
+		command, _ := l.Readline()
+		// command, _ := reader.ReadString('\n')
 		command = strings.TrimSpace(command)
 		execute(command)
 	}
