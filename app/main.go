@@ -11,11 +11,19 @@ import (
 	"github.com/google/shlex"
 )
 
+var l *readline.Instance
+
 // tab
 func filterInput(r rune) (rune, bool) {
-	switch r {
-	case readline.CharTab:
-		print("\x07")
+	if r == readline.CharTab {
+		builtIn := []string{"echo", "exit", "type"}
+		command := strings.TrimSpace(l.Line().Line)
+
+		for _, line := range builtIn {
+			if strings.HasPrefix(command, line) {
+				print("\x07")
+			}
+		}
 	}
 	return r, true
 }
