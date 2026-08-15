@@ -133,7 +133,7 @@ func main() {
 		const x07 = 0x07
 		var bell = []byte{x07}
 		os.Stdout.Write(bell)
-		fmt.Printf("%c", 0x07)
+		fmt.Print(bell)
 		execute(command)
 	}
 }
