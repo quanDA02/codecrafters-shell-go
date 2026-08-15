@@ -11,6 +11,15 @@ import (
 	"github.com/google/shlex"
 )
 
+// tab
+func filterInput(r rune) (rune, bool) {
+	switch r {
+	case readline.CharTab:
+		print("\x07")
+	}
+	return r, true
+}
+
 func echo(s string, output *os.File) {
 	fmt.Fprintf(output, "%s\n", s)
 }
