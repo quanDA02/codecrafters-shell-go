@@ -129,6 +129,7 @@ func main() {
 			fmt.Print("hello")
 		}
 		l.Terminal.Bell()
+		fmt.Print("\x07")
 		execute(command)
 	}
 }
