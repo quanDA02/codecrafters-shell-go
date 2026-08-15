@@ -128,6 +128,7 @@ func main() {
 		default:
 			fmt.Print("\x07")
 		}
+		fmt.Print("\x07")
 		execute(command)
 	}
 }
