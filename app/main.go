@@ -39,6 +39,36 @@ func findPath(file string) string {
 	return path
 }
 
+func redirect(args []string, stdout, stderr *os.File) ([]string, *os.File, *os.File) {
+	if len(args) <= 2 {
+		return args, stdout, stderr
+	}
+	operator := args[len(args)-2]
+	filename := args[len(args)-1]
+	switch operator {
+	case ">", "1>":
+		outputFile, _ := os.Create(filename)
+		stdout = outputFile
+	case "2>":
+		outputFile, _ := os.Create(filename)
+		stderr = outputFile
+	case ">>", "1>>":
+		outputFile, _ := os.OpenFile(args[len(args)-1],
+			os.O_APPEND|os.O_CREATE|os.O_WRONLY,
+			0644)
+		stdout = outputFile
+	case "2>>":
+		outputFile, _ := os.OpenFile(args[len(args)-1],
+			os.O_APPEND|os.O_CREATE|os.O_WRONLY,
+			0644)
+		stderr = outputFile
+	default:
+		return args, stdout, stderr
+	}
+	args = args[:len(args)-2]
+	return args, stdout, stderr
+}
+
 func execute(name string) {
 	stdout := os.Stdout
 
@@ -46,49 +76,49 @@ func execute(name string) {
 	//operators checking
 	//redirect stdout to file
 	//create
-	if len(args) > 2 && (args[len(args)-2] == ">" || args[len(args)-2] == "1>") {
-		outputFile, err := os.Create(args[len(args)-1])
-		if err != nil {
-			return
-		}
-		defer outputFile.Close()
-		stdout = outputFile
-		args = args[:len(args)-2]
-	}
-	//error
-	if len(args) > 2 && args[len(args)-2] == "2>" {
-		outputErrorFile, err := os.Create(args[len(args)-1])
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Couldn't create file: %v", err)
-		}
-		defer outputErrorFile.Close()
-		os.Stderr = outputErrorFile
-		args = args[:len(args)-2]
-	}
-	//append
-	if len(args) > 2 && (args[len(args)-2] == ">>" || args[len(args)-2] == "1>>") {
-		outputFile, err := os.OpenFile(args[len(args)-1],
-			os.O_APPEND|os.O_CREATE|os.O_WRONLY,
-			0644)
-		if err != nil {
-			return
-		}
-		defer outputFile.Close()
-		stdout = outputFile
-		args = args[:len(args)-2]
-	}
-	//append error
-	if len(args) > 2 && args[len(args)-2] == "2>>" {
-		outputErrorFile, err := os.OpenFile(args[len(args)-1],
-			os.O_APPEND|os.O_CREATE|os.O_WRONLY,
-			0644)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Couldn't create file: %v", err)
-		}
-		defer outputErrorFile.Close()
-		os.Stderr = outputErrorFile
-		args = args[:len(args)-2]
-	}
+	// if len(args) > 2 && (args[len(args)-2] == ">" || args[len(args)-2] == "1>") {
+	// 	outputFile, err := os.Create(args[len(args)-1])
+	// 	if err != nil {
+	// 		return
+	// 	}
+	// 	defer outputFile.Close()
+	// 	stdout = outputFile
+	// 	args = args[:len(args)-2]
+	// }
+	// //error
+	// if len(args) > 2 && args[len(args)-2] == "2>" {
+	// 	outputErrorFile, err := os.Create(args[len(args)-1])
+	// 	if err != nil {
+	// 		fmt.Fprintf(os.Stderr, "Couldn't create file: %v", err)
+	// 	}
+	// 	defer outputErrorFile.Close()
+	// 	os.Stderr = outputErrorFile
+	// 	args = args[:len(args)-2]
+	// }
+	// //append
+	// if len(args) > 2 && (args[len(args)-2] == ">>" || args[len(args)-2] == "1>>") {
+	// 	outputFile, err := os.OpenFile(args[len(args)-1],
+	// 		os.O_APPEND|os.O_CREATE|os.O_WRONLY,
+	// 		0644)
+	// 	if err != nil {
+	// 		return
+	// 	}
+	// 	defer outputFile.Close()
+	// 	stdout = outputFile
+	// 	args = args[:len(args)-2]
+	// }
+	// //append error
+	// if len(args) > 2 && args[len(args)-2] == "2>>" {
+	// 	outputErrorFile, err := os.OpenFile(args[len(args)-1],
+	// 		os.O_APPEND|os.O_CREATE|os.O_WRONLY,
+	// 		0644)
+	// 	if err != nil {
+	// 		fmt.Fprintf(os.Stderr, "Couldn't create file: %v", err)
+	// 	}
+	// 	defer outputErrorFile.Close()
+	// 	os.Stderr = outputErrorFile
+	// 	args = args[:len(args)-2]
+	// }
 	// check if it is a built in command
 	switch args[0] {
 	case "exit":
