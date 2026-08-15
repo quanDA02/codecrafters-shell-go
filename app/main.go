@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"os"
 	"os/exec"
@@ -119,7 +118,7 @@ func main() {
 		panic(err)
 	}
 
-	reader := bufio.NewReader(os.Stdin)
+	// reader := bufio.NewReader(os.Stdin)
 	for {
 		fmt.Print("$ ")
 		command, _ := l.Readline()
