@@ -121,7 +121,7 @@ func main() {
 	l.Terminal.EnterRawMode()
 	for {
 		command, _ := l.Readline()
-		command = strings.TrimSpace(command)
+		// command = strings.TrimSpace(command)
 		// args, _ := shlex.Split(command)
 		// switch args[0] {
 		// case "exit", "type", "echo":
