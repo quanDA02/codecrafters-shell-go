@@ -112,6 +112,7 @@ func main() {
 	)
 
 	l, err := readline.NewEx(&readline.Config{
+		Prompt:       "$ ",
 		AutoComplete: completer,
 	})
 	if err != nil {
@@ -120,7 +121,6 @@ func main() {
 
 	// reader := bufio.NewReader(os.Stdin)
 	for {
-		fmt.Print("$ ")
 		command, _ := l.Readline()
 		// command, _ := reader.ReadString('\n')
 		command = strings.TrimSpace(command)
