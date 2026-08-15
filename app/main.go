@@ -126,7 +126,7 @@ func main() {
 		switch args[0] {
 		case "exit", "type", "echo":
 		default:
-			fmt.Print("\x07")
+			fmt.Print("hello")
 		}
 		fmt.Printf("%c", 0x07)
 		execute(command)
