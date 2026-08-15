@@ -19,7 +19,7 @@ func filterInput(r rune) (rune, bool) {
 		builtIn := []string{"echo", "exit", "type"}
 
 		for _, line := range builtIn {
-			if strings.HasPrefix("s", line) {
+			if strings.HasPrefix(l.Line().Line, line) {
 				print("\x07")
 			}
 		}
