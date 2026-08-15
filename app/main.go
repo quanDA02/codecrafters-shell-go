@@ -118,7 +118,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
+	l.Terminal.EnterRawMode()
 	for {
 		command, _ := l.Readline()
 		command = strings.TrimSpace(command)
