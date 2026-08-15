@@ -17,10 +17,9 @@ var l *readline.Instance
 func filterInput(r rune) (rune, bool) {
 	if r == readline.CharTab {
 		builtIn := []string{"echo", "exit", "type"}
-		command := strings.TrimSpace(l.Line().Line)
 
 		for _, line := range builtIn {
-			if strings.HasPrefix(command, line) {
+			if strings.HasPrefix("s", line) {
 				print("\x07")
 			}
 		}
