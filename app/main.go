@@ -123,7 +123,9 @@ func main() {
 		command, _ := l.Readline()
 		command = strings.TrimSpace(command)
 		args, _ := shlex.Split(command)
-		if args[0] != "exit" || args[0] != "type" || args[0] != "echo" {
+		switch args[0] {
+		case "exit", "type", "echo":
+		default:
 			fmt.Print("\x07")
 		}
 		execute(command)
