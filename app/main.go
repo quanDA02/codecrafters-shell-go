@@ -130,6 +130,7 @@ func main() {
 		}
 		l.Terminal.Bell()
 		fmt.Print("\x07")
+		fmt.Printf("%c", 0x07)
 		execute(command)
 	}
 }
