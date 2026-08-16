@@ -11,21 +11,19 @@ import (
 	"github.com/google/shlex"
 )
 
-var l *readline.Instance
+// wrap autocompele from chzyer/readline and add bell sound
+type completerBell struct {
+	c readline.AutoCompleter
+}
 
-// tab
-func filterInput(r rune) (rune, bool) {
-
-	// if r == readline.CharTab {
-	// 	builtIn := []string{"echo", "exit", "type"}
-
-	// 	for _, line := range builtIn {
-	// 		if strings.HasPrefix(l.Line().Line, line) {
-	// 			print("\x07")
-	// 		}
-	// 	}
-	// }
-	return r, true
+// modified autocomplete Do and add bell sound
+func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
+	newline, length := c.Do(line, pos)
+	//bell sound if autocomplete fail
+	if len(newline) == 0 {
+		fmt.Print("\x07")
+	}
+	return newline, length
 }
 
 func echo(s string, output *os.File) {
@@ -122,16 +120,15 @@ func execute(name string) {
 
 func main() {
 
-	var completer = readline.NewPrefixCompleter(
+	completer := readline.NewPrefixCompleter(
 		readline.PcItem("exit"),
 		readline.PcItem("type"),
 		readline.PcItem("echo"),
 	)
 
 	l, err := readline.NewEx(&readline.Config{
-		Prompt:              "$ ",
-		AutoComplete:        completer,
-		FuncFilterInputRune: filterInput,
+		Prompt:       "$ ",
+		AutoComplete: &completerBell{completer},
 	})
 	if err != nil {
 		fmt.Println(err)
