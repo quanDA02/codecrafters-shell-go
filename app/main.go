@@ -15,7 +15,7 @@ var l *readline.Instance
 
 // tab
 func filterInput(r rune) (rune, bool) {
-	fmt.Println(r)
+
 	// if r == readline.CharTab {
 	// 	builtIn := []string{"echo", "exit", "type"}
 
@@ -133,6 +133,7 @@ func main() {
 		AutoComplete:        completer,
 		FuncFilterInputRune: filterInput,
 	})
+	fmt.Println(err)
 	if err != nil {
 		panic(err)
 	}
