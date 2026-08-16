@@ -19,9 +19,6 @@ type completerBell struct {
 
 // modified autocomplete Do and add bell sound
 func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
-	l := strings.Fields(string(line))
-	line = []rune(l[len(l)-1])
-	fmt.Println(string(line))
 	newline, length := c.completer.Do(line, pos)
 	fmt.Println("hellodsdsd")
 	//bell sound if autocomplete fail
