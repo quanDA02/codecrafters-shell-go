@@ -38,7 +38,6 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 			}
 
 			fmt.Print("\n$ " + string(line))
-			return newline, length
 		}
 		return nil, 0
 	}
