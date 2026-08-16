@@ -20,7 +20,6 @@ type completerBell struct {
 // modified autocomplete Do and add bell sound
 func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	newline, length := c.completer.Do(line, pos)
-	fmt.Println("hellodsdsd")
 	//bell sound if autocomplete fail
 	if len(newline) == 0 {
 		fmt.Print("\x07")
@@ -180,6 +179,7 @@ func main() {
 		Prompt:       "$ ",
 		AutoComplete: &completerBell{completer, 0},
 	})
+	l.CaptureExitSignal()
 	if err != nil {
 		fmt.Println(err)
 	}
