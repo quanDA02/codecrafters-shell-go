@@ -27,10 +27,11 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 }
 func executableCompletion(prefix string) []string {
 	path := os.Getenv("PATH")
+	dirs := strings.Split(path, ":")
 	if path == "" {
 		// fmt.Print("fuck")
 	}
-	fmt.Print(path + "ok")
+	fmt.Print(dirs[2] + "ok")
 	str := []string{
 		"cusssstom_exe_7091", "hello",
 	}
