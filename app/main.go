@@ -30,7 +30,7 @@ func executableCompletion(prefix string) []string {
 	if path == "" {
 		fmt.Print("fuck")
 	}
-	fmt.Print("son")
+	fmt.Print(path + "ok")
 	str := strings.Split(path, " ")
 	return str
 }
