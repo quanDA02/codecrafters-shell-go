@@ -188,8 +188,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	defer l.Close()
-	l.CaptureExitSignal()
+
 	for {
 		command, _ := l.Readline()
 		command = strings.TrimSpace(command)
