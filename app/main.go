@@ -28,19 +28,15 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 func executableCompletion(prefix string) []string {
 	path := os.Getenv("PATH")
 	dirs := strings.Split(path, ":")
-	// var suggestions []string
+	var suggestions []string
 	for _, dir := range dirs {
 		files, _ := os.ReadDir(dir)
 		for _, file := range files {
-			fmt.Print(file.Name() + " ")
-			// suggestions = append(suggestions, file.Name())
+			// fmt.Print(file.Name() + " ")
+			suggestions = append(suggestions, file.Name())
 		}
 	}
-	fmt.Print(dirs[2] + "ok")
-	str := []string{
-		"cusssstom_exe_7091", "hello",
-	}
-	return str
+	return suggestions
 }
 
 func echo(s string, output *os.File) {
