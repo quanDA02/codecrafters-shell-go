@@ -24,7 +24,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	if len(newline) == 0 {
 		fmt.Print("\x07")
 	}
-	fmt.Println("hello world")
+
 	if len(newline) > 1 {
 		slices.SortFunc(newline, slices.Compare)
 		b := commonPrefix(newline)
@@ -68,6 +68,7 @@ func executableCompletion(prefix string) []string {
 	for _, dir := range dirs {
 		files, _ := os.ReadDir(dir)
 		for _, file := range files {
+			fmt.Print(file.Name())
 			suggestions = append(suggestions, file.Name())
 		}
 	}
