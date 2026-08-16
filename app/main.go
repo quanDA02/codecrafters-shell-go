@@ -28,9 +28,9 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 func executableCompletion(prefix string) []string {
 	path := findPath(prefix)
 	if path == "" {
-		fmt.Print("fuck")
+		// fmt.Print("fuck")
 	}
-	fmt.Print(path + "ok")
+	// fmt.Print(path + "ok")
 	str := []string{
 		"lmao", "hello",
 	}
