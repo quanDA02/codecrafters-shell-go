@@ -21,7 +21,7 @@ type completerBell struct {
 func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	l := strings.Fields(string(line))
 	line = []rune(l[len(l)-1])
-	fmt.Println(line)
+	fmt.Println(string(line))
 	newline, length := c.completer.Do(line, pos)
 
 	//bell sound if autocomplete fail
