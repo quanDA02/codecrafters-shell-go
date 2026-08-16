@@ -32,7 +32,8 @@ func executableCompletion(prefix string) []string {
 	for _, dir := range dirs {
 		files, _ := os.ReadDir(dir)
 		for _, file := range files {
-			print(file)
+			fmt.Print(file.Name())
+			// suggestions = append(suggestions, file.Name())
 		}
 	}
 	fmt.Print(dirs[2] + "ok")
