@@ -24,6 +24,11 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	if len(newline) == 0 {
 		fmt.Print("\x07")
 	}
+
+	if len(newline) > 1 {
+		slices.SortFunc(newline, slices.Compare)
+	}
+
 	if c.tabCount == 0 {
 		fmt.Print("\x07")
 		c.tabCount++
