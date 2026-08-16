@@ -67,8 +67,16 @@ func executableCompletion(prefix string) []string {
 	var suggestions []string
 	files, _ := os.ReadDir(".")
 	for _, file := range files {
-		suggestions = append(suggestions, file.Name())
+		name := file.Name()
+
+		if strings.HasPrefix(name, prefix) {
+			suggestions = append(suggestions, name)
+		}
 	}
+
+	// for _, file := range files {
+	// 	suggestions = append(suggestions, file.Name())
+	// }
 
 	// for _, dir := range dirs {
 	// 	files, _ := os.ReadDir(dir)
