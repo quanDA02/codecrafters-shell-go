@@ -23,7 +23,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	line = []rune(l[len(l)-1])
 	fmt.Println(string(line))
 	newline, length := c.completer.Do(line, pos)
-
+	fmt.Println("hellodsdsd")
 	//bell sound if autocomplete fail
 	if len(newline) == 0 {
 		fmt.Print("\x07")
