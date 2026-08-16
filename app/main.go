@@ -65,7 +65,7 @@ func executableCompletion(prefix string) []string {
 	// path := os.Getenv("PATH")
 	// dirs := strings.Split(path, ":")
 	var suggestions []string
-	files, _ := os.ReadDir(".")
+	files, _ := os.ReadDir("./")
 	for _, file := range files {
 		name := file.Name()
 
