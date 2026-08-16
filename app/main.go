@@ -32,7 +32,7 @@ func executableCompletion(prefix string) []string {
 	}
 	// fmt.Print(path + "ok")
 	str := []string{
-		"lmao", "hello",
+		"custom_exe_7091", "hello",
 	}
 	return str
 }
