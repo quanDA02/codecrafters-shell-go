@@ -25,6 +25,15 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	}
 	return newline, length
 }
+func executableCompletion(prefix string) []string {
+	path := findPath(prefix)
+	if path == "" {
+		fmt.Print("fuck")
+	}
+	fmt.Print("son")
+	str := strings.Split(path, " ")
+	return str
+}
 
 func echo(s string, output *os.File) {
 	fmt.Fprintf(output, "%s\n", s)
@@ -124,6 +133,7 @@ func main() {
 		readline.PcItem("exit"),
 		readline.PcItem("type"),
 		readline.PcItem("echo"),
+		readline.PcItemDynamic(executableCompletion),
 	)
 
 	l, err := readline.NewEx(&readline.Config{
