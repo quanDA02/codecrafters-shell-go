@@ -19,6 +19,7 @@ type completerBell struct {
 
 // modified autocomplete Do and add bell sound
 func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
+	fmt.Println(line)
 	newline, length := c.completer.Do(line, pos)
 	//bell sound if autocomplete fail
 	if len(newline) == 0 {
@@ -180,7 +181,7 @@ func main() {
 		AutoComplete: &completerBell{completer, 0},
 	})
 	if err != nil {
-		fmt.Println(err, "hello world")
+		fmt.Println(err)
 	}
 	for {
 		command, _ := l.Readline()
