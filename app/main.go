@@ -135,7 +135,7 @@ func main() {
 		readline.PcItem("exit"),
 		readline.PcItem("type"),
 		readline.PcItem("echo"),
-		readline.PcItemDynamic(executableCompletion),
+		readline.PcItemDynamic(executableCompletion, nil),
 	)
 
 	l, err := readline.NewEx(&readline.Config{
