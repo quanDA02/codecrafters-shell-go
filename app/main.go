@@ -14,6 +14,7 @@ import (
 // wrap autocompele from chzyer/readline and add bell sound
 type completerBell struct {
 	completer readline.AutoCompleter
+	tabCount  int
 }
 
 // modified autocomplete Do and add bell sound
@@ -22,6 +23,10 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	//bell sound if autocomplete fail
 	if len(newline) == 0 {
 		fmt.Print("\x07")
+	}
+	if c.tabCount == 0 {
+		fmt.Print("\x07")
+		c.tabCount++
 	}
 	return newline, length
 }
