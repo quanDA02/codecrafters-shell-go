@@ -27,16 +27,17 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 
 	if len(newline) > 1 {
 		slices.SortFunc(newline, slices.Compare)
+		if c.tabCount == 0 {
+			fmt.Print("\x07")
+			c.tabCount++
+			return nil, 0
+		} else {
+			c.tabCount = 0
+			fmt.Print("\n$ " + string(line))
+			return newline, length
+		}
 	}
 
-	if c.tabCount == 0 {
-		fmt.Print("\x07")
-		c.tabCount++
-	} else {
-		c.tabCount = 0
-		fmt.Print("\n$ " + string(line))
-		return nil, 0
-	}
 	return newline, length
 }
 
