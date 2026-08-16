@@ -15,15 +15,16 @@ var l *readline.Instance
 
 // tab
 func filterInput(r rune) (rune, bool) {
-	if r == readline.CharTab {
-		builtIn := []string{"echo", "exit", "type"}
+	fmt.Print(r)
+	// if r == readline.CharTab {
+	// 	builtIn := []string{"echo", "exit", "type"}
 
-		for _, line := range builtIn {
-			if strings.HasPrefix(l.Line().Line, line) {
-				print("\x07")
-			}
-		}
-	}
+	// 	for _, line := range builtIn {
+	// 		if strings.HasPrefix(l.Line().Line, line) {
+	// 			print("\x07")
+	// 		}
+	// 	}
+	// }
 	return r, true
 }
 
