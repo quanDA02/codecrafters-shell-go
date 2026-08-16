@@ -15,7 +15,7 @@ var l *readline.Instance
 
 // tab
 func filterInput(r rune) (rune, bool) {
-	fmt.Print(r)
+	fmt.Println(r)
 	// if r == readline.CharTab {
 	// 	builtIn := []string{"echo", "exit", "type"}
 
