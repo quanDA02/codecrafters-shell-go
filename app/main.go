@@ -19,7 +19,7 @@ type completerBell struct {
 
 // modified autocomplete Do and add bell sound
 func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
-	l, _ := shlex.Split(string(line))
+	l := strings.Fields(string(line))
 	line = []rune(l[len(l)-1])
 	newline, length := c.completer.Do(line, pos)
 	//bell sound if autocomplete fail
