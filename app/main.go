@@ -27,6 +27,11 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 
 	if len(newline) > 1 {
 		slices.SortFunc(newline, slices.Compare)
+		b := buildinPrefix(newline)
+		if len(b) > 0 {
+			return newline, length
+		}
+
 		if c.tabCount == 0 {
 			fmt.Print("\x07")
 			c.tabCount++
@@ -44,6 +49,16 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	}
 
 	return newline, length
+}
+
+// check if prefix have buildin command
+func buildinPrefix(line [][]rune) []rune {
+	first, last := line[0], line[len(line)-1]
+	result := first[:0]
+	for i := 0; i < len(first) && i < len(last) && first[i] == last[i]; i++ {
+		result = first[:i+1]
+	}
+	return result
 }
 
 func executableCompletion(prefix string) []string {
