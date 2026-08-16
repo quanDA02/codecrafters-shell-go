@@ -33,8 +33,8 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 		} else {
 			c.tabCount = 0
 			// print sorted suggestions
-			for _, line := range newline {
-				fmt.Print(line)
+			for _, suggestion := range newline {
+				fmt.Print(string(line), string(suggestion))
 			}
 
 			fmt.Print("\n$ " + string(line))
