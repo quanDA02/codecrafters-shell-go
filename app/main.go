@@ -148,7 +148,7 @@ func main() {
 
 	l, err := readline.NewEx(&readline.Config{
 		Prompt:       "$ ",
-		AutoComplete: &completerBell{completer},
+		AutoComplete: &completerBell{completer, 0},
 	})
 	if err != nil {
 		fmt.Println(err)
