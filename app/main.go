@@ -27,11 +27,14 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	if c.tabCount == 0 {
 		fmt.Print("\x07")
 		c.tabCount++
+	} else {
+		c.tabCount = 0
+		fmt.Print("\n$ " + string(line))
+		return nil, 0
 	}
 	return newline, length
 }
 
-// executable suggestion
 func executableCompletion(prefix string) []string {
 	path := os.Getenv("PATH")
 	dirs := strings.Split(path, ":")
