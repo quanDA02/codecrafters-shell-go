@@ -179,6 +179,10 @@ func main() {
 		Prompt:       "$ ",
 		AutoComplete: &completerBell{completer, 0},
 	})
+	if err != nil {
+		panic(err)
+	}
+	defer l.Close()
 	l.CaptureExitSignal()
 	if err != nil {
 		fmt.Println(err)
