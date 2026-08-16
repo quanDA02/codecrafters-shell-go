@@ -24,7 +24,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	if len(newline) == 0 {
 		fmt.Print("\x07")
 	}
-
+	fmt.Println("hello world")
 	if len(newline) > 1 {
 		slices.SortFunc(newline, slices.Compare)
 		b := commonPrefix(newline)
