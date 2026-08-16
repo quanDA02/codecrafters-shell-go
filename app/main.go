@@ -25,6 +25,8 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	}
 	return newline, length
 }
+
+// executable suggestion
 func executableCompletion(prefix string) []string {
 	path := os.Getenv("PATH")
 	dirs := strings.Split(path, ":")
