@@ -62,21 +62,20 @@ func commonPrefix(line [][]rune) []rune {
 }
 
 func executableCompletion(prefix string) []string {
-	// path := os.Getenv("PATH")
-	// dirs := strings.Split(path, ":")
+	path := os.Getenv("PATH")
+	dirs := strings.Split(path, ":")
 	var suggestions []string
+
+	for _, dir := range dirs {
+		files, _ := os.ReadDir(dir)
+		for _, file := range files {
+			suggestions = append(suggestions, file.Name())
+		}
+	}
 	files, _ := os.ReadDir("./")
 	for _, file := range files {
 		suggestions = append(suggestions, file.Name())
 	}
-
-	// for _, dir := range dirs {
-	// 	files, _ := os.ReadDir(dir)
-	// 	for _, file := range files {
-	// 		fmt.Print(" " + file.Name())
-	// 		suggestions = append(suggestions, file.Name())
-	// 	}
-	// }
 	return suggestions
 }
 
