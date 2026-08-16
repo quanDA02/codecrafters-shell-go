@@ -13,12 +13,12 @@ import (
 
 // wrap autocompele from chzyer/readline and add bell sound
 type completerBell struct {
-	c readline.AutoCompleter
+	completer readline.AutoCompleter
 }
 
 // modified autocomplete Do and add bell sound
 func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
-	newline, length := c.Do(line, pos)
+	newline, length := c.completer.Do(line, pos)
 	//bell sound if autocomplete fail
 	if len(newline) == 0 {
 		fmt.Print("\x07")
