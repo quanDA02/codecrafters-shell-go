@@ -133,9 +133,8 @@ func main() {
 		AutoComplete:        completer,
 		FuncFilterInputRune: filterInput,
 	})
-	fmt.Println(err)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	for {
 		command, _ := l.Readline()
