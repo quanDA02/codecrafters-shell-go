@@ -28,8 +28,12 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 func executableCompletion(prefix string) []string {
 	path := os.Getenv("PATH")
 	dirs := strings.Split(path, ":")
-	if path == "" {
-		// fmt.Print("fuck")
+	// var suggestions []string
+	for _, dir := range dirs {
+		files, _ := os.ReadDir(dir)
+		for _, file := range files {
+			print(file)
+		}
 	}
 	fmt.Print(dirs[2] + "ok")
 	str := []string{
