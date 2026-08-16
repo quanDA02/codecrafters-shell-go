@@ -31,7 +31,9 @@ func executableCompletion(prefix string) []string {
 		fmt.Print("fuck")
 	}
 	fmt.Print(path + "ok")
-	str := strings.Split(path, " ")
+	str := []string{
+		"lmao", "hello",
+	}
 	return str
 }
 
