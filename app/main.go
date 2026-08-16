@@ -180,7 +180,7 @@ func main() {
 		AutoComplete: &completerBell{completer, 0},
 	})
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println(err, "hello world")
 	}
 	for {
 		command, _ := l.Readline()
