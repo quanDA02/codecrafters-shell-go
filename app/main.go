@@ -137,6 +137,7 @@ func executableCompletion(prefixes string) []string {
 							suggestions = append(suggestions, file.Name()+" ")
 						} else {
 							suggestions = append(suggestions, file.Name())
+							fmt.Print("stupid")
 						}
 					}
 				}
