@@ -95,7 +95,7 @@ func executableCompletion(prefixes string) []string {
 		}
 
 		for _, file := range files {
-			suggestions = append(suggestions, "/"+file.Name())
+			suggestions = append(suggestions, last+file.Name())
 		}
 	}
 
