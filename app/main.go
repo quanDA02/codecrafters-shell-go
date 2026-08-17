@@ -104,7 +104,10 @@ func executableCompletion(prefixes string) []string {
 		files, _ := os.ReadDir("./")
 		if strings.HasSuffix(prefixes, "/") {
 			// fmt.Print("ssscccscs")
-			filess, _ := os.ReadDir(prefixes)
+			filess, err := os.ReadDir(prefixes)
+			if err != nil {
+				fmt.Print(err)
+			}
 			for _, file := range filess {
 				name := file.Name()
 				if file.IsDir() {
