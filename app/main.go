@@ -20,10 +20,11 @@ type completerBell struct {
 // modified autocomplete Do and add bell sound
 func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 
-	fmt.Println(string(line))
+	fmt.Println(strings.Split(string(line), " "))
 
 	//seperate line and only take the last part of it
 	lline := line
+
 	for i, r := range line {
 		if r == ' ' {
 			lline = line[i:]
