@@ -79,7 +79,9 @@ func executableCompletion(prefixes string) []string {
 
 	prefix := strings.Split(prefixes, " ")
 	first, last := prefix[0], prefix[len(prefix)-1]
-	// fmt.Println("fi:", first, "ls:", last)
+
+	fmt.Println("fi:", first, "ls:", last)
+
 	suggestions := make([]string, 0)
 	if first == last {
 		path := os.Getenv("PATH")
@@ -99,7 +101,7 @@ func executableCompletion(prefixes string) []string {
 
 		for _, file := range files {
 			name := file.Name()
-			//check if the last character is a "/"
+			//check if the last character is a "/"(slash)
 			if strings.HasPrefix(name, last) {
 				suggestions = append(suggestions, file.Name())
 			} else {
