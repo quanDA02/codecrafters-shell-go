@@ -20,11 +20,9 @@ type completerBell struct {
 // modified autocomplete Do and add bell sound
 func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	var lline = []rune{}
-	fmt.Print("pos:", pos)
 	for i, r := range line {
 		if r == ' ' {
 			lline = line[i:]
-			fmt.Print("len line: ", lline)
 			pos = len(lline)
 		}
 	}
@@ -99,7 +97,6 @@ func executableCompletion(prefixes string) []string {
 			suggestions = append(suggestions, n[0])
 		}
 	}
-	suggestions = append(suggestions, " sex")
 	fmt.Printf("suggestions: %q\n", suggestions)
 
 	return suggestions
