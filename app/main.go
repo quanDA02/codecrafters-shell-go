@@ -114,8 +114,8 @@ func executableCompletion(prefixes string) []string {
 			} else {
 				// check if file name is a execution
 				if file.IsDir() {
-					name = file.Name() + "/"
-					suggestions = append(suggestions, prefixes+name)
+					name = prefixes + file.Name() + "/"
+					suggestions = append(suggestions, name)
 				} else {
 					suggestions = append(suggestions, file.Name())
 				}
