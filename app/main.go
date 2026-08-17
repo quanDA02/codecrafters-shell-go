@@ -92,6 +92,9 @@ func executableCompletion(prefixes string) []string {
 			suggestions = append(suggestions, file.Name())
 		}
 	}
+
+	fmt.Println(suggestions)
+
 	return suggestions
 }
 
