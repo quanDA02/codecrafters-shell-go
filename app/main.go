@@ -98,7 +98,13 @@ func executableCompletion(prefixes string) []string {
 		}
 
 		for _, file := range files {
-			suggestions = append(suggestions, last+file.Name())
+			name := file.Name()
+			if strings.HasPrefix(name, last) {
+				suggestions = append(suggestions, file.Name())
+			} else {
+				suggestions = append(suggestions, last+file.Name())
+			}
+
 		}
 	}
 
