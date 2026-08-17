@@ -102,11 +102,7 @@ func executableCompletion(prefixes string) []string {
 		}
 	} else {
 		files, _ := os.ReadDir("./")
-		s, _ := shlex.Split(prefixes)
-		if len(s) > 1 {
-			fmt.Print("hello")
-		}
-		if strings.Contains(first, "/") {
+		if strings.Contains(prefixes, "/") {
 			fmt.Print("hello")
 			files, _ = os.ReadDir(prefixes)
 		}
