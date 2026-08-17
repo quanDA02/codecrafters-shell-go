@@ -19,7 +19,13 @@ type completerBell struct {
 
 // modified autocomplete Do and add bell sound
 func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
-	newline, length := c.completer.Do(line, pos)
+	var lline = []rune{}
+	for i, r := range line {
+		if r == ' ' {
+			lline = line[i:]
+		}
+	}
+	newline, length := c.completer.Do(lline, pos)
 	//bell sound if autocomplete fail
 	fmt.Printf(
 		"\nline: %q\nnewline: %q\nlength: %d\n",
