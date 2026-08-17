@@ -71,22 +71,24 @@ func commonPrefix(line [][]rune) []rune {
 func executableCompletion(prefixes string) []string {
 	prefix := strings.Split(prefixes, " ")
 	first, last := prefix[0], prefix[len(prefix)-1]
-	fmt.Println("f:", first, "l:", last)
-	path := os.Getenv("./")
-	dirs := strings.Split(path, ":")
-
 	suggestions := make([]string, 0)
+	if first != last {
+		path := os.Getenv("./")
+		dirs := strings.Split(path, ":")
 
-	for _, dir := range dirs {
-		files, _ := os.ReadDir(dir)
+		for _, dir := range dirs {
+			files, _ := os.ReadDir(dir)
+			for _, file := range files {
+				suggestions = append(suggestions, file.Name())
+			}
+		}
+	} else {
+		files, _ := os.ReadDir("./")
 		for _, file := range files {
 			suggestions = append(suggestions, file.Name())
 		}
 	}
-	// files, _ := os.ReadDir("./")
-	// for _, file := range files {
-	// 	suggestions = append(suggestions, file.Name())
-	// }
+
 	fmt.Printf("suggestions: %q\n", suggestions)
 
 	return suggestions
