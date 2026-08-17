@@ -98,6 +98,7 @@ func executableCompletion(prefixes string) []string {
 			files, _ := os.ReadDir(dir)
 			for _, file := range files {
 				suggestions = append(suggestions, first+file.Name())
+				fmt.Print("stupid")
 			}
 		}
 	} else {
