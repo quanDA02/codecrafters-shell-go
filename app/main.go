@@ -90,7 +90,7 @@ func executableCompletion(prefixes string) []string {
 			suggestions = append(suggestions, n[0])
 		}
 	}
-	suggestions = append(suggestions, " ")
+	suggestions = append(suggestions, " sex")
 	fmt.Printf("suggestions: %q\n", suggestions)
 
 	return suggestions
