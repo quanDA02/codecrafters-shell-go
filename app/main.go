@@ -109,14 +109,14 @@ func executableCompletion(prefixes string) []string {
 		for _, file := range files {
 			name := file.Name()
 			//check if the last character is a "/"(slash)
-			if strings.HasPrefix(name, last) {
-				suggestions = append(suggestions, prefixes+file.Name()+"//")
+			if strings.HasPrefix(name, "/") {
+				suggestions = append(suggestions, file.Name())
 			} else {
 				// check if file name is a execution
 				if strings.Contains(file.Name(), ".") {
-					suggestions = append(suggestions, prefixes+file.Name()+"//")
+					suggestions = append(suggestions, prefixes+file.Name())
 				} else {
-					suggestions = append(suggestions, prefixes+file.Name()+"//")
+					suggestions = append(suggestions, prefixes+file.Name()+"/")
 				}
 			}
 		}
