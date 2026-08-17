@@ -84,6 +84,7 @@ func executableCompletion(prefixes string) []string {
 
 	suggestions := make([]string, 0)
 	if first == last {
+		fmt.Println("sex")
 		path := os.Getenv("PATH")
 		dirs := strings.Split(path, ":")
 
