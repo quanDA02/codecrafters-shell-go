@@ -19,17 +19,16 @@ type completerBell struct {
 
 // modified autocomplete Do and add bell sound
 func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
-
+	lline := line
 	arr, _ := shlex.Split(string(line))
-	fmt.Println(len(arr))
 
 	//seperate line and only take the last part of it
-	lline := line
-
-	for i, r := range line {
-		if r == ' ' {
-			lline = line[i:]
-			pos = len(lline)
+	if len(arr) == 1 {
+		for i, r := range line {
+			if r == ' ' {
+				lline = line[i:]
+				pos = len(lline)
+			}
 		}
 	}
 	newline, length := c.completer.Do(lline, pos)
