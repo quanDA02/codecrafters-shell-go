@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"slices"
 	"strings"
 
@@ -91,7 +92,7 @@ func executableCompletion(prefixes string) []string {
 	if first == last {
 
 		path := os.Getenv("PATH")
-		dirs := strings.Split(path, ":")
+		dirs := filepath.SplitList(path)
 
 		for _, dir := range dirs {
 			files, _ := os.ReadDir(dir)
