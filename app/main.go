@@ -133,8 +133,7 @@ func executableCompletion(prefixes string) []string {
 						name = prefixes + file.Name() + "/"
 						suggestions = append(suggestions, name)
 					} else {
-						suggestions = append(suggestions, prefixes+file.Name()+" ")
-						fmt.Print("cock")
+						suggestions = append(suggestions, file.Name()+" ")
 					}
 				}
 			}
