@@ -121,6 +121,7 @@ func executableCompletion(prefixes string) []string {
 				}
 
 				fmt.Println("suggestion :", suggestions)
+				fmt.Print("sss")
 
 			} else {
 				// check if file name is a directory
