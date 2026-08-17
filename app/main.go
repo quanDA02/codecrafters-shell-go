@@ -89,7 +89,7 @@ func executableCompletion(prefixes string) []string {
 			}
 		}
 	} else {
-		files, _ := os.ReadDir(last)
+		files, _ := os.ReadDir("./")
 		if strings.HasPrefix(last, "/") {
 			files, _ = os.ReadDir(last)
 		}
