@@ -23,7 +23,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	//bell sound if autocomplete fail
 	fmt.Printf(
 		"\nline: %q\nnewline: %q\nlength: %d\n",
-		string(line),
+		line,
 		newline,
 		length,
 	)
