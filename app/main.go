@@ -19,6 +19,9 @@ type completerBell struct {
 
 // modified autocomplete Do and add bell sound
 func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
+
+	fmt.Println(line)
+
 	//seperate line and only take the last part of it
 	lline := line
 	for i, r := range line {
@@ -112,7 +115,7 @@ func executableCompletion(prefixes string) []string {
 		}
 	}
 
-	fmt.Println("suggestion :", suggestions)
+	// fmt.Println("suggestion :", suggestions)
 
 	return suggestions
 }
