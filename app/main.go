@@ -80,6 +80,7 @@ func executableCompletion(prefixes string) []string {
 	prefix := strings.Split(prefixes, " ")
 	first, last := prefix[0], prefix[len(prefix)-1]
 
+	fmt.Println("prefix:", prefix)
 	fmt.Println("fi:", first, "ls:", last)
 
 	suggestions := make([]string, 0)
@@ -111,7 +112,7 @@ func executableCompletion(prefixes string) []string {
 		}
 	}
 
-	fmt.Println("suggestion :", suggestions)
+	// fmt.Println("suggestion :", suggestions)
 
 	return suggestions
 }
