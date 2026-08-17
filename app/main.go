@@ -97,7 +97,7 @@ func executableCompletion(prefixes string) []string {
 			files, _ := os.ReadDir(dir)
 			// files, _ = os.ReadDir("./")
 			for _, file := range files {
-				suggestions = append(suggestions, first+file.Name())
+				suggestions = append(suggestions, file.Name())
 			}
 			fmt.Print(suggestions)
 		}
