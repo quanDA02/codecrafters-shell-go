@@ -28,7 +28,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 		}
 	}
 	newline, length := c.completer.Do(lline, pos)
-	fmt.Println("line:", lline)
+	fmt.Println("line:", string(lline))
 	fmt.Println("new:", newline)
 	//bell sound if autocomplete fail
 	if len(newline) == 0 {
