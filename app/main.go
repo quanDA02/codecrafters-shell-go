@@ -70,7 +70,7 @@ func commonPrefix(line [][]rune) []rune {
 
 func executableCompletion(prefix string) []string {
 	path := os.Getenv("/")
-	fmt.Print(path)
+	fmt.Print("cum " + prefix)
 	dirs := strings.Split(path, ":")
 
 	suggestions := make([]string, 0)
