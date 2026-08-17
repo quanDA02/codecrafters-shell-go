@@ -105,42 +105,42 @@ func executableCompletion(prefixes string) []string {
 		if strings.HasSuffix(prefixes, "/") {
 			// fmt.Print("ssscccscs")
 			prefixes := strings.TrimSpace(prefixes)
-			files, _ = os.ReadDir(prefixes)
-			// if err != nil {
-			// 	fmt.Print(err)
-			// }
+			files, err := os.ReadDir(prefixes)
+			if err != nil {
+				fmt.Print(err)
+			}
 
-			// for _, file := range files {
-			// 	name := file.Name()
-			// 	if file.IsDir() {
-			// 		name = prefixes + file.Name() + "/"
-			// 		suggestions = append(suggestions, name)
-			// 	} else {
-			// 		suggestions = append(suggestions, file.Name()+" ")
-			// 	}
-
-			// }
-			// fmt.Println("suggestion :", suggestions)
-			// fmt.Print("sss")
-		}
-
-		for _, file := range files {
-			name := file.Name()
-			//check if the last character is a "/"(slash)
-			if strings.HasPrefix(name, "/") {
-				suggestions = append(suggestions, file.Name())
-			} else {
-				// check if file name is a directory
+			for _, file := range files {
+				name := file.Name()
 				if file.IsDir() {
-					name = prefixes + file.Name() + "/"
+					name = prefixes + file.Name() + "/ "
 					suggestions = append(suggestions, name)
 				} else {
+					suggestions = append(suggestions, file.Name()+" ")
+				}
+
+			}
+			// fmt.Println("suggestion :", suggestions)
+			// fmt.Print("sss")
+		} else {
+			for _, file := range files {
+				name := file.Name()
+				//check if the last character is a "/"(slash)
+				if strings.HasPrefix(name, "/") {
 					suggestions = append(suggestions, file.Name())
+				} else {
+					// check if file name is a directory
+					if file.IsDir() {
+						name = prefixes + file.Name() + "/"
+						suggestions = append(suggestions, name)
+					} else {
+						suggestions = append(suggestions, file.Name())
+					}
 				}
 			}
 		}
-	}
 
+	}
 	// fmt.Println("suggestion :", suggestions)
 
 	return suggestions
