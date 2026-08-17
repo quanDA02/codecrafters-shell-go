@@ -86,13 +86,9 @@ func executableCompletion(prefixes string) []string {
 	} else {
 		files, _ := os.ReadDir("./")
 		for _, file := range files {
-			name := file.Name()
-			n := strings.Split(name, ".")
-			suggestions = append(suggestions, n[0])
+			suggestions = append(suggestions, file.Name())
 		}
 	}
-	fmt.Printf("suggestions: %q\n", suggestions)
-
 	return suggestions
 }
 
