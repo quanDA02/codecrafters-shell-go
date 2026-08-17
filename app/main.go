@@ -24,7 +24,8 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	for i, r := range line {
 		if r == ' ' {
 			lline = line[i:]
-			pos = len(line)
+			fmt.Print("len line: ", lline)
+			pos = len(lline)
 		}
 	}
 	newline, length := c.completer.Do(lline, pos)
