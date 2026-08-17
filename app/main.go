@@ -75,9 +75,7 @@ func executableCompletion(prefix string) []string {
 	// }
 	files, _ := os.ReadDir("./")
 	for _, file := range files {
-		if strings.HasPrefix(file.Name(), prefix) {
-			suggestions = append(suggestions, file.Name())
-		}
+		suggestions = append(suggestions, file.Name())
 	}
 	fmt.Print(suggestions)
 	return suggestions
