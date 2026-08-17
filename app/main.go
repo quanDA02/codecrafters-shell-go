@@ -68,9 +68,11 @@ func commonPrefix(line [][]rune) []rune {
 	return result
 }
 
-func executableCompletion(prefix string) []string {
-	path := os.Getenv("/")
-	fmt.Print("cum " + prefix)
+func executableCompletion(prefixes string) []string {
+	prefix := strings.Split(prefixes, " ")
+	first, last := prefix[0], prefix[len(prefix)-1]
+	fmt.Println("f:", first, "l:", last)
+	path := os.Getenv("./")
 	dirs := strings.Split(path, ":")
 
 	suggestions := make([]string, 0)
