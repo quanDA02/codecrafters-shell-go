@@ -122,7 +122,7 @@ func executableCompletion(prefixes string) []string {
 		}
 	}
 
-	fmt.Println("suggestion :", suggestions)
+	// fmt.Println("suggestion :", suggestions)
 
 	return suggestions
 }
