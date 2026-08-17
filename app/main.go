@@ -72,8 +72,8 @@ func executableCompletion(prefixes string) []string {
 	prefix := strings.Split(prefixes, " ")
 	first, last := prefix[0], prefix[len(prefix)-1]
 	suggestions := make([]string, 0)
-	if first != last {
-		path := os.Getenv("./")
+	if first == last {
+		path := os.Getenv("PATH")
 		dirs := strings.Split(path, ":")
 
 		for _, dir := range dirs {
