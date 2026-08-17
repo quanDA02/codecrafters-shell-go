@@ -30,8 +30,8 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	newline, length := c.completer.Do(lline, pos)
 
 	//these print line for debug purpose only
-	fmt.Println("line:", string(lline))
-	fmt.Println("new:", newline)
+	// fmt.Println("line:", string(lline))
+	// fmt.Println("new:", newline)
 
 	//bell sound if autocomplete fail
 	if len(newline) == 0 {
@@ -80,12 +80,12 @@ func executableCompletion(prefixes string) []string {
 	prefix := strings.Split(prefixes, " ")
 	first, last := prefix[0], prefix[len(prefix)-1]
 
-	fmt.Println("prefix:", prefix)
-	fmt.Println("fi:", first, "ls:", last)
+	// fmt.Println("prefix:", prefix)
+	// fmt.Println("fi:", first, "ls:", last)
 
 	suggestions := make([]string, 0)
 	if first == last {
-		fmt.Println("sex")
+
 		path := os.Getenv("PATH")
 		dirs := strings.Split(path, ":")
 
