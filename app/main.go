@@ -72,7 +72,7 @@ func commonPrefix(line [][]rune) []rune {
 
 func executableCompletion(prefixes string) []string {
 
-	prefix, _ := shlex.Split(prefixes)
+	prefix := strings.Split(prefixes, " ")
 	first, last := prefix[0], prefix[len(prefix)-1]
 	suggestions := make([]string, 0)
 	if first == last {
