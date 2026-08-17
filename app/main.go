@@ -68,30 +68,24 @@ func commonPrefix(line [][]rune) []rune {
 	return result
 }
 
-var previousPrefix = ""
-var previousSuggestions = []string{}
-
 func executableCompletion(prefix string) []string {
-	// path := os.Getenv("PATH")
-	// dirs := strings.Split(path, ":")
-	if prefix == previousPrefix {
-		return previousSuggestions
-	}
+	path := os.Getenv("./")
+	dirs := strings.Split(path, ":")
+
 	suggestions := make([]string, 0)
 
-	// for _, dir := range dirs {
-	// 	files, _ := os.ReadDir(dir)
-	// 	for _, file := range files {
-	// 		suggestions = append(suggestions, file.Name())
-	// 	}
-	// }
-	files, _ := os.ReadDir("./")
-	for _, file := range files {
-		suggestions = append(suggestions, file.Name())
+	for _, dir := range dirs {
+		files, _ := os.ReadDir(dir)
+		for _, file := range files {
+			suggestions = append(suggestions, file.Name())
+		}
 	}
-	fmt.Printf("suggestions: %q\n", suggestions)
-	previousPrefix = prefix
-	previousSuggestions = suggestions
+	// files, _ := os.ReadDir("./")
+	// for _, file := range files {
+	// 	suggestions = append(suggestions, file.Name())
+	// }
+	// fmt.Printf("suggestions: %q\n", suggestions)
+
 	return suggestions
 }
 
