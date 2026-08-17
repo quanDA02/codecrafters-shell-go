@@ -70,36 +70,27 @@ func commonPrefix(line [][]rune) []rune {
 }
 
 func executableCompletion(prefixes string) []string {
-	suggestions := make([]string, 0)
-	path := os.Getenv("PATH")
-	dirs := strings.Split(path, ":")
 
-	for _, dir := range dirs {
-		files, _ := os.ReadDir(dir)
+	prefix := strings.Split(prefixes, " ")
+	first, last := prefix[0], prefix[len(prefix)-1]
+	fmt.Println("fi:", first, "ls:", last)
+	suggestions := make([]string, 0)
+	if first == last {
+		path := os.Getenv("PATH")
+		dirs := strings.Split(path, ":")
+
+		for _, dir := range dirs {
+			files, _ := os.ReadDir(dir)
+			for _, file := range files {
+				suggestions = append(suggestions, file.Name())
+			}
+		}
+	} else {
+		files, _ := os.ReadDir("./")
 		for _, file := range files {
 			suggestions = append(suggestions, file.Name())
 		}
 	}
-
-	// prefix := strings.Split(prefixes, " ")
-	// first, last := prefix[0], prefix[len(prefix)-1]
-	// suggestions := make([]string, 0)
-	// if first == last {
-	// 	path := os.Getenv("PATH")
-	// 	dirs := strings.Split(path, ":")
-
-	// 	for _, dir := range dirs {
-	// 		files, _ := os.ReadDir(dir)
-	// 		for _, file := range files {
-	// 			suggestions = append(suggestions, file.Name())
-	// 		}
-	// 	}
-	// } else {
-	// 	files, _ := os.ReadDir("./")
-	// 	for _, file := range files {
-	// 		suggestions = append(suggestions, file.Name())
-	// 	}
-	// }
 	return suggestions
 }
 
