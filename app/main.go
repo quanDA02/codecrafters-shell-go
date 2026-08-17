@@ -99,12 +99,12 @@ func executableCompletion(prefixes string) []string {
 
 		for _, file := range files {
 			name := file.Name()
+			//check if the last character is a "/"
 			if strings.HasPrefix(name, last) {
 				suggestions = append(suggestions, file.Name())
 			} else {
 				suggestions = append(suggestions, last+file.Name())
 			}
-
 		}
 	}
 
