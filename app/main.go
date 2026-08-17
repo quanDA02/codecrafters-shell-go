@@ -21,7 +21,12 @@ type completerBell struct {
 func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	newline, length := c.completer.Do(line, pos)
 	//bell sound if autocomplete fail
-	fmt.Print(length)
+	fmt.Printf(
+		"\nline: %q\nnewline: %q\nlength: %d\n",
+		string(line),
+		newline,
+		length,
+	)
 	if len(newline) == 0 {
 		fmt.Print("\x07")
 		return nil, 0
@@ -78,7 +83,7 @@ func executableCompletion(prefix string) []string {
 	for _, file := range files {
 		suggestions = append(suggestions, file.Name())
 	}
-	fmt.Print(suggestions)
+	fmt.Printf("suggestions: %q\n", suggestions)
 	return suggestions
 }
 
