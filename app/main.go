@@ -91,11 +91,11 @@ func executableCompletion(prefixes string) []string {
 	} else {
 		files, _ := os.ReadDir("./")
 		if strings.HasSuffix(last, "/") {
-			fmt.Print("\n LMAO")
 			files, _ = os.ReadDir(last)
 		}
+
 		for _, file := range files {
-			suggestions = append(suggestions, file.Name())
+			suggestions = append(suggestions, "/"+file.Name())
 		}
 	}
 
