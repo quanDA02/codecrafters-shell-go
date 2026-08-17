@@ -90,6 +90,9 @@ func executableCompletion(prefixes string) []string {
 		}
 	} else {
 		files, _ := os.ReadDir(last)
+		if strings.HasPrefix(last, "/") {
+			files, _ = os.ReadDir(last)
+		}
 		for _, file := range files {
 			suggestions = append(suggestions, file.Name())
 		}
