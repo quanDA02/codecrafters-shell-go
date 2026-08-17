@@ -103,7 +103,7 @@ func executableCompletion(prefixes string) []string {
 	} else {
 		files, _ := os.ReadDir("./")
 		if strings.HasSuffix(prefixes, "/") {
-			fmt.Print(last)
+			// fmt.Print(last)
 			files, _ = os.ReadDir(prefixes)
 		}
 
@@ -112,6 +112,16 @@ func executableCompletion(prefixes string) []string {
 			//check if the last character is a "/"(slash)
 			if strings.HasPrefix(name, "/") {
 				suggestions = append(suggestions, file.Name())
+
+				if file.IsDir() {
+					name = prefixes + file.Name() + "/"
+					suggestions = append(suggestions, name)
+				} else {
+					suggestions = append(suggestions, file.Name())
+				}
+
+				fmt.Println("suggestion :", suggestions)
+
 			} else {
 				// check if file name is a directory
 				if file.IsDir() {
