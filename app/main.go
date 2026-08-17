@@ -24,7 +24,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	arr, _ := shlex.Split(string(line))
 
 	//seperate line and only take the last part of it
-	if len(arr) != 1 {
+	if len(arr) > 1 {
 		for i, r := range line {
 			if r == ' ' {
 				lline = line[i:]
@@ -85,8 +85,8 @@ func executableCompletion(prefixes string) []string {
 	prefix := strings.Split(prefixes, " ")
 	first, last := prefix[0], prefix[len(prefix)-1]
 
-	fmt.Println("prefix:", prefix)
-	fmt.Println("fi:", first, "ls:", last)
+	// fmt.Println("prefix:", prefix)
+	// fmt.Println("fi:", first, "ls:", last)
 
 	suggestions := make([]string, 0)
 	if first == last {
@@ -112,7 +112,12 @@ func executableCompletion(prefixes string) []string {
 			if strings.HasPrefix(name, last) {
 				suggestions = append(suggestions, file.Name())
 			} else {
-				suggestions = append(suggestions, last+file.Name())
+				// check if file name is a execution
+				if strings.Contains(file.Name(), ".") {
+					suggestions = append(suggestions, last+file.Name())
+				} else {
+					suggestions = append(suggestions, last+file.Name()+"/")
+				}
 			}
 		}
 	}
