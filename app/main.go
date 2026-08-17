@@ -115,15 +115,15 @@ func executableCompletion(prefixes string) []string {
 				// check if file name is a execution
 				if file.IsDir() {
 					name = file.Name() + "/"
-					suggestions = append(suggestions, name)
+					suggestions = append(suggestions, prefixes+name)
 				} else {
-					suggestions = append(suggestions, prefixes+file.Name())
+					suggestions = append(suggestions, file.Name())
 				}
 			}
 		}
 	}
 
-	fmt.Println("suggestion :", suggestions)
+	// fmt.Println("suggestion :", suggestions)
 
 	return suggestions
 }
