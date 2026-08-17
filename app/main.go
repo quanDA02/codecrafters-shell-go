@@ -106,7 +106,7 @@ func executableCompletion(prefixes string) []string {
 			// fmt.Print("ssscccscs")
 			files, err := os.ReadDir(prefixes)
 			if err != nil {
-				fmt.Print(err)
+				return suggestions
 			}
 			for _, file := range files {
 				name := file.Name()
