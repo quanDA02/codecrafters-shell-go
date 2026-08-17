@@ -19,6 +19,7 @@ type completerBell struct {
 
 // modified autocomplete Do and add bell sound
 func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
+	//seperate line and only take the last part of it
 	lline := line
 	for i, r := range line {
 		if r == ' ' {
@@ -71,9 +72,8 @@ func commonPrefix(line [][]rune) []rune {
 
 func executableCompletion(prefixes string) []string {
 
-	prefix := strings.Split(prefixes, " ")
+	prefix, _ := shlex.Split(prefixes)
 	first, last := prefix[0], prefix[len(prefix)-1]
-	fmt.Println("fi:", first, "ls:", last)
 	suggestions := make([]string, 0)
 	if first == last {
 		path := os.Getenv("PATH")
