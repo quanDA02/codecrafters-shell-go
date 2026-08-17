@@ -66,7 +66,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 		}
 		return nil, 0
 	}
-
+	newline[0] = newline[0][:len(newline[0])-1]
 	return newline, length
 }
 
@@ -112,7 +112,7 @@ func executableCompletion(prefixes string) []string {
 			if strings.HasPrefix(name, "/") {
 				suggestions = append(suggestions, file.Name())
 			} else {
-				// check if file name is a execution
+				// check if file name is a directory
 				if file.IsDir() {
 					name = prefixes + file.Name() + "/"
 					suggestions = append(suggestions, name)
