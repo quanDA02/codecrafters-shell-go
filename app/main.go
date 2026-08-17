@@ -102,7 +102,7 @@ func executableCompletion(prefixes string) []string {
 		}
 	} else {
 		files, _ := os.ReadDir("./")
-		println("this :", last)
+		println("this :", first)
 		if strings.HasSuffix(last, "/") {
 			fmt.Print("hello")
 			files, _ = os.ReadDir(prefixes)
