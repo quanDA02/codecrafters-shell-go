@@ -114,9 +114,9 @@ func executableCompletion(prefixes string) []string {
 			} else {
 				// check if file name is a execution
 				if strings.Contains(file.Name(), ".") {
-					suggestions = append(suggestions, last+file.Name()+"/")
+					suggestions = append(suggestions, last+file.Name()+"//")
 				} else {
-					suggestions = append(suggestions, last+file.Name()+"/")
+					suggestions = append(suggestions, last+file.Name()+"//")
 				}
 			}
 		}
