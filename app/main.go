@@ -105,14 +105,8 @@ func executableCompletion(prefixes string) []string {
 		if strings.HasSuffix(prefixes, "/") {
 			// fmt.Print(last)
 			files, _ = os.ReadDir(prefixes)
-		}
-
-		for _, file := range files {
-			name := file.Name()
-			//check if the last character is a "/"(slash)
-			if strings.HasPrefix(name, "/") {
-				suggestions = append(suggestions, file.Name())
-
+			for _, file := range files {
+				name := file.Name()
 				if file.IsDir() {
 					name = prefixes + file.Name() + "/"
 					suggestions = append(suggestions, name)
@@ -122,7 +116,14 @@ func executableCompletion(prefixes string) []string {
 
 				fmt.Println("suggestion :", suggestions)
 				fmt.Print("sss")
+			}
+		}
 
+		for _, file := range files {
+			name := file.Name()
+			//check if the last character is a "/"(slash)
+			if strings.HasPrefix(name, "/") {
+				suggestions = append(suggestions, file.Name())
 			} else {
 				// check if file name is a directory
 				if file.IsDir() {
