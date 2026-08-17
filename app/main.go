@@ -91,11 +91,11 @@ func executableCompletion(prefixes string) []string {
 	suggestions := make([]string, 0)
 	if first == last {
 
-		path := os.Getenv("./")
+		path := os.Getenv("PATH")
 		dirs := filepath.SplitList(path)
-
 		for _, dir := range dirs {
 			files, _ := os.ReadDir(dir)
+			files, _ = os.ReadDir("./")
 			for _, file := range files {
 				suggestions = append(suggestions, first+file.Name())
 			}
