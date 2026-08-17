@@ -28,6 +28,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 		}
 	}
 	newline, length := c.completer.Do(lline, pos)
+	fmt.Println("new:", newline)
 	//bell sound if autocomplete fail
 	if len(newline) == 0 {
 		fmt.Print("\x07")
