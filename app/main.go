@@ -66,7 +66,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 		}
 		return nil, 0
 	}
-	newline[0] = newline[0][:len(newline[0])-1]
+	newline = newline[:len(newline)-1]
 	return newline, length
 }
 
