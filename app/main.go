@@ -98,7 +98,7 @@ func executableCompletion(prefixes string) []string {
 	// number of line almost double because of some space tracing
 	suggestions := make([]string, 0)
 	if first == last {
-
+		fmt.Println("yo chat im in root")
 		path := os.Getenv("PATH")
 		dirs := filepath.SplitList(path)
 		for _, dir := range dirs {
