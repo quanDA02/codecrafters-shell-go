@@ -67,8 +67,11 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 		return nil, 0
 	}
 
-	for _, r := range newline {
-		fmt.Print("hello", string(r))
+	for _, grid := range newline {
+		for _, r := range grid {
+			fmt.Print("hello", r)
+		}
+
 	}
 
 	newline[0] = newline[0][:len(newline[0])-1]
