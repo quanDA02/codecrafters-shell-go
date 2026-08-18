@@ -123,7 +123,7 @@ func executableCompletion(prefixes string) []string {
 					name = prefixes + file.Name() + "/"
 					suggestions = append(suggestions, name)
 				} else {
-					suggestions = append(suggestions, prefixes+file.Name())
+					suggestions = append(suggestions, file.Name())
 				}
 			}
 			// fmt.Println("suggestion :", suggestions)
