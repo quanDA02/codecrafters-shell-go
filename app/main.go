@@ -69,7 +69,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 
 	for _, grid := range newline {
 		for _, r := range grid {
-			fmt.Print("hello", r)
+			fmt.Printf("%#U", r)
 		}
 
 	}
