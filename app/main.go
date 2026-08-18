@@ -67,9 +67,9 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 		return nil, 0
 	}
 
+	// checking if there are a slash at the end and remove space trace
 	s := strings.TrimSpace(string(newline[0]))
 	if strings.HasSuffix(s, "/") {
-		fmt.Println("fuck yeah")
 		newline[0] = newline[0][:len(newline[0])-1]
 	}
 
