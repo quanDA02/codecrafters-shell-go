@@ -69,7 +69,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 
 	s := strings.TrimSpace(string(newline[0]))
 	if strings.HasSuffix(s, "/") {
-		fmt.Printf("fuck yeah")
+		fmt.Print("fuck yeah")
 		newline[0] = newline[0][:len(newline[0])-1]
 	}
 
