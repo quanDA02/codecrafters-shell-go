@@ -93,8 +93,8 @@ func executableCompletion(prefixes string) []string {
 	prefix, _ := shlex.Split(prefixes)
 	first, last := prefix[0], prefix[len(prefix)-1]
 
-	// fmt.Println("prefix:", prefix)
-	// fmt.Println("fi:", first, "ls:", last)
+	fmt.Println("prefix:", prefix)
+	fmt.Println("fi:", first, "ls:", last)
 	// number of line almost double because of some space tracing
 	suggestions := make([]string, 0)
 	if first == last {
