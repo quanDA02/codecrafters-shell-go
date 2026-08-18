@@ -67,11 +67,9 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 		return nil, 0
 	}
 
-	for _, grid := range newline {
-		for _, r := range grid {
-			fmt.Printf("%#U", r)
-		}
-
+	s := strings.TrimSpace(string(newline[0]))
+	if strings.HasSuffix(s, "/") {
+		fmt.Printf("fuck yeah")
 	}
 
 	// newline[0] = newline[0][:len(newline[0])-1]
