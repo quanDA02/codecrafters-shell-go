@@ -94,10 +94,10 @@ func executableCompletion(prefixes string) []string {
 	first, last := prefix[0], prefix[len(prefix)-1]
 
 	// fmt.Println("prefix:", prefix)
-	fmt.Println("fi:", first, "ls:", last)
+	// fmt.Println("fi:", first, "ls:", last)
 	// number of line almost double because of some space tracing
 	suggestions := make([]string, 0)
-	if first == last || last == " " {
+	if first == last || last == " " || last == "" {
 
 		path := os.Getenv("PATH")
 		dirs := filepath.SplitList(path)
@@ -107,7 +107,7 @@ func executableCompletion(prefixes string) []string {
 			for _, file := range files {
 				suggestions = append(suggestions, file.Name())
 			}
-			// fmt.Print(suggestions)
+			fmt.Print(suggestions)
 		}
 	} else {
 		files, _ := os.ReadDir("./")
