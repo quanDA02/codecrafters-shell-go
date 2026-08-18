@@ -142,10 +142,8 @@ func executableCompletion(prefixes string) []string {
 					} else {
 						if strings.Contains(file.Name(), ".") {
 							suggestions = append(suggestions, file.Name())
-							fmt.Println("stupid")
 						} else {
 							suggestions = append(suggestions, file.Name())
-							fmt.Println("stupid2")
 						}
 					}
 				}
