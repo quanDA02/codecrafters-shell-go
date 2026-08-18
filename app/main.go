@@ -59,7 +59,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 			fmt.Println("")
 			// print sorted suggestions
 			for _, suggestion := range newline {
-				fmt.Print(string(suggestion))
+				fmt.Print(string(lline), string(suggestion))
 			}
 			fmt.Print("\n$ " + string(line))
 		}
