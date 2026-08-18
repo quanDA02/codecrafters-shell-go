@@ -141,10 +141,7 @@ func executableCompletion(prefixes string) []string {
 						suggestions = append(suggestions, name)
 					} else {
 						if strings.Contains(file.Name(), ".") {
-							if !strings.HasSuffix(prefixes, "_") {
-								suggestions = append(suggestions, file.Name())
-								fmt.Println("suggestion :", suggestions)
-							}
+							suggestions = append(suggestions, file.Name())
 						} else {
 							suggestions = append(suggestions, file.Name())
 						}
@@ -152,8 +149,8 @@ func executableCompletion(prefixes string) []string {
 				}
 			}
 		}
-
 	}
+	fmt.Println("suggestion :", suggestions)
 
 	return suggestions
 }
