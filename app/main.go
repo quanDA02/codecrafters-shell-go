@@ -68,7 +68,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	}
 
 	for _, r := range newline {
-		fmt.Printf("%U ", r)
+		fmt.Printf("%s ", r)
 	}
 
 	newline[0] = newline[0][:len(newline[0])-1]
