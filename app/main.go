@@ -90,7 +90,7 @@ func commonPrefix(line [][]rune) []rune {
 
 func executableCompletion(prefixes string) []string {
 
-	prefix := strings.Split(prefixes, " ")
+	prefix, _ := shlex.Split(prefixes)
 	first, last := prefix[0], prefix[len(prefix)-1]
 
 	// fmt.Println("prefix:", prefix)
@@ -98,7 +98,7 @@ func executableCompletion(prefixes string) []string {
 	// number of line almost double because of some space tracing
 	suggestions := make([]string, 0)
 	if first == last {
-		fmt.Println("yo chat im in root")
+
 		path := os.Getenv("PATH")
 		dirs := filepath.SplitList(path)
 		for _, dir := range dirs {
