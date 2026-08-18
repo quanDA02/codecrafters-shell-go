@@ -141,6 +141,7 @@ func executableCompletion(prefixes string) []string {
 						suggestions = append(suggestions, name)
 					} else {
 						if strings.Contains(file.Name(), ".") {
+							fmt.Println(prefixes)
 							suggestions = append(suggestions, file.Name())
 						} else {
 							suggestions = append(suggestions, file.Name())
