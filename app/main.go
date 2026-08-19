@@ -106,9 +106,9 @@ func executableCompletion(prefixes string) []string {
 				suggestions = append(suggestions, prefixes+file.Name())
 				fmt.Print("waduh")
 			}
-			if len(suggestions) == 0 {
-				println(prefixes, ": ", suggestions)
-			}
+		}
+		if len(suggestions) == 0 {
+			println(prefixes, ": ", suggestions)
 		}
 		// path := os.Getenv("PATH")
 		// dirs := filepath.SplitList(path)
