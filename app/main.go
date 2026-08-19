@@ -136,6 +136,7 @@ func executableCompletion(prefixes string) []string {
 			} else {
 				suggestions = append(suggestions, name)
 			}
+			fmt.Print("\n", suggestions)
 		}
 
 		// path := os.Getenv("PATH")
