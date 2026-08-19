@@ -136,7 +136,6 @@ func executableCompletion(prefixes string) []string {
 		// suggestions := make([]string, 0)
 		for _, dir := range dirs {
 			files, _ := os.ReadDir(dir)
-			// files, _ = os.ReadDir("./")
 			for _, file := range files {
 				if file.IsDir() {
 					suggestions = append(suggestions, file.Name()+"/")
@@ -145,7 +144,7 @@ func executableCompletion(prefixes string) []string {
 				}
 			}
 		}
-		// fmt.Print(suggestions)
+		fmt.Print(suggestions)
 	}
 	// if first == last || (last == " " && first != " ") || (last == "" && first != "") {
 
