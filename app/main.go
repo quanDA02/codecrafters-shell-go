@@ -127,7 +127,7 @@ func executableCompletion(prefixes string) []string {
 						// fmt.Print(suggestions)
 					}
 				}
-				fmt.Print(suggestions)
+				// fmt.Print(suggestions)
 			}
 		}
 
