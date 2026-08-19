@@ -107,21 +107,21 @@ func executableCompletion(prefixes string) []string {
 		}
 	}
 
-	if len(suggestions) == 0 {
-		path := os.Getenv("PATH")
-		dirs := filepath.SplitList(path)
-		// fmt.Print("before: ", suggestions)
-		// suggestions := make([]string, 0)
-		for _, dir := range dirs {
-			files, _ := os.ReadDir(dir)
-			for _, file := range files {
-				if file.IsDir() {
-					suggestions = append(suggestions, file.Name()+"/")
-				} else {
-					suggestions = append(suggestions, file.Name())
-				}
-			}
-		}
+	// if len(suggestions) == 0 {
+	// 	path := os.Getenv("PATH")
+	// 	dirs := filepath.SplitList(path)
+	// 	// fmt.Print("before: ", suggestions)
+	// 	// suggestions := make([]string, 0)
+	// 	for _, dir := range dirs {
+	// 		files, _ := os.ReadDir(dir)
+	// 		for _, file := range files {
+	// 			if file.IsDir() {
+	// 				suggestions = append(suggestions, file.Name()+"/")
+	// 			} else {
+	// 				suggestions = append(suggestions, file.Name())
+	// 			}
+	// 		}
+	// 	}
 		// fmt.Printf("%s", suggestions)
 	}
 	// if first == last || (last == " " && first != " ") || (last == "" && first != "") {
