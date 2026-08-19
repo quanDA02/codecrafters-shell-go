@@ -144,6 +144,7 @@ func executableCompletion(prefixes string) []string {
 				}
 			}
 		}
+		fmt.Printf("%s", suggestions)
 	}
 	// if first == last || (last == " " && first != " ") || (last == "" && first != "") {
 
