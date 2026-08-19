@@ -169,33 +169,33 @@ func executableCompletion(prefixes string) []string {
 	// 	fmt.Print(err)
 	// }
 
-	for _, file := range files {
-		name := file.Name()
-		if file.IsDir() {
-			name = prefixes + file.Name() + "/"
-			suggestions = append(suggestions, name)
-		} else {
-			suggestions = append(suggestions, prefixes+file.Name())
-		}
-	}
+	// for _, file := range files {
+	// 	name := file.Name()
+	// 	if file.IsDir() {
+	// 		name = prefixes + file.Name() + "/"
+	// 		suggestions = append(suggestions, name)
+	// 	} else {
+	// 		suggestions = append(suggestions, prefixes+file.Name())
+	// 	}
+	// }
 	// 		// fmt.Println("suggestion :", suggestions)
 	// 		// fmt.Print("sss")
 	// 	} else {
-	// 		for _, file := range files {
-	// 			name := file.Name()
-	// 			//check if the last character is a "/"(slash)
-	// 			if strings.HasPrefix(name, "/") {
-	// 				suggestions = append(suggestions, prefixes+file.Name())
-	// 			} else {
-	// 				// check if file name is a directory
-	// 				if file.IsDir() {
-	// 					name = file.Name() + "/"
-	// 					suggestions = append(suggestions, name)
-	// 				} else {
-	// 					suggestions = append(suggestions, file.Name())
-	// 				}
-	// 			}
-	// 		}
+	for _, file := range files {
+		name := file.Name()
+		//check if the last character is a "/"(slash)
+		if strings.HasPrefix(name, "/") {
+			suggestions = append(suggestions, prefixes+file.Name())
+		} else {
+			// check if file name is a directory
+			if file.IsDir() {
+				name = file.Name() + "/"
+				suggestions = append(suggestions, name)
+			} else {
+				suggestions = append(suggestions, file.Name())
+			}
+		}
+	}
 	// 	}
 	// }
 	// fmt.Println("suggestion :", suggestions)
