@@ -131,7 +131,7 @@ func executableCompletion(prefixes string) []string {
 		}
 		for i, dir := range dirs {
 			if last == "" {
-				fmt.Print("\n it is i", i)
+				fmt.Print("\n it is i:", suggestions)
 			}
 			files, _ := os.ReadDir(dir)
 			for _, file := range files {
