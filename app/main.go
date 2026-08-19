@@ -145,7 +145,7 @@ func executableCompletion(prefixes string) []string {
 			}
 		}
 		if prefixes == "stat " {
-			fmt.Print(suggestions)
+			fmt.Println(suggestions)
 		}
 	}
 	// if first == last || (last == " " && first != " ") || (last == "" && first != "") {
