@@ -129,7 +129,7 @@ func executableCompletion(prefixes string) []string {
 		}
 		// println(suggestions)
 	}
-	if strings.HasSuffix(prefixes, "_") || len(suggestions) == 0 {
+	if len(suggestions) == 0 {
 		path := os.Getenv("PATH")
 		dirs := filepath.SplitList(path)
 		// fmt.Print("before: ", suggestions)
@@ -144,7 +144,7 @@ func executableCompletion(prefixes string) []string {
 				}
 			}
 		}
-		// fmt.Print(suggestions)
+		fmt.Print(suggestions)
 	}
 	// if first == last || (last == " " && first != " ") || (last == "" && first != "") {
 
