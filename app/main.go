@@ -50,7 +50,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 		if len(b) > 0 {
 			return newline, length
 		}
-
+		fmt.Print(newline)
 		if c.tabCount == 0 {
 			fmt.Print("\x07")
 			c.tabCount++
