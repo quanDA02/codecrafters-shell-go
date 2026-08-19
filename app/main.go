@@ -99,7 +99,7 @@ func executableCompletion(prefixes string) []string {
 	suggestions := make([]string, 0)
 	files, _ := os.ReadDir("./")
 	if strings.HasSuffix(prefixes, "/") {
-		// prefixes := strings.TrimSpace(prefixes)
+		prefixes := strings.TrimSpace(prefixes)
 		files, err := os.ReadDir(prefixes)
 		if err != nil {
 			fmt.Print(err)
