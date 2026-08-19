@@ -132,11 +132,10 @@ func executableCompletion(prefixes string) []string {
 						suggestions = append(suggestions, prefixes+file.Name()+"/")
 					} else {
 						suggestions = append(suggestions, prefixes+file.Name())
-						// fmt.Print(len(suggestions))
 					}
 				}
 			}
-			// fmt.Print(suggestions)
+			fmt.Print(suggestions)
 		}
 	} else {
 		files, _ := os.ReadDir("./")
