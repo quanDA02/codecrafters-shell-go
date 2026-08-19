@@ -159,7 +159,7 @@ func executableCompletion(prefixes string) []string {
 						name = file.Name() + "/"
 						suggestions = append(suggestions, name)
 					} else {
-						suggestions = append(suggestions, prefixes+file.Name())
+						suggestions = append(suggestions, file.Name())
 					}
 				}
 			}
