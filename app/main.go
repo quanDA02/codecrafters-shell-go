@@ -144,7 +144,7 @@ func executableCompletion(prefixes string) []string {
 				}
 			}
 		}
-		if prefixes == "stat " {
+		if prefixes == "stat " || prefixes == "ls " || prefixes == "tree " {
 			fmt.Println(suggestions)
 		}
 	}
