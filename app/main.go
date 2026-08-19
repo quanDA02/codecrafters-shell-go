@@ -45,7 +45,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	}
 
 	if len(newline) > 1 {
-		println("what a life", string(newline[1]))
+		// println("what a life", string(newline[1]))
 		slices.SortFunc(newline, slices.Compare)
 		b := commonPrefix(newline)
 		if len(b) > 0 {
