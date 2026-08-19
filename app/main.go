@@ -102,8 +102,10 @@ func executableCompletion(prefixes string) []string {
 	for _, file := range files {
 		if file.IsDir() {
 			suggestions = append(suggestions, file.Name()+"/")
+			suggestions = append(suggestions, prefixes+file.Name()+"/")
 		} else {
 			suggestions = append(suggestions, file.Name())
+			suggestions = append(suggestions, prefixes+file.Name())
 		}
 	}
 
@@ -126,23 +128,21 @@ func executableCompletion(prefixes string) []string {
 	// }
 	// if first == last || (last == " " && first != " ") || (last == "" && first != "") {
 
-	files, _ = os.ReadDir("./")
-	if strings.HasSuffix(prefixes, "/") {
-		prefixes = strings.TrimSpace(prefixes)
-		fmt.Print(prefixes)
-		files, _ = os.ReadDir(prefixes)
-	}
+	// files, _ = os.ReadDir("./")
+	// if strings.HasSuffix(prefixes, "/") {
+	// 	prefixes = strings.TrimSpace(prefixes)
+	// 	fmt.Print(prefixes)
+	// 	files, _ = os.ReadDir(prefixes)
+	// }
 
-	for _, file := range files {
-		if file.IsDir() {
-			suggestions = append(suggestions, file.Name()+"/")
-			// suggestions = append(suggestions, prefixes+file.Name()+"/")
-		} else {
-			suggestions = append(suggestions, file.Name())
-			// suggestions = append(suggestions, prefixes+file.Name())
-			// fmt.Print(suggestions)
-		}
-	}
+	// for _, file := range files {
+	// 	if file.IsDir() {
+	// 		suggestions = append(suggestions, prefixes+file.Name()+"/")
+	// 	} else {
+	// 		suggestions = append(suggestions, prefixes+file.Name())
+	// 		// fmt.Print(suggestions)
+	// 	}
+	// }
 	// 	if strings.HasSuffix(prefixes, "_") {
 	// 		path := os.Getenv("PATH")
 	// 		dirs := filepath.SplitList(path)
