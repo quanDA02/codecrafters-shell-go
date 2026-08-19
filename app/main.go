@@ -36,7 +36,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 
 	//these print line for debug purpose only
 	fmt.Println("line:", string(line))
-	fmt.Println("new:", newline)
+	fmt.Println("new:", len(newline))
 
 	//bell sound if autocomplete fail
 	if len(newline) == 0 {
@@ -97,7 +97,7 @@ func executableCompletion(prefixes string) []string {
 	// number of line almost double because of some space tracing
 	suggestions := make([]string, 0)
 	if first != last {
-		files, err := os.ReadDir(last)
+		files, err := os.ReadDir("./")
 		if err != nil {
 			panic(err)
 		}
