@@ -126,10 +126,15 @@ func executableCompletion(prefixes string) []string {
 						suggestions = append(suggestions, prefixes+file.Name()+"/")
 					} else {
 						suggestions = append(suggestions, prefixes+file.Name())
-						fmt.Print(len(suggestions))
+						// fmt.Print(len(suggestions))
 					}
 				}
-				// if suggestions
+				if len(suggestions) > 1 {
+					slices.Sort(suggestions)
+					suggestion := suggestions[0]
+					suggestions := make([]string, 0)
+					suggestions = append(suggestions, suggestion)
+				}
 			}
 		}
 
