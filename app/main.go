@@ -97,7 +97,8 @@ func executableCompletion(prefixes string) []string {
 	// fmt.Println("fi:", first, "ls:", last)
 	// number of line almost double because of some space tracing
 	suggestions := make([]string, 0)
-	fmt.Println(prefixes, "sss")
+	// fmt.Println(prefixes, "sss")
+	prefixes = strings.TrimSpace(prefixes)
 	files, _ := os.ReadDir("./")
 	if strings.HasSuffix(prefixes, "/") {
 		// fmt.Print("ssscccscs")
