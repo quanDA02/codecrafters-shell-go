@@ -97,7 +97,7 @@ func executableCompletion(prefixes string) []string {
 	// number of line almost double because of some space tracing
 	suggestions := make([]string, 0)
 	if first != last {
-		files, err := os.ReadDir("./")
+		files, err := os.ReadDir(last)
 		if err != nil {
 			panic(err)
 		}
