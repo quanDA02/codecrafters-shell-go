@@ -111,6 +111,7 @@ func executableCompletion(prefixes string) []string {
 			}
 			if file.IsDir() {
 				suggestions = append(suggestions, name+"/")
+				println(suggestions)
 			} else {
 				suggestions = append(suggestions, name)
 			}
