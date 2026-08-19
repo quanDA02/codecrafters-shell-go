@@ -96,14 +96,15 @@ func executableCompletion(prefixes string) []string {
 	// fmt.Println("fi:", first, "ls:", last)
 	// number of line almost double because of some space tracing
 	suggestions := make([]string, 0)
-	if first != last {
+	if first != last && last != "" {
 		files, err := os.ReadDir("./")
 		if err != nil {
 			panic(err)
 		}
-		// if strings.HasSuffix(last, "/") {
-		// 	files, _ = os.ReadDir(last)
-		// }
+		prefixes = strings.TrimSpace(prefixes)
+		if strings.HasSuffix(prefixes, "/") {
+			files, _ = os.ReadDir(prefixes)
+		}
 		for _, file := range files {
 			name := file.Name()
 			if strings.HasSuffix(prefixes, "/") {
@@ -117,9 +118,21 @@ func executableCompletion(prefixes string) []string {
 		}
 		return suggestions
 	} else {
+		if last == "" {
+			fmt.Print("\n it is i")
+		}
 		path := os.Getenv("PATH")
+		if last == "" {
+			fmt.Print("\n it is i")
+		}
 		dirs := filepath.SplitList(path)
-		for _, dir := range dirs {
+		if last == "" {
+			fmt.Print("\n it is i")
+		}
+		for i, dir := range dirs {
+			if last == "" {
+				fmt.Print("\n it is i", i)
+			}
 			files, _ := os.ReadDir(dir)
 			for _, file := range files {
 				name := file.Name()
