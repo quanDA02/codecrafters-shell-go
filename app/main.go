@@ -121,7 +121,7 @@ func executableCompletion(prefixes string) []string {
 			name := file.Name()
 			// fmt.Println(name)
 			if file.IsDir() {
-				name = prefixes + file.Name() + "/"
+				name = file.Name() + "/"
 				suggestions = append(suggestions, name)
 			} else {
 				suggestions = append(suggestions, file.Name())
