@@ -129,10 +129,7 @@ func executableCompletion(prefixes string) []string {
 		}
 		// println(suggestions)
 	}
-	if len(suggestions) == 0 {
-		fmt.Println("good lord")
-	}
-	if strings.HasSuffix(prefixes, "_") {
+	if strings.HasSuffix(prefixes, "_") || len(suggestions) == 0 {
 		path := os.Getenv("PATH")
 		dirs := filepath.SplitList(path)
 		// fmt.Print("before: ", suggestions)
