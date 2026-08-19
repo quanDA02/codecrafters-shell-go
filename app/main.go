@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"slices"
 	"strings"
 
@@ -108,7 +109,7 @@ func executableCompletion(prefixes string) []string {
 
 	// // if len(suggestions) == 0 {
 	path := os.Getenv("PATH")
-	dirs := strings.Split(path, ":")
+	dirs := filepath.SplitList(path)
 	// fmt.Print("before: ", suggestions)
 	// suggestions := make([]string, 0)
 	for _, dir := range dirs {
