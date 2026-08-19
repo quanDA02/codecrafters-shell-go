@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"slices"
 	"strings"
 
@@ -109,25 +110,27 @@ func executableCompletion(prefixes string) []string {
 				suggestions = append(suggestions, prefixes+file.Name()+"/")
 			} else {
 				suggestions = append(suggestions, prefixes+file.Name())
+				// fmt.Print(suggestions)
+			}
+		}
+		if strings.HasSuffix(prefixes, "_") {
+			path := os.Getenv("PATH")
+			dirs := filepath.SplitList(path)
+			for _, dir := range dirs {
+				files, _ := os.ReadDir(dir)
+				// files, _ = os.ReadDir("./")
+				for _, file := range files {
+					if file.IsDir() {
+						suggestions = append(suggestions, prefixes+file.Name()+"/")
+					} else {
+						suggestions = append(suggestions, prefixes+file.Name())
+						// fmt.Print(suggestions)
+					}
+				}
 				fmt.Print(suggestions)
 			}
 		}
 
-		// path := os.Getenv("PATH")
-		// dirs := filepath.SplitList(path)
-		// for _, dir := range dirs {
-		// 	files, _ := os.ReadDir(dir)
-		// 	// files, _ = os.ReadDir("./")
-		// 	for _, file := range files {
-		// 		if file.IsDir() {
-		// 			suggestions = append(suggestions, prefixes+file.Name()+"/")
-		// 		} else {
-		// 			suggestions = append(suggestions, prefixes+file.Name())
-		// 			// fmt.Print(suggestions)
-		// 		}
-		// 	}
-		// 	// fmt.Print(suggestions)
-		// }
 		// fmt.Print(suggestions)
 
 	} else {
