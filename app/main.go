@@ -48,6 +48,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 		slices.SortFunc(newline, slices.Compare)
 		b := commonPrefix(newline)
 		if len(b) > 0 {
+			fmt.Println("yo:", b)
 			return newline, length
 		}
 
@@ -129,13 +130,6 @@ func executableCompletion(prefixes string) []string {
 						// fmt.Print(len(suggestions))
 					}
 				}
-			}
-			if len(suggestions) > 1 {
-				slices.Sort(suggestions)
-				suggestion := suggestions[0]
-				// suggestions := make([]string, 0)
-				suggestions = append(suggestions, suggestion)
-				fmt.Print(suggestions)
 			}
 		}
 
