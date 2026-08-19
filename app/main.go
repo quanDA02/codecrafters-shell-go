@@ -138,14 +138,11 @@ func executableCompletion(prefixes string) []string {
 			files, _ := os.ReadDir(dir)
 			for _, file := range files {
 				if file.IsDir() {
-					suggestions = append(suggestions, file.Name()+"/")
+					suggestions = append(suggestions, prefixes+file.Name()+"/")
 				} else {
 					suggestions = append(suggestions, file.Name())
 				}
 			}
-		}
-		if prefixes == "stat " || prefixes == "ls " || prefixes == "tree " {
-			fmt.Println(suggestions)
 		}
 	}
 	// if first == last || (last == " " && first != " ") || (last == "" && first != "") {
