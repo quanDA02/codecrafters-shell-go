@@ -118,7 +118,7 @@ func executableCompletion(prefixes string) []string {
 		return suggestions
 	} else {
 
-		files, err := os.ReadDir(first)
+		files, err := os.ReadDir("./")
 		if err != nil {
 			panic(err)
 		}
