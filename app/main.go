@@ -110,7 +110,6 @@ func executableCompletion(prefixes string) []string {
 		// fmt.Println("suggestion :", suggestions)
 		// fmt.Print("sss")
 	} else {
-		println("sss")
 		for _, file := range files {
 			name := file.Name()
 			//check if the last character is a "/"(slash)
