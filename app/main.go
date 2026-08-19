@@ -99,35 +99,15 @@ func executableCompletion(prefixes string) []string {
 	suggestions := make([]string, 0)
 	prefixes = strings.TrimSpace(prefixes)
 	files, _ := os.ReadDir("./")
-	if strings.HasSuffix(prefixes, "/") {
-		files, err := os.ReadDir(prefixes)
-		if err != nil {
-			fmt.Print(err)
-		}
 
-		for _, file := range files {
-			name := file.Name()
-			if file.IsDir() {
-				name = file.Name() + "/"
-				suggestions = append(suggestions, name)
-			} else {
-				suggestions = append(suggestions, file.Name())
-			}
+	for _, file := range files {
+		name := file.Name()
+		if file.IsDir() {
+			name = file.Name() + "/"
+			suggestions = append(suggestions, name)
+		} else {
+			suggestions = append(suggestions, file.Name())
 		}
-		// fmt.Println("suggestion :", suggestions)
-		// fmt.Print("sss")
-	} else {
-		for _, file := range files {
-			name := file.Name()
-			// fmt.Println(name)
-			if file.IsDir() {
-				name = file.Name() + "/"
-				suggestions = append(suggestions, name)
-			} else {
-				suggestions = append(suggestions, file.Name())
-			}
-		}
-		// println(suggestions)
 	}
 	if len(suggestions) == 0 {
 		path := os.Getenv("PATH")
