@@ -50,7 +50,6 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 		if len(b) > 0 {
 			return newline, length
 		}
-		fmt.Print("new:", newline)
 		if c.tabCount == 0 {
 			fmt.Print("\x07")
 			c.tabCount++
@@ -136,7 +135,7 @@ func executableCompletion(prefixes string) []string {
 
 	// // if len(suggestions) == 0 {
 
-	// fmt.Printf("%s", suggestions)
+	fmt.Printf("%s", suggestions)
 	// }
 	// if first == last || (last == " " && first != " ") || (last == "" && first != "") {
 
