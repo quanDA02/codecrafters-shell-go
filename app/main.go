@@ -99,6 +99,9 @@ func executableCompletion(prefixes string) []string {
 	if first == last || (last == " " && first != " ") || (last == "" && first != "") {
 
 		files, _ := os.ReadDir("./")
+		if strings.HasSuffix(prefixes, "/") {
+			files, _ = os.ReadDir("./")
+		}
 		for _, file := range files {
 			if file.IsDir() {
 				suggestions = append(suggestions, prefixes+file.Name()+"/")
