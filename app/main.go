@@ -97,7 +97,7 @@ func executableCompletion(prefixes string) []string {
 	// fmt.Println("fi:", first, "ls:", last)
 	// number of line almost double because of some space tracing
 	suggestions := make([]string, 0)
-	// prefixes = strings.TrimSpace(prefixes)
+	prefixes = strings.TrimSpace(prefixes)
 	files, _ := os.ReadDir("./")
 	for _, file := range files {
 		if file.IsDir() {
