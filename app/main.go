@@ -32,7 +32,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 			}
 		}
 	}
-	newline, length := c.completer.Do(lline, pos)
+	newline, length := c.completer.Do(line, pos)
 
 	//these print line for debug purpose only
 	fmt.Println("line:", string(line))
@@ -105,7 +105,7 @@ func executableCompletion(prefixes string) []string {
 		// 	files, _ = os.ReadDir(last)
 		// }
 		for _, file := range files {
-			name := file.Name()
+			name := first + file.Name()
 			if strings.HasSuffix(last, "/") {
 				name = last + file.Name()
 			}
