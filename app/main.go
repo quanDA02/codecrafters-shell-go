@@ -45,7 +45,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	}
 
 	if len(newline) > 1 {
-		// println("what a life", string(newline[1]))
+		println("what a life", string(newline[1]))
 		slices.SortFunc(newline, slices.Compare)
 		b := commonPrefix(newline)
 		if len(b) > 0 {
@@ -83,10 +83,9 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 // check common prefix
 func commonPrefix(line [][]rune) []rune {
 	first, last := (line[0]), line[len(line)-1]
-	println("f:", string(first), " l:", string(last))
+	// println("f:", string(first), " l:", string(last))
 	result := first[:0]
 	for i := 0; i < len(first) && i < len(last) && first[i] == last[i]; i++ {
-		println(first[:i+1])
 		result = first[:i+1]
 	}
 	return result
@@ -121,7 +120,7 @@ func executableCompletion(prefixes string) []string {
 			path := os.Getenv("PATH")
 			dirs := filepath.SplitList(path)
 			// fmt.Print("before: ", suggestions)
-			suggestions := make([]string, 0)
+			// suggestions := make([]string, 0)
 			for _, dir := range dirs {
 				files, _ := os.ReadDir(dir)
 				// files, _ = os.ReadDir("./")
