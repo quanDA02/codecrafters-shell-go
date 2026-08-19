@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-	"path/filepath"
 	"slices"
 	"strings"
 
@@ -90,7 +89,7 @@ func commonPrefix(line [][]rune) []rune {
 func executableCompletion(prefixes string) []string {
 
 	prefix := strings.Split(prefixes, " ")
-	_, last := prefix[0], prefix[len(prefix)-1]
+	first, last := prefix[0], prefix[len(prefix)-1]
 
 	// fmt.Println("prefix:", prefix)
 	// fmt.Println("fi:", first, "ls:", last)
@@ -119,24 +118,44 @@ func executableCompletion(prefixes string) []string {
 		return suggestions
 	} else {
 
-		path := os.Getenv("PATH")
-		dirs := filepath.SplitList(path)
-		for _, dir := range dirs {
-			if last == "" {
-				fmt.Print("\n it is i:", suggestions)
+		files, err := os.ReadDir(first)
+		if err != nil {
+			panic(err)
+		}
+		prefixes = strings.TrimSpace(prefixes)
+		if strings.HasSuffix(prefixes, "/") {
+			files, _ = os.ReadDir(prefixes)
+		}
+		for _, file := range files {
+			name := file.Name()
+			if strings.HasSuffix(prefixes, "/") {
+				name = prefixes + file.Name()
 			}
-			files, _ := os.ReadDir(dir)
-			for _, file := range files {
-				name := file.Name()
-				if file.IsDir() {
-					suggestions = append(suggestions, name+"/")
-					// suggestions = append(suggestions, prefixes+" "+file.Name()+"/")
-				} else {
-					suggestions = append(suggestions, name)
-					// suggestions = append(suggestions, prefixes+file.Name())
-				}
+			if file.IsDir() {
+				suggestions = append(suggestions, name+"/")
+			} else {
+				suggestions = append(suggestions, name)
 			}
 		}
+
+		// path := os.Getenv("PATH")
+		// dirs := filepath.SplitList(path)
+		// for _, dir := range dirs {
+		// 	if last == "" {
+		// 		fmt.Print("\n it is i:", suggestions)
+		// 	}
+		// 	files, _ := os.ReadDir(dir)
+		// 	for _, file := range files {
+		// 		name := file.Name()
+		// 		if file.IsDir() {
+		// 			suggestions = append(suggestions, name+"/")
+		// 			// suggestions = append(suggestions, prefixes+" "+file.Name()+"/")
+		// 		} else {
+		// 			suggestions = append(suggestions, name)
+		// 			// suggestions = append(suggestions, prefixes+file.Name())
+		// 		}
+		// 	}
+		// }
 	}
 
 	// // if len(suggestions) == 0 {
