@@ -129,7 +129,7 @@ func executableCompletion(prefixes string) []string {
 		if last == "" {
 			fmt.Print("\n it is i")
 		}
-		for i, dir := range dirs {
+		for _, dir := range dirs {
 			if last == "" {
 				fmt.Print("\n it is i:", suggestions)
 			}
