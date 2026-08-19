@@ -88,35 +88,44 @@ func commonPrefix(line [][]rune) []rune {
 }
 
 func executableCompletion(prefixes string) []string {
-	suggestions := make([]string, 0)
-	files, _ := os.ReadDir("./")
-	if strings.HasSuffix(prefixes, "/") {
-		// fmt.Print("ssscccscs")
-		prefixes := strings.TrimSpace(prefixes)
-		files, err := os.ReadDir(prefixes)
-		if err != nil {
-			fmt.Print(err)
-		}
 
+	prefix := strings.Split(prefixes, " ")
+	first, last := prefix[0], prefix[len(prefix)-1]
+
+	// fmt.Println("prefix:", prefix)
+	// fmt.Println("fi:", first, "ls:", last)
+	// number of line almost double because of some space tracing
+	suggestions := make([]string, 0)
+	if first == last || (last == " " && first != " ") || (last == "" && first != "") {
+
+		files, _ := os.ReadDir("./")
 		for _, file := range files {
-			name := file.Name()
-			if file.IsDir() {
-				name = prefixes + file.Name() + "/"
-				suggestions = append(suggestions, name)
-			} else {
-				suggestions = append(suggestions, file.Name())
-			}
+			suggestions = append(suggestions, file.Name())
 		}
-		// fmt.Println("suggestion :", suggestions)
-		// fmt.Print("sss")
+		// path := os.Getenv("PATH")
+		// dirs := filepath.SplitList(path)
+		// for _, dir := range dirs {
+		// 	files, _ := os.ReadDir(dir)
+		// 	// files, _ = os.ReadDir("./")
+		// 	for _, file := range files {
+		// 		suggestions = append(suggestions, file.Name())
+		// 	}
+		// 	// fmt.Print(suggestions)
+		// }
+		// fmt.Print(suggestions)
+
 	} else {
-		for _, file := range files {
-			name := file.Name()
-			//check if the last character is a "/"(slash)
-			if strings.HasPrefix(name, "/") {
-				suggestions = append(suggestions, file.Name())
-			} else {
-				// check if file name is a directory
+		files, _ := os.ReadDir("./")
+		if strings.HasSuffix(prefixes, "/") {
+			// fmt.Print("ssscccscs")
+			prefixes := strings.TrimSpace(prefixes)
+			files, err := os.ReadDir(prefixes)
+			if err != nil {
+				fmt.Print(err)
+			}
+
+			for _, file := range files {
+				name := file.Name()
 				if file.IsDir() {
 					name = prefixes + file.Name() + "/"
 					suggestions = append(suggestions, name)
@@ -124,68 +133,26 @@ func executableCompletion(prefixes string) []string {
 					suggestions = append(suggestions, file.Name())
 				}
 			}
+			// fmt.Println("suggestion :", suggestions)
+			// fmt.Print("sss")
+		} else {
+			for _, file := range files {
+				name := file.Name()
+				//check if the last character is a "/"(slash)
+				if strings.HasPrefix(name, "/") {
+					suggestions = append(suggestions, file.Name())
+				} else {
+					// check if file name is a directory
+					if file.IsDir() {
+						name = file.Name() + "/"
+						suggestions = append(suggestions, name)
+					} else {
+						suggestions = append(suggestions, file.Name())
+					}
+				}
+			}
 		}
 	}
-
-	// prefix := strings.Split(prefixes, " ")
-	// first, last := prefix[0], prefix[len(prefix)-1]
-
-	// fmt.Println("prefix:", prefix)
-	// fmt.Println("fi:", first, "ls:", last)
-	// number of line almost double because of some space tracing
-
-	// if first == last || (last == " " && first != " ") || (last == "" && first != "") {
-
-	// 	path := os.Getenv("PATH")
-	// 	dirs := filepath.SplitList(path)
-	// 	for _, dir := range dirs {
-	// 		files, _ := os.ReadDir(dir)
-	// 		files, _ = os.ReadDir("./")
-	// 		for _, file := range files {
-	// 			suggestions = append(suggestions, file.Name())
-	// 		}
-	// 		// fmt.Print(suggestions)
-	// 	}
-	// 	// fmt.Print(suggestions)
-	// } else {
-	// 	files, _ := os.ReadDir("./")
-	// 	if strings.HasSuffix(prefixes, "/") {
-	// 		// fmt.Print("ssscccscs")
-	// 		prefixes := strings.TrimSpace(prefixes)
-	// 		files, err := os.ReadDir(prefixes)
-	// 		if err != nil {
-	// 			fmt.Print(err)
-	// 		}
-
-	// 		for _, file := range files {
-	// 			name := file.Name()
-	// 			if file.IsDir() {
-	// 				name = prefixes + file.Name() + "/"
-	// 				suggestions = append(suggestions, name)
-	// 			} else {
-	// 				suggestions = append(suggestions, file.Name())
-	// 			}
-	// 		}
-	// 		// fmt.Println("suggestion :", suggestions)
-	// 		// fmt.Print("sss")
-	// 	} else {
-	// 		for _, file := range files {
-	// 			name := file.Name()
-	// 			//check if the last character is a "/"(slash)
-	// 			if strings.HasPrefix(name, "/") {
-	// 				suggestions = append(suggestions, file.Name())
-	// 			} else {
-	// 				// check if file name is a directory
-	// 				if file.IsDir() {
-	// 					name = file.Name() + "/"
-	// 					suggestions = append(suggestions, name)
-	// 				} else {
-	// 					suggestions = append(suggestions, file.Name())
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-	// }
 	// fmt.Println("suggestion :", suggestions)
 
 	return suggestions
@@ -289,7 +256,7 @@ func main() {
 		readline.PcItem("exit"),
 		readline.PcItem("type"),
 		readline.PcItem("echo"),
-		readline.PcItemDynamic(executableCompletion),
+		readline.PcItemDynamic(executableCompletion, nil),
 	)
 
 	l, err := readline.NewEx(&readline.Config{
