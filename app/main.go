@@ -28,11 +28,11 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 		for i, r := range line {
 			if r == ' ' {
 				lline = line[i:]
-				// pos = len(lline)
+				pos = len(lline)
 			}
 		}
 	}
-	newline, length := c.completer.Do(line, pos)
+	newline, length := c.completer.Do(lline, pos)
 
 	//these print line for debug purpose only
 	// fmt.Println("line:", string(line))
