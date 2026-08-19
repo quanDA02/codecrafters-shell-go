@@ -134,6 +134,7 @@ func executableCompletion(prefixes string) []string {
 					suggestion := suggestions[0]
 					suggestions := make([]string, 0)
 					suggestions = append(suggestions, suggestion)
+					fmt.Print(suggestions)
 				}
 			}
 		}
