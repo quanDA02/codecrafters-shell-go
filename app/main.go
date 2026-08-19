@@ -117,9 +117,10 @@ func executableCompletion(prefixes string) []string {
 		for _, dir := range dirs {
 			files, _ := os.ReadDir(dir)
 			for _, file := range files {
+				println(file.Name())
 				if file.IsDir() {
 					suggestions = append(suggestions, file.Name()+"/")
-					println(file.Name())
+
 				} else {
 					suggestions = append(suggestions, prefixes+file.Name())
 				}
