@@ -114,7 +114,6 @@ func executableCompletion(prefixes string) []string {
 				suggestions = append(suggestions, name+"/")
 			} else {
 				suggestions = append(suggestions, name)
-				println(suggestions)
 			}
 		}
 	} else {
