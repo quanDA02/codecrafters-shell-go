@@ -103,79 +103,136 @@ func executableCompletion(prefixes string) []string {
 	// fmt.Println("fi:", first, "ls:", last)
 	// number of line almost double because of some space tracing
 	suggestions := make([]string, 0)
-	if first == last || (last == " " && first != " ") || (last == "" && first != "") {
 
-		files, _ := os.ReadDir("./")
-		// if strings.HasSuffix(prefixes, "/") {
-		// 	prefixes = strings.TrimSpace(prefixes)
-		// 	fmt.Print(prefixes)
-		// 	files, _ = os.ReadDir(prefixes)
-		// }
+	files, _ := os.ReadDir("./")
+	if strings.HasSuffix(prefixes, "/") {
+		// fmt.Print("ssscccscs")
+		prefixes := strings.TrimSpace(prefixes)
+		files, err := os.ReadDir(prefixes)
+		if err != nil {
+			fmt.Print(err)
+		}
+
 		for _, file := range files {
+			name := file.Name()
 			if file.IsDir() {
-				suggestions = append(suggestions, prefixes+file.Name()+"/")
+				name = prefixes + file.Name() + "/"
+				suggestions = append(suggestions, name)
 			} else {
 				suggestions = append(suggestions, prefixes+file.Name())
-				// fmt.Print(suggestions)
 			}
 		}
-		if strings.HasSuffix(prefixes, "_") {
-			path := os.Getenv("PATH")
-			dirs := filepath.SplitList(path)
-			// fmt.Print("before: ", suggestions)
-			// suggestions := make([]string, 0)
-			for _, dir := range dirs {
-				files, _ := os.ReadDir(dir)
-				// files, _ = os.ReadDir("./")
-				for _, file := range files {
-					if file.IsDir() {
-						suggestions = append(suggestions, prefixes+file.Name()+"/")
-					} else {
-						suggestions = append(suggestions, file.Name())
-					}
-				}
-			}
-			// fmt.Print(suggestions)
-		}
+		// fmt.Println("suggestion :", suggestions)
+		// fmt.Print("sss")
 	} else {
-		files, _ := os.ReadDir("./")
-		if strings.HasSuffix(prefixes, "/") {
-			// fmt.Print("ssscccscs")
-			prefixes := strings.TrimSpace(prefixes)
-			files, err := os.ReadDir(prefixes)
-			if err != nil {
-				fmt.Print(err)
-			}
-
-			for _, file := range files {
-				name := file.Name()
+		for _, file := range files {
+			name := file.Name()
+			//check if the last character is a "/"(slash)
+			if strings.HasPrefix(name, "/") {
+				suggestions = append(suggestions, prefixes+file.Name())
+			} else {
+				// check if file name is a directory
 				if file.IsDir() {
-					name = prefixes + file.Name() + "/"
+					name = file.Name() + "/"
 					suggestions = append(suggestions, name)
 				} else {
-					suggestions = append(suggestions, prefixes+file.Name())
-				}
-			}
-			// fmt.Println("suggestion :", suggestions)
-			// fmt.Print("sss")
-		} else {
-			for _, file := range files {
-				name := file.Name()
-				//check if the last character is a "/"(slash)
-				if strings.HasPrefix(name, "/") {
-					suggestions = append(suggestions, prefixes+file.Name())
-				} else {
-					// check if file name is a directory
-					if file.IsDir() {
-						name = file.Name() + "/"
-						suggestions = append(suggestions, name)
-					} else {
-						suggestions = append(suggestions, file.Name())
-					}
+					suggestions = append(suggestions, file.Name())
 				}
 			}
 		}
 	}
+	if strings.HasSuffix(prefixes, "_") {
+		path := os.Getenv("PATH")
+		dirs := filepath.SplitList(path)
+		// fmt.Print("before: ", suggestions)
+		// suggestions := make([]string, 0)
+		for _, dir := range dirs {
+			files, _ := os.ReadDir(dir)
+			// files, _ = os.ReadDir("./")
+			for _, file := range files {
+				if file.IsDir() {
+					suggestions = append(suggestions, prefixes+file.Name()+"/")
+				} else {
+					suggestions = append(suggestions, file.Name())
+				}
+			}
+		}
+		// fmt.Print(suggestions)
+	}
+	// if first == last || (last == " " && first != " ") || (last == "" && first != "") {
+
+	// 	files, _ := os.ReadDir("./")
+	// 	// if strings.HasSuffix(prefixes, "/") {
+	// 	// 	prefixes = strings.TrimSpace(prefixes)
+	// 	// 	fmt.Print(prefixes)
+	// 	// 	files, _ = os.ReadDir(prefixes)
+	// 	// }
+
+	// 	for _, file := range files {
+	// 		if file.IsDir() {
+	// 			suggestions = append(suggestions, prefixes+file.Name()+"/")
+	// 		} else {
+	// 			suggestions = append(suggestions, prefixes+file.Name())
+	// 			// fmt.Print(suggestions)
+	// 		}
+	// 	}
+	// 	if strings.HasSuffix(prefixes, "_") {
+	// 		path := os.Getenv("PATH")
+	// 		dirs := filepath.SplitList(path)
+	// 		// fmt.Print("before: ", suggestions)
+	// 		// suggestions := make([]string, 0)
+	// 		for _, dir := range dirs {
+	// 			files, _ := os.ReadDir(dir)
+	// 			// files, _ = os.ReadDir("./")
+	// 			for _, file := range files {
+	// 				if file.IsDir() {
+	// 					suggestions = append(suggestions, prefixes+file.Name()+"/")
+	// 				} else {
+	// 					suggestions = append(suggestions, file.Name())
+	// 				}
+	// 			}
+	// 		}
+	// 		// fmt.Print(suggestions)
+	// 	}
+	// } else {
+	// 	files, _ := os.ReadDir("./")
+	// 	if strings.HasSuffix(prefixes, "/") {
+	// 		// fmt.Print("ssscccscs")
+	// 		prefixes := strings.TrimSpace(prefixes)
+	// 		files, err := os.ReadDir(prefixes)
+	// 		if err != nil {
+	// 			fmt.Print(err)
+	// 		}
+
+	// 		for _, file := range files {
+	// 			name := file.Name()
+	// 			if file.IsDir() {
+	// 				name = prefixes + file.Name() + "/"
+	// 				suggestions = append(suggestions, name)
+	// 			} else {
+	// 				suggestions = append(suggestions, prefixes+file.Name())
+	// 			}
+	// 		}
+	// 		// fmt.Println("suggestion :", suggestions)
+	// 		// fmt.Print("sss")
+	// 	} else {
+	// 		for _, file := range files {
+	// 			name := file.Name()
+	// 			//check if the last character is a "/"(slash)
+	// 			if strings.HasPrefix(name, "/") {
+	// 				suggestions = append(suggestions, prefixes+file.Name())
+	// 			} else {
+	// 				// check if file name is a directory
+	// 				if file.IsDir() {
+	// 					name = file.Name() + "/"
+	// 					suggestions = append(suggestions, name)
+	// 				} else {
+	// 					suggestions = append(suggestions, file.Name())
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// }
 	// fmt.Println("suggestion :", suggestions)
 
 	return suggestions
