@@ -110,7 +110,7 @@ func executableCompletion(prefixes string) []string {
 				suggestions = append(suggestions, prefixes+file.Name()+"/")
 			} else {
 				suggestions = append(suggestions, prefixes+file.Name())
-				fmt.Print(suggestions)
+				// fmt.Print(suggestions)
 			}
 		}
 
@@ -122,7 +122,7 @@ func executableCompletion(prefixes string) []string {
 			for _, file := range files {
 				suggestions = append(suggestions, file.Name())
 			}
-			fmt.Print(suggestions)
+			// fmt.Print(suggestions)
 		}
 		// fmt.Print(suggestions)
 
