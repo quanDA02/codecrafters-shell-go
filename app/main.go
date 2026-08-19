@@ -163,21 +163,21 @@ func executableCompletion(prefixes string) []string {
 	// 	files, _ := os.ReadDir("./")
 	// 	if strings.HasSuffix(prefixes, "/") {
 	// 		// fmt.Print("ssscccscs")
-	// 		prefixes := strings.TrimSpace(prefixes)
-	// 		files, err := os.ReadDir(prefixes)
-	// 		if err != nil {
-	// 			fmt.Print(err)
-	// 		}
+	prefixes = strings.TrimSpace(prefixes)
+	files, err := os.ReadDir(prefixes)
+	if err != nil {
+		fmt.Print(err)
+	}
 
-	// 		for _, file := range files {
-	// 			name := file.Name()
-	// 			if file.IsDir() {
-	// 				name = prefixes + file.Name() + "/"
-	// 				suggestions = append(suggestions, name)
-	// 			} else {
-	// 				suggestions = append(suggestions, prefixes+file.Name())
-	// 			}
-	// 		}
+	for _, file := range files {
+		name := file.Name()
+		if file.IsDir() {
+			name = prefixes + file.Name() + "/"
+			suggestions = append(suggestions, name)
+		} else {
+			suggestions = append(suggestions, prefixes+file.Name())
+		}
+	}
 	// 		// fmt.Println("suggestion :", suggestions)
 	// 		// fmt.Print("sss")
 	// 	} else {
