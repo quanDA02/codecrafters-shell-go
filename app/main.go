@@ -116,6 +116,7 @@ func executableCompletion(prefixes string) []string {
 		if strings.HasSuffix(prefixes, "_") {
 			path := os.Getenv("PATH")
 			dirs := filepath.SplitList(path)
+			fmt.Print("before: ", suggestions)
 			for _, dir := range dirs {
 				files, _ := os.ReadDir(dir)
 				// files, _ = os.ReadDir("./")
@@ -124,7 +125,7 @@ func executableCompletion(prefixes string) []string {
 						suggestions = append(suggestions, prefixes+file.Name()+"/")
 					} else {
 						suggestions = append(suggestions, file.Name())
-						// fmt.Print(suggestions)
+						fmt.Print("after:", suggestions)
 					}
 				}
 				// fmt.Print(suggestions)
