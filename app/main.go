@@ -45,11 +45,9 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	}
 
 	if len(newline) > 1 {
-		// println("what a life", string(newline[1]))
 		slices.SortFunc(newline, slices.Compare)
 		b := commonPrefix(newline)
 		if len(b) > 0 {
-
 			return newline, length
 		}
 
@@ -58,7 +56,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 			c.tabCount++
 		} else {
 			c.tabCount = 0
-			fmt.Println("")
+			fmt.Println()
 			// print sorted suggestions
 
 			prefix := strings.TrimSpace(string(lline))
@@ -83,11 +81,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 // check common prefix
 func commonPrefix(line [][]rune) []rune {
 	first, last := (line[0]), line[len(line)-1]
-	// for i := 0; i < len(line); i++ {
-	// 	println(string(line[i]))
-	// }
-	// println("f:", string(first), " l:", string(last))
-	result := first[:0]
+	result := first
 	for i := 0; i < len(first) && i < len(last) && first[i] == last[i]; i++ {
 		result = first[:i+1]
 	}
