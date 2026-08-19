@@ -107,7 +107,7 @@ func executableCompletion(prefixes string) []string {
 				fmt.Print("waduh")
 			}
 		}
-		if len(suggestions) == 0 {
+		if len(suggestions[0]) == 0 {
 			println(prefixes, ": ", suggestions)
 		}
 		// path := os.Getenv("PATH")
