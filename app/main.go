@@ -84,7 +84,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 func commonPrefix(line [][]rune) []rune {
 	first, last := (line[0]), line[len(line)-1]
 	for i := 0; i < len(line); i++ {
-		println(line)
+		println(line[i])
 	}
 	// println("f:", string(first), " l:", string(last))
 	result := first[:0]
