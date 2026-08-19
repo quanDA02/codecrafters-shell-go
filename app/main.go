@@ -97,11 +97,8 @@ func executableCompletion(prefixes string) []string {
 	// fmt.Println("fi:", first, "ls:", last)
 	// number of line almost double because of some space tracing
 	suggestions := make([]string, 0)
-	// fmt.Println(prefixes, "sss")
-	// prefixes = strings.TrimSpace(prefixes)
 	files, _ := os.ReadDir("./")
 	if strings.HasSuffix(prefixes, "/") {
-		// fmt.Print("ssscccscs")
 		// prefixes := strings.TrimSpace(prefixes)
 		files, err := os.ReadDir(prefixes)
 		if err != nil {
@@ -112,7 +109,7 @@ func executableCompletion(prefixes string) []string {
 			name := file.Name()
 			if file.IsDir() {
 				name = prefixes + file.Name() + "/"
-				suggestions = append(suggestions, name)
+				suggestions = append(suggestions, prefixes+name)
 			} else {
 				suggestions = append(suggestions, prefixes+file.Name())
 			}
