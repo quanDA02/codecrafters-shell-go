@@ -89,7 +89,7 @@ func commonPrefix(line [][]rune) []rune {
 func executableCompletion(prefixes string) []string {
 
 	prefix := strings.Split(prefixes, " ")
-	first, last := prefix[0], prefix[len(prefix)-1]
+	_, last := prefix[0], prefix[len(prefix)-1]
 
 	// fmt.Println("prefix:", prefix)
 	// fmt.Println("fi:", first, "ls:", last)
