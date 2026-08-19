@@ -99,7 +99,7 @@ func executableCompletion(prefixes string) []string {
 	if first == last || (last == " " && first != " ") || (last == "" && first != "") {
 
 		files, _ := os.ReadDir("./")
-		if strings.HasSuffix(prefixes, "_") {
+		if strings.HasSuffix(prefixes, "/") {
 			prefixes = strings.TrimSpace(prefixes)
 			fmt.Print(prefixes)
 			files, _ = os.ReadDir(prefixes)
