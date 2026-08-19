@@ -82,6 +82,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 // check common prefix
 func commonPrefix(line [][]rune) []rune {
 	first, last := line[0], line[len(line)-1]
+	println("f:", first, " l:", last)
 	result := first[:0]
 	for i := 0; i < len(first) && i < len(last) && first[i] == last[i]; i++ {
 		result = first[:i+1]
