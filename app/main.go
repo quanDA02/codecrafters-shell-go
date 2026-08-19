@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-	"path/filepath"
 	"slices"
 	"strings"
 
@@ -122,8 +121,8 @@ func executableCompletion(prefixes string) []string {
 	// 			}
 	// 		}
 	// 	}
-		// fmt.Printf("%s", suggestions)
-	}
+	// fmt.Printf("%s", suggestions)
+	// }
 	// if first == last || (last == " " && first != " ") || (last == "" && first != "") {
 
 	// 	files, _ := os.ReadDir("./")
