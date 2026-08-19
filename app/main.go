@@ -115,6 +115,7 @@ func executableCompletion(prefixes string) []string {
 				suggestions = append(suggestions, name)
 			}
 		}
+		return suggestions
 	} else {
 		path := os.Getenv("PATH")
 		dirs := filepath.SplitList(path)
