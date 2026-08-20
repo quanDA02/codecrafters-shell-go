@@ -218,7 +218,7 @@ func redirect(args []string, stdout, stderr *os.File) ([]string, *os.File, *os.F
 	return args, stdout, stderr
 }
 
-func complete()
+// func complete()
 
 func execute(name string) {
 
