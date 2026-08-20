@@ -39,6 +39,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	// fmt.Println("new:", len(newline))
 
 	//bell sound if autocomplete fail
+
 	if len(newline) == 0 {
 		fmt.Print("\x07")
 		return nil, 0
