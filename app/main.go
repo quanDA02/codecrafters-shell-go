@@ -117,7 +117,6 @@ func executableCompletion(prefixes string) []string {
 			}
 		}
 	} else {
-
 		files, err := os.ReadDir("./")
 		if err != nil {
 			panic(err)
@@ -136,7 +135,6 @@ func executableCompletion(prefixes string) []string {
 			} else {
 				suggestions = append(suggestions, name)
 			}
-			// fmt.Print("\n", suggestions)
 		}
 	}
 	path := os.Getenv("PATH")
@@ -164,7 +162,7 @@ func echo(s string, output *os.File) {
 
 func typeCommand(s string) {
 	builtins := []string{
-		"type", "exit", "echo",
+		"type", "exit", "echo", "complete",
 	}
 	if slices.Contains(builtins, s) {
 		fmt.Println(s, "is a shell builtin")
@@ -256,6 +254,7 @@ func main() {
 		readline.PcItem("exit"),
 		readline.PcItem("type"),
 		readline.PcItem("echo"),
+		readline.PcItem("complete"),
 		readline.PcItemDynamic(executableCompletion, nil),
 	)
 
@@ -266,7 +265,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
 	for {
 		command, _ := l.Readline()
 		command = strings.TrimSpace(command)
