@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"slices"
 	"strings"
 
@@ -115,7 +116,6 @@ func executableCompletion(prefixes string) []string {
 				suggestions = append(suggestions, name)
 			}
 		}
-		return suggestions
 	} else {
 
 		files, err := os.ReadDir("./")
@@ -138,25 +138,23 @@ func executableCompletion(prefixes string) []string {
 			}
 			// fmt.Print("\n", suggestions)
 		}
-
-		// path := os.Getenv("PATH")
-		// dirs := filepath.SplitList(path)
-		// for _, dir := range dirs {
-		// 	if last == "" {
-		// 		fmt.Print("\n it is i:", suggestions)
-		// 	}
-		// 	files, _ := os.ReadDir(dir)
-		// 	for _, file := range files {
-		// 		name := file.Name()
-		// 		if file.IsDir() {
-		// 			suggestions = append(suggestions, name+"/")
-		// 			// suggestions = append(suggestions, prefixes+" "+file.Name()+"/")
-		// 		} else {
-		// 			suggestions = append(suggestions, name)
-		// 			// suggestions = append(suggestions, prefixes+file.Name())
-		// 		}
-		// 	}
-		// }
+	}
+	path := os.Getenv("PATH")
+	dirs := filepath.SplitList(path)
+	for _, dir := range dirs {
+		files, _ := os.ReadDir(dir)
+		for _, file := range files {
+			name := file.Name()
+			if last == "" {
+				name = prefixes + name
+			}
+			if file.IsDir() {
+				suggestions = append(suggestions, name)
+			} else {
+				suggestions = append(suggestions, name)
+				// suggestions = append(suggestions, prefixes+file.Name())
+			}
+		}
 	}
 
 	// // if len(suggestions) == 0 {
