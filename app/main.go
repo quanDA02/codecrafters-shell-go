@@ -39,7 +39,6 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	// fmt.Println("new:", len(newline))
 
 	//bell sound if autocomplete fail
-
 	if len(newline) == 0 {
 		fmt.Print("\x07")
 		return nil, 0
@@ -220,7 +219,7 @@ func redirect(args []string, stdout, stderr *os.File) ([]string, *os.File, *os.F
 }
 
 func complete(args []string) {
-	fmt.Println(fmt.Printf("comepletion: %s: no completion specification", args[1]))
+	fmt.Printf("comepletion: %s: no completion specification\n", args[1])
 }
 
 func execute(name string) {
