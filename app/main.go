@@ -230,7 +230,7 @@ func complete(args []string) {
 		key := args[1]
 		path, exist := completeMap[key]
 		if exist {
-			fmt.Printf("complete -C '%s' %s", path, key)
+			fmt.Printf("complete -C '%s' %s\n", path, key)
 		} else {
 			fmt.Printf("complete: %s: no completion specification\n", args[1])
 		}
