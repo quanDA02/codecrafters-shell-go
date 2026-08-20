@@ -219,7 +219,7 @@ func redirect(args []string, stdout, stderr *os.File) ([]string, *os.File, *os.F
 }
 
 func complete(args []string) {
-	fmt.Println("hrlloeas")
+	fmt.Printf("comeplete:")
 	// fmt.Printf("complete: %s: no completion specification", args)
 }
 
