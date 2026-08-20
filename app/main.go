@@ -218,7 +218,9 @@ func redirect(args []string, stdout, stderr *os.File) ([]string, *os.File, *os.F
 	return args, stdout, stderr
 }
 
-// func complete()
+func complete(args []string) {
+	fmt.Println("\n ", args)
+}
 
 func execute(name string) {
 
@@ -238,10 +240,7 @@ func execute(name string) {
 		echo(strings.Join(args[1:], " "), stdout)
 		return
 	case "complete":
-		cmd := exec.Command(args[0], args[1:]...)
-		cmd.Stdout = stdout
-		cmd.Stderr = stderr
-		cmd.Run()
+		complete(args[1:])
 		return
 	}
 
