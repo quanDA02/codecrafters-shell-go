@@ -221,6 +221,9 @@ func redirect(args []string, stdout, stderr *os.File) ([]string, *os.File, *os.F
 var completeMap = make(map[string]string)
 
 func complete(args []string) {
+	if len(args) < 2 {
+		return
+	}
 	flag := args[0]
 	switch flag {
 	case "-p":
