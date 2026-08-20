@@ -218,6 +218,8 @@ func redirect(args []string, stdout, stderr *os.File) ([]string, *os.File, *os.F
 	return args, stdout, stderr
 }
 
+func complete()
+
 func execute(name string) {
 
 	args, _ := shlex.Split(name)
@@ -234,6 +236,12 @@ func execute(name string) {
 		return
 	case "echo":
 		echo(strings.Join(args[1:], " "), stdout)
+		return
+	case "complete":
+		cmd := exec.Command(args[0], args[1:]...)
+		cmd.Stdout = stdout
+		cmd.Stderr = stderr
+		cmd.Run()
 		return
 	}
 
