@@ -219,7 +219,13 @@ func redirect(args []string, stdout, stderr *os.File) ([]string, *os.File, *os.F
 }
 
 func complete(args []string) {
-	fmt.Printf("complete: %s: no completion specification\n", args[1])
+	flag := args[0]
+	switch flag {
+	case "-p":
+		fmt.Printf("complete: %s: no completion specification\n", args[1])
+	case "-C":
+	}
+
 }
 
 func execute(name string) {
