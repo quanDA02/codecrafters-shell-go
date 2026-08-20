@@ -227,7 +227,7 @@ func complete(args []string) {
 	flag := args[0]
 	switch flag {
 	case "-p":
-		key := args[2]
+		key := args[1]
 		path, exist := completeMap[key]
 		if exist {
 			fmt.Printf("complete -C '%s' %s", path, key)
