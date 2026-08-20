@@ -218,12 +218,23 @@ func redirect(args []string, stdout, stderr *os.File) ([]string, *os.File, *os.F
 	return args, stdout, stderr
 }
 
+var completeMap = make(map[string]string)
+
 func complete(args []string) {
 	flag := args[0]
 	switch flag {
 	case "-p":
-		fmt.Printf("complete: %s: no completion specification\n", args[1])
+		key := args[2]
+		path, exist := completeMap[key]
+		if exist {
+			fmt.Printf("complete -C '%s' %s", path, key)
+		} else {
+			fmt.Printf("complete: %s: no completion specification\n", args[1])
+		}
 	case "-C":
+		if len(args) > 2 {
+			completeMap[args[2]] = args[1]
+		}
 	}
 
 }
