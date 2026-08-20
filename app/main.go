@@ -239,7 +239,7 @@ func execute(name string) {
 	case "echo":
 		echo(strings.Join(args[1:], " "), stdout)
 		return
-	case "complete":
+	case "complete:":
 		complete(args[1:])
 		return
 	}
