@@ -35,12 +35,13 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 		if len(arr) > 1 {
 			for i, r := range line {
 				if r == ' ' {
-					lline = line[i:]
-					// pos = len(lline)
+					line = line[i:]
+					pos = len(lline)
 				}
 			}
 		}
 		newline, length = c.completer.Do(lline, pos)
+		line = lline
 	}
 
 	//these print line for debug purpose only
