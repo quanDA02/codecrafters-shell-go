@@ -21,7 +21,7 @@ type completerBell struct {
 // modified autocomplete Do and add bell sound
 func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 
-	fmt.Println(line[0])
+	fmt.Println(string(line[0]))
 
 	lline := line
 	arr, _ := shlex.Split(string(line))
