@@ -116,11 +116,7 @@ func executableCompletion(prefixes string) []string {
 		if strings.HasSuffix(prefixes, "/") {
 			files, _ = os.ReadDir(prefixes)
 		}
-		fmt.Println("fi:", first, "ls:", last)
-		// path, _ := completeMap[last]
-		if lastKey != "" {
-			files, _ = os.ReadDir(lastKey)
-		}
+		files, _ = os.ReadDir(lastKey)
 		for _, file := range files {
 			name := file.Name()
 			if strings.HasSuffix(prefixes, "/") {
