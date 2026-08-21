@@ -23,7 +23,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 
 	lline := line
 	arr, _ := shlex.Split(string(line))
-	print(arr[0])
+	fmt.Println(arr[0])
 	//seperate line and only take the last part of it
 	if len(arr) > 1 {
 		for i, r := range line {
