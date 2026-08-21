@@ -50,7 +50,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 		fmt.Print("\x07")
 		return nil, 0
 	}
-
+	fmt.Println("suggestions2")
 	if len(newline) > 1 {
 		fmt.Println(len(newline), "nigger")
 		slices.SortFunc(newline, slices.Compare)
