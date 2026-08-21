@@ -97,14 +97,14 @@ func executableCompletion(prefixes string) []string {
 	// number of line almost double because of some space tracing
 
 	if path, exist := completeMap[first]; exist {
-		files, err := os.ReadFile(path)
-		if err != nil {
-			panic(err)
-		}
+		// files, err := os.ReadFile(path)
+		// if err != nil {
+		// 	panic(err)
+		// }
 		// for _, file := range files {
 		// 	suggestions = append(suggestions, file.Name())
 		// }
-		println(string(files))
+		execute(path)
 	}
 
 	if last != "" {
