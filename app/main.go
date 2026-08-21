@@ -34,7 +34,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	}
 	newline, length := c.completer.Do(lline, pos)
 	if newline == nil {
-		println("you suck")
+		fmt.Print(" ")
 		return nil, 0
 	}
 	//these print line for debug purpose only
