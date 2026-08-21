@@ -113,7 +113,7 @@ func executableCompletion(prefixes string) []string {
 			files, _ = os.ReadDir(prefixes)
 		}
 		fmt.Println("fi:", first, "ls:", last)
-		path, _ := completeMap[first]
+		path, _ := completeMap[last]
 		files, _ = os.ReadDir(path)
 		for _, file := range files {
 			name := file.Name()
