@@ -101,10 +101,10 @@ func executableCompletion(prefixes string) []string {
 		if err != nil {
 			panic(err)
 		}
-		for _, file := range files {
-			suggestions = append(suggestions, file.Name())
-		}
-		println("hello")
+		// for _, file := range files {
+		// 	suggestions = append(suggestions, file.Name())
+		// }
+		println(files)
 	}
 
 	if last != "" {
