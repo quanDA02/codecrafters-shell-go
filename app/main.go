@@ -98,12 +98,13 @@ func executableCompletion(prefixes string) []string {
 	if path, exist := completeMap[first]; exist {
 		cmd := exec.Command(path)
 		output, _ := cmd.Output()
-		// outputString := strings.TrimSpace(string(output))
-		suggestions = append(suggestions, prefixes+string(output))
+		outputString := strings.TrimSpace(string(output))
+		suggestions = append(suggestions, prefixes+outputString)
 		return suggestions
 	}
 
 	if last != "" {
+		fmt.Println(1)
 		files, err := os.ReadDir("./")
 		if err != nil {
 			panic(err)
@@ -124,6 +125,7 @@ func executableCompletion(prefixes string) []string {
 			}
 		}
 	} else {
+		fmt.Println(2)
 		files, err := os.ReadDir("./")
 		if err != nil {
 			panic(err)
