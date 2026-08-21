@@ -36,7 +36,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 		if len(arr) > 1 {
 			for i, r := range line {
 				if r == ' ' {
-					line = line[i:]
+					lline = line[i:]
 					pos = len(lline)
 				}
 			}
