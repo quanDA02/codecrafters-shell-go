@@ -49,7 +49,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	//bell sound if autocomplete fail
 	if len(newline) < 1 {
 		fmt.Print("\x07")
-		// return nil, 0
+		return nil, 0
 	}
 	fmt.Println("line:", string(line))
 	fmt.Println("new:", len(newline))
@@ -145,7 +145,7 @@ func executableCompletion(prefixes string) []string {
 			files, _ = os.ReadDir(prefixes)
 		}
 		for _, file := range files {
-			name := file.Name()
+			name := prefixes + file.Name()
 			if strings.HasSuffix(prefixes, "/") {
 				name = prefixes + file.Name()
 			}
