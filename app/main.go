@@ -23,6 +23,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	arr, _ := shlex.Split(string(line))
 	var newline [][]rune
 	var length int
+	fmt.Println(newline)
 	if _, exist := completeMap[arr[0]]; exist {
 		newline, length = c.completer.Do(line, pos)
 		if len(arr) <= 2 {
