@@ -86,6 +86,9 @@ func commonPrefix(line [][]rune) []rune {
 	return result
 }
 
+// caching last completed key used
+var lastKey = ""
+
 func executableCompletion(prefixes string) []string {
 	suggestions := make([]string, 0)
 	prefix := strings.Split(prefixes, " ")
@@ -97,6 +100,7 @@ func executableCompletion(prefixes string) []string {
 
 	if path, exist := completeMap[first]; exist {
 		cmd := exec.Command(path)
+		lastKey = path
 		output, _ := cmd.Output()
 		outputString := strings.TrimSpace(string(output))
 		suggestions = append(suggestions, prefixes+outputString)
@@ -114,7 +118,9 @@ func executableCompletion(prefixes string) []string {
 		}
 		fmt.Println("fi:", first, "ls:", last)
 		// path, _ := completeMap[last]
-		files, _ = os.ReadDir(last)
+		if lastKey != "" {
+			files, _ = os.ReadDir(lastKey)
+		}
 		for _, file := range files {
 			name := file.Name()
 			if strings.HasSuffix(prefixes, "/") {
