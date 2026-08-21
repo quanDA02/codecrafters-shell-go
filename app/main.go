@@ -21,26 +21,28 @@ type completerBell struct {
 // modified autocomplete Do and add bell sound
 func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	arr, _ := shlex.Split(string(line))
+	var newline [][]rune
+	var length int
 	if _, exist := completeMap[arr[0]]; exist {
-		newline, length := c.completer.Do(line, pos)
+		newline, length = c.completer.Do(line, pos)
 		if len(arr) <= 2 {
 			newline[0] = newline[0][:len(newline[0])-1]
 		}
-		return newline, length
-	}
-	lline := line
-
-	fmt.Println(arr[0])
-	//seperate line and only take the last part of it
-	if len(arr) > 1 {
-		for i, r := range line {
-			if r == ' ' {
-				lline = line[i:]
-				// pos = len(lline)
+	} else {
+		lline := line
+		fmt.Println(arr[0])
+		//seperate line and only take the last part of it
+		if len(arr) > 1 {
+			for i, r := range line {
+				if r == ' ' {
+					lline = line[i:]
+					// pos = len(lline)
+				}
 			}
 		}
+		newline, length = c.completer.Do(lline, pos)
 	}
-	newline, length := c.completer.Do(lline, pos)
+
 	//these print line for debug purpose only
 	// fmt.Println("line:", string(line))
 	// fmt.Println("new:", len(newline))
