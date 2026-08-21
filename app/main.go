@@ -174,21 +174,22 @@ func executableCompletion(prefixes string) []string {
 			}
 		}
 	}
-	println(last)
 
-	path := os.Getenv("PATH")
-	dirs := filepath.SplitList(path)
-	for _, dir := range dirs {
-		files, _ := os.ReadDir(dir)
-		for _, file := range files {
-			name := file.Name()
-			if last == "" {
-				name = prefixes + name
-			}
-			if file.IsDir() {
-				suggestions = append(suggestions, name)
-			} else {
-				suggestions = append(suggestions, name)
+	if len(prefix) < 2 && last == "" {
+		path := os.Getenv("PATH")
+		dirs := filepath.SplitList(path)
+		for _, dir := range dirs {
+			files, _ := os.ReadDir(dir)
+			for _, file := range files {
+				name := file.Name()
+				if last == "" {
+					name = prefixes + name
+				}
+				if file.IsDir() {
+					suggestions = append(suggestions, name)
+				} else {
+					suggestions = append(suggestions, name)
+				}
 			}
 		}
 	}
