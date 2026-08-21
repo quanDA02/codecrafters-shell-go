@@ -104,7 +104,6 @@ func executableCompletion(prefixes string) []string {
 	}
 
 	if last != "" {
-		fmt.Println(1)
 		files, err := os.ReadDir("./")
 		if err != nil {
 			panic(err)
@@ -124,8 +123,8 @@ func executableCompletion(prefixes string) []string {
 				suggestions = append(suggestions, name)
 			}
 		}
+		fmt.Println(suggestions)
 	} else {
-		fmt.Println(2)
 		files, err := os.ReadDir("./")
 		if err != nil {
 			panic(err)
