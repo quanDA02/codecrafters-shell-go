@@ -33,7 +33,10 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 		}
 	}
 	newline, length := c.completer.Do(lline, pos)
-
+	if newline == nil {
+		println("you suck")
+		return nil, 0
+	}
 	//these print line for debug purpose only
 	// fmt.Println("line:", string(line))
 	// fmt.Println("new:", len(newline))
@@ -101,7 +104,7 @@ func executableCompletion(prefixes string) []string {
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
 		cmd.Run()
-		return suggestions
+		return nil
 	}
 
 	if last != "" {
