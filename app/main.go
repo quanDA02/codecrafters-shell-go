@@ -175,7 +175,7 @@ func executableCompletion(prefixes string) []string {
 		}
 	}
 
-	if len(prefix) <= 2 {
+	if len(prefix) <= 1 {
 		path := os.Getenv("PATH")
 		dirs := filepath.SplitList(path)
 		for _, dir := range dirs {
