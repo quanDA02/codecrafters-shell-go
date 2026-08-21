@@ -100,7 +100,7 @@ func executableCompletion(prefixes string) []string {
 
 	if path, exist := completeMap[first]; exist {
 		cmd := exec.Command(path)
-		lastKey = path
+		lastKey = first
 		output, _ := cmd.Output()
 		outputString := strings.TrimSpace(string(output))
 		suggestions = append(suggestions, prefixes+outputString)
