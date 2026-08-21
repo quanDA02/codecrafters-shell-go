@@ -174,7 +174,8 @@ func executableCompletion(prefixes string) []string {
 			}
 		}
 	}
-	println("hide")
+	println(last)
+
 	path := os.Getenv("PATH")
 	dirs := filepath.SplitList(path)
 	for _, dir := range dirs {
