@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-	"path/filepath"
 	"slices"
 	"strings"
 
@@ -173,24 +172,24 @@ func executableCompletion(prefixes string) []string {
 		}
 	}
 
-	if len(prefix) <= 2 {
-		path := os.Getenv("PATH")
-		dirs := filepath.SplitList(path)
-		for _, dir := range dirs {
-			files, _ := os.ReadDir(dir)
-			for _, file := range files {
-				name := file.Name()
-				if last == "" {
-					name = prefixes + name
-				}
-				if file.IsDir() {
-					suggestions = append(suggestions, name)
-				} else {
-					suggestions = append(suggestions, name)
-				}
-			}
-		}
-	}
+	// if len(prefix) <= 2 {
+	// 	path := os.Getenv("PATH")
+	// 	dirs := filepath.SplitList(path)
+	// 	for _, dir := range dirs {
+	// 		files, _ := os.ReadDir(dir)
+	// 		for _, file := range files {
+	// 			name := file.Name()
+	// 			if last == "" {
+	// 				name = prefixes + name
+	// 			}
+	// 			if file.IsDir() {
+	// 				suggestions = append(suggestions, name)
+	// 			} else {
+	// 				suggestions = append(suggestions, name)
+	// 			}
+	// 		}
+	// 	}
+	// }
 
 	return suggestions
 }
@@ -321,7 +320,7 @@ func main() {
 		readline.PcItem("type"),
 		readline.PcItem("echo"),
 		readline.PcItem("complete"),
-		readline.PcItemDynamic(executableCompletion),
+		readline.PcItemDynamic(executableCompletion, nil),
 	)
 
 	l, err := readline.NewEx(&readline.Config{
