@@ -20,6 +20,7 @@ type completerBell struct {
 // modified autocomplete Do and add bell sound
 func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	arr, _ := shlex.Split(string(line))
+	lline := line
 	var newline [][]rune
 	var length int
 	if _, exist := completeMap[arr[0]]; exist {
@@ -31,7 +32,6 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 			return nil, 0
 		}
 	} else {
-		lline := line
 		//seperate line and only take the last part of it
 		if len(arr) > 1 {
 			for i, r := range line {
@@ -42,7 +42,6 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 			}
 		}
 		newline, length = c.completer.Do(lline, pos)
-		line = lline
 	}
 	//these print line for debug purpose only
 	// fmt.Println("line:", string(line))
@@ -72,7 +71,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 			for _, suggestion := range newline {
 				fmt.Print(string(prefix), string(suggestion))
 			}
-			fmt.Print("\n$ " + string(strings.Join(arr, " ")))
+			fmt.Print("\n$ " + string(line))
 		}
 		return nil, 0
 	}
