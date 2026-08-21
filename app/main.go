@@ -98,7 +98,7 @@ func executableCompletion(prefixes string) []string {
 
 	if path, exist := completeMap[first]; exist {
 		execute(path)
-		fmt.Print(" ")
+		fmt.Print(" nigger")
 		return suggestions
 	}
 
