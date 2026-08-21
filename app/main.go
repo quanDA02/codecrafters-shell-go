@@ -190,7 +190,7 @@ func executableCompletion(prefixes string) []string {
 	// 		}
 	// 	}
 	// }
-
+	fmt.Println(suggestions)
 	return suggestions
 }
 
