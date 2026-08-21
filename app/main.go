@@ -27,6 +27,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 			newline, length = c.completer.Do(line, pos)
 			return newline, length
 		} else {
+			fmt.Print("\x07")
 			return nil, 0
 		}
 	} else {
