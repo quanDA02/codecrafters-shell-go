@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"slices"
 	"strings"
 
@@ -174,25 +175,26 @@ func executableCompletion(prefixes string) []string {
 		}
 	}
 
-	// if len(prefix) <= 2 {
-	// 	path := os.Getenv("PATH")
-	// 	dirs := filepath.SplitList(path)
-	// 	for _, dir := range dirs {
-	// 		files, _ := os.ReadDir(dir)
-	// 		for _, file := range files {
-	// 			name := file.Name()
-	// 			if last == "" {
-	// 				name = prefixes + name
-	// 			}
-	// 			if file.IsDir() {
-	// 				suggestions = append(suggestions, name)
-	// 			} else {
-	// 				suggestions = append(suggestions, name)
-	// 			}
-	// 		}
-	// 	}
-	// }
-	// fmt.Println(suggestions)
+	if len(prefix) <= 2 {
+		path := os.Getenv("PATH")
+		dirs := filepath.SplitList(path)
+		for _, dir := range dirs {
+			files, _ := os.ReadDir(dir)
+			for _, file := range files {
+				name := file.Name()
+				if last == "" {
+					name = prefixes + name
+				}
+				if file.IsDir() {
+					suggestions = append(suggestions, name)
+				} else {
+					suggestions = append(suggestions, name)
+				}
+			}
+		}
+		fmt.Println(suggestions)
+	}
+
 	return suggestions
 }
 
