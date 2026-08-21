@@ -98,7 +98,7 @@ func executableCompletion(prefixes string) []string {
 	if path, exist := completeMap[first]; exist {
 		cmd := exec.Command(path)
 		output, _ := cmd.Output()
-		suggestions = append(suggestions, prefixes+string(output)+" ")
+		suggestions = append(suggestions, prefixes+string(output)+" fuck")
 		return suggestions
 	}
 
