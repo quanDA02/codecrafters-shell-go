@@ -41,20 +41,17 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 				}
 			}
 		}
-		println("::", string(lline))
 		newline, length = c.completer.Do(lline, pos)
-		fmt.Println("suggestions")
 	}
 	//these print line for debug purpose only
-
+	// fmt.Println("line:", string(line))
+	// fmt.Println("new:", len(newline))
 	//bell sound if autocomplete fail
 	if len(newline) < 1 {
 		fmt.Print("\x07")
 		return nil, 0
 	}
-	fmt.Println("line:", string(line))
-	fmt.Println("new:", len(newline))
-	fmt.Println("suggestions2")
+
 	if len(newline) > 1 {
 		fmt.Println(len(newline), "nigger")
 		slices.SortFunc(newline, slices.Compare)
@@ -146,7 +143,7 @@ func executableCompletion(prefixes string) []string {
 			files, _ = os.ReadDir(prefixes)
 		}
 		for _, file := range files {
-			name := prefix[0] + file.Name()
+			name := file.Name()
 			if strings.HasSuffix(prefixes, "/") {
 				name = prefixes + file.Name()
 			}
@@ -196,7 +193,7 @@ func executableCompletion(prefixes string) []string {
 	// 		}
 	// 	}
 	// }
-	fmt.Println(suggestions)
+	// fmt.Println(suggestions)
 	return suggestions
 }
 
