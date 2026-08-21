@@ -137,6 +137,7 @@ func executableCompletion(prefixes string) []string {
 			}
 		}
 	}
+	fmt.Println(suggestions)
 	path := os.Getenv("PATH")
 	dirs := filepath.SplitList(path)
 	for _, dir := range dirs {
@@ -153,7 +154,7 @@ func executableCompletion(prefixes string) []string {
 			}
 		}
 	}
-	fmt.Println(suggestions)
+
 	return suggestions
 }
 
