@@ -97,7 +97,7 @@ func executableCompletion(prefixes string) []string {
 	// number of line almost double because of some space tracing
 
 	if path, exist := completeMap[first]; exist {
-		files, err := os.ReadDir(path)
+		files, err := os.ReadFile(path)
 		if err != nil {
 			panic(err)
 		}
