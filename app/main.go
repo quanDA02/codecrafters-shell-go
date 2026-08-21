@@ -100,7 +100,7 @@ func executableCompletion(prefixes string) []string {
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
 		output, _ := cmd.Output()
-		suggestions = append(suggestions, string(output))
+		suggestions = append(suggestions, prefixes+string(output))
 		return suggestions
 	}
 
