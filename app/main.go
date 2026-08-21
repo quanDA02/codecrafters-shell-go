@@ -110,8 +110,7 @@ func executableCompletion(prefixes string) []string {
 			if err != nil {
 				panic(err)
 			}
-			suggestions = append(suggestions, string(out))
-			fmt.Println(suggestions)
+			suggestions = append(suggestions, string(out)+" ")
 			return suggestions
 		}
 	}
