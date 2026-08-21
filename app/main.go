@@ -51,7 +51,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	}
 
 	if len(newline) > 1 {
-		fmt.Println(len(newline))
+		fmt.Println(len(newline), "nigger")
 		slices.SortFunc(newline, slices.Compare)
 		b := commonPrefix(newline)
 		if len(b) > 0 {
