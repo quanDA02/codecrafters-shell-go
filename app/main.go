@@ -110,7 +110,8 @@ func executableCompletion(prefixes string) []string {
 			if err != nil {
 				panic(err)
 			}
-			suggestions = append(suggestions, command+" "+previousWord+" "+string(out)+" ")
+			output := strings.TrimSpace(string(out))
+			suggestions = append(suggestions, command+" "+previousWord+" "+output+" ")
 			return suggestions
 		}
 	}
