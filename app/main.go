@@ -64,7 +64,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 			c.tabCount = 0
 			fmt.Println()
 			// print sorted suggestions
-
+			fmt.Println(len(newline))
 			prefix := strings.TrimSpace(string(line))
 
 			for _, suggestion := range newline {
