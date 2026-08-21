@@ -20,9 +20,13 @@ type completerBell struct {
 
 // modified autocomplete Do and add bell sound
 func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
-
-	lline := line
 	arr, _ := shlex.Split(string(line))
+	if _, exist := completeMap[arr[0]]; exist {
+		newline, length := c.completer.Do(line, pos)
+		return newline, length
+	}
+	lline := line
+
 	fmt.Println(arr[0])
 	//seperate line and only take the last part of it
 	if len(arr) > 1 {
@@ -33,7 +37,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 			}
 		}
 	}
-	newline, length := c.completer.Do(line, pos)
+	newline, length := c.completer.Do(lline, pos)
 	//these print line for debug purpose only
 	// fmt.Println("line:", string(line))
 	// fmt.Println("new:", len(newline))
@@ -93,18 +97,11 @@ var lastKey = ""
 func executableCompletion(prefixes string) []string {
 	suggestions := make([]string, 0)
 	prefix := strings.Split(prefixes, " ")
-	first, last := prefix[0], prefix[len(prefix)-1]
-
-	// fmt.Println("prefix:", prefix)
-	// fmt.Println("fi:", first, "ls:", last)
-	// number of line almost double because of some space tracing
-
-	linePart := strings.Split(string(prefixes), " ")
-	if len(linePart) > 2 {
-		if program, exist := completeMap[linePart[0]]; exist {
-			command := linePart[0]
-			previousWord := linePart[1]
-			partial := linePart[2]
+	if len(prefix) > 2 {
+		if program, exist := completeMap[prefix[0]]; exist {
+			command := prefix[0]
+			previousWord := prefix[1]
+			partial := prefix[2]
 			cmd := exec.Command(program, command, partial, previousWord)
 			out, err := cmd.CombinedOutput()
 			if err != nil {
@@ -115,6 +112,12 @@ func executableCompletion(prefixes string) []string {
 			return suggestions
 		}
 	}
+
+	first, last := prefix[0], prefix[len(prefix)-1]
+
+	// fmt.Println("prefix:", prefix)
+	// fmt.Println("fi:", first, "ls:", last)
+	// number of line almost double because of some space tracing
 
 	if path, exist := completeMap[first]; exist {
 		cmd := exec.Command(path)
