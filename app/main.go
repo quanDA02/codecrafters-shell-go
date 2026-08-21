@@ -41,9 +41,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 				}
 			}
 		}
-		line := lline
-		newline, length = c.completer.Do(line, pos)
-		line = lline
+		newline, length = c.completer.Do(lline, pos)
 		fmt.Println("suggestions")
 	}
 	//these print line for debug purpose only
