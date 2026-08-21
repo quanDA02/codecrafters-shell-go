@@ -33,13 +33,9 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 		}
 	}
 	newline, length := c.completer.Do(lline, pos)
-	if newline == nil {
-		fmt.Print(" ")
-		return nil, 0
-	}
 	//these print line for debug purpose only
 	// fmt.Println("line:", string(line))
-	// fmt.Println("new:", len(newline))
+	fmt.Println("new:", len(newline))
 
 	//bell sound if autocomplete fail
 	if len(newline) == 0 {
@@ -103,8 +99,9 @@ func executableCompletion(prefixes string) []string {
 		cmd := exec.Command(path)
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
-		cmd.Run()
-		return nil
+		output, _ := cmd.Output()
+		suggestions = append(suggestions, string(output))
+		return suggestions
 	}
 
 	if last != "" {
