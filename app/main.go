@@ -45,13 +45,14 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 		fmt.Println("suggestions")
 	}
 	//these print line for debug purpose only
-	fmt.Println("line:", string(line))
-	fmt.Println("new:", len(newline))
+
 	//bell sound if autocomplete fail
 	if len(newline) < 1 {
 		fmt.Print("\x07")
-		return nil, 0
+		// return nil, 0
 	}
+	fmt.Println("line:", string(line))
+	fmt.Println("new:", len(newline))
 	fmt.Println("suggestions2")
 	if len(newline) > 1 {
 		fmt.Println(len(newline), "nigger")
