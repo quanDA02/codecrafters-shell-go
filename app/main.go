@@ -31,7 +31,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 			if err != nil {
 				panic(err)
 			}
-			fmt.Println(out)
+			fmt.Println(string(out))
 		}
 	}
 
