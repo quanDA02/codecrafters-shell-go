@@ -28,11 +28,11 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 		for i, r := range line {
 			if r == ' ' {
 				lline = line[i:]
-				pos = len(lline)
+				// pos = len(lline)
 			}
 		}
 	}
-	newline, length := c.completer.Do(lline, pos)
+	newline, length := c.completer.Do(line, pos)
 	//these print line for debug purpose only
 	// fmt.Println("line:", string(line))
 	// fmt.Println("new:", len(newline))
@@ -116,7 +116,6 @@ func executableCompletion(prefixes string) []string {
 		if strings.HasSuffix(prefixes, "/") {
 			files, _ = os.ReadDir(prefixes)
 		}
-		files, _ = os.ReadDir(lastKey)
 		for _, file := range files {
 			name := file.Name()
 			if strings.HasSuffix(prefixes, "/") {
@@ -128,7 +127,7 @@ func executableCompletion(prefixes string) []string {
 				suggestions = append(suggestions, name)
 			}
 		}
-		fmt.Println(suggestions)
+		// fmt.Println(suggestions)
 	} else {
 		files, err := os.ReadDir("./")
 		if err != nil {
