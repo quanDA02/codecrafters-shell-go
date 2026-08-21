@@ -25,6 +25,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	if _, exist := completeMap[arr[0]]; exist {
 		if len(arr) != 2 {
 			newline, length = c.completer.Do(line, pos)
+			return newline, length
 		}
 	} else {
 		lline := line
