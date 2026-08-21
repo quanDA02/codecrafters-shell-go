@@ -133,6 +133,7 @@ func executableCompletion(prefixes string) []string {
 	}
 
 	if last != "" {
+		fmt.Println("yoshi")
 		files, err := os.ReadDir("./")
 		if err != nil {
 			panic(err)
