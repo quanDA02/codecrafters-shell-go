@@ -111,7 +111,7 @@ func executableCompletion(prefixes string) []string {
 				panic(err)
 			}
 			output := strings.TrimSpace(string(out))
-			suggestions = append(suggestions, command+" "+previousWord+" "+output+" ")
+			suggestions = append(suggestions, command+" "+previousWord+" "+output)
 			return suggestions
 		}
 	}
