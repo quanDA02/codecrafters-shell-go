@@ -99,7 +99,7 @@ func executableCompletion(prefixes string) []string {
 		cmd := exec.Command(path)
 		output, _ := cmd.Output()
 		outputString := strings.TrimSpace(string(output))
-		suggestions = append(suggestions, prefixes+outputString+" fuck")
+		suggestions = append(suggestions, prefixes+outputString)
 		return suggestions
 	}
 
