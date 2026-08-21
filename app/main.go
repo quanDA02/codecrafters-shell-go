@@ -97,7 +97,7 @@ func executableCompletion(prefixes string) []string {
 	// number of line almost double because of some space tracing
 
 	if path, exist := completeMap[first]; exist {
-		execute(path)
+		(execute(path + " "))
 		return suggestions
 	}
 
