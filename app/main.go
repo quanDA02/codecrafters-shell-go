@@ -98,7 +98,7 @@ func commonPrefix(line [][]rune) []rune {
 
 func externalCommand(prefix string) (cmd, current, prev string) {
 	part := strings.Fields(prefix)
-	fmt.Println(part)
+	fmt.Println(part[0])
 	return
 }
 
