@@ -108,7 +108,7 @@ func executableCompletion(prefixes string) []string {
 			previousWord := prefix[1]
 			partial := prefix[2]
 			cmd := exec.Command(program, command, partial, previousWord)
-			out, err := cmd.CombinedOutput()
+			out, err := cmd.Output()
 			if err != nil {
 				panic(err)
 			}
