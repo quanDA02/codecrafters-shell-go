@@ -239,7 +239,7 @@ func echo(s string, output *os.File) {
 
 func typeCommand(s string) {
 	builtins := []string{
-		"type", "exit", "echo", "complete", "jobs"
+		"type", "exit", "echo", "complete", "jobs",
 	}
 	if slices.Contains(builtins, s) {
 		fmt.Println(s, "is a shell builtin")
