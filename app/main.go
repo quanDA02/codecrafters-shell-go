@@ -109,6 +109,7 @@ func externalCommand(prefix string) (cmd, current, prev string) {
 		current = ""
 		prev = ""
 	case len(part) == 2:
+		cmd = ""
 		current = part[1]
 		prev = part[0]
 	case len(part) > 2:
