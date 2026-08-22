@@ -25,7 +25,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	var newline [][]rune
 	var length int
 	if _, exist := completeMap[arr[0]]; exist {
-		if len(arr) != 2 {
+		if len(arr) <= 2 {
 			newline, length = c.completer.Do(line, pos)
 			return newline, length
 		} else {
@@ -121,7 +121,6 @@ func executableCompletion(prefixes string) []string {
 			fmt.Println("ed:", suggestions)
 			return suggestions
 		}
-
 	}
 	first, last := prefix[0], prefix[len(prefix)-1]
 
