@@ -114,7 +114,7 @@ func externalCommand(prefix string) (cmd, current, prev string) {
 	case len(part) > 2:
 		current = part[len(part)-1]
 		prev = part[len(part)-2]
-		fmt.Println("ytoooooooooo")
+		fmt.Println(prev + current)
 	}
 	return
 }
