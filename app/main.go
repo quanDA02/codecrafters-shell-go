@@ -97,8 +97,23 @@ func commonPrefix(line [][]rune) []rune {
 }
 
 func externalCommand(prefix string) (cmd, current, prev string) {
+	//ex: cmd prev curre<tab>
 	part := strings.Fields(prefix)
-	fmt.Println(part[0])
+	if len(part) == 0 {
+		return
+	}
+	cmd = part[0]
+	switch {
+	case len(part) == 1:
+		current = ""
+		prev = ""
+	case len(part) == 2:
+		current = part[1]
+		prev = ""
+	case len(part) > 2:
+		current = part[len(part)-1]
+		prev = part[len(part)-2]
+	}
 	return
 }
 
