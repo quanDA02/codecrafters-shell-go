@@ -47,7 +47,7 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	}
 	//these print line for debug purpose only
 	// fmt.Println("line:", string(line))
-	fmt.Println("new:", len(newline))
+	// fmt.Println("new:", len(newline))
 	//bell sound if autocomplete fail
 	if len(newline) < 1 {
 		fmt.Print("\x07")
@@ -145,8 +145,8 @@ func executableCompletion(prefixes string) []string {
 			}
 			suggestions = append(suggestions, suggestion)
 		}
-		fmt.Println("l:", prefixes)
-		fmt.Println("s:", suggestions)
+		// fmt.Println("l:", prefixes)
+		// fmt.Println("s:", suggestions)
 		return suggestions
 	}
 
