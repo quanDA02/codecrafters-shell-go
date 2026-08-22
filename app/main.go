@@ -143,7 +143,6 @@ func executableCompletion(prefixes string) []string {
 			prev = strings.TrimSpace(prev)
 			if command != prev {
 				suggestion = command + " " + prev + " " + suggestion
-				println(suggestion)
 			} else {
 				suggestion = command + " " + suggestion
 			}
