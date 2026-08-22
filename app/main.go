@@ -239,7 +239,7 @@ func echo(s string, output *os.File) {
 
 func typeCommand(s string) {
 	builtins := []string{
-		"type", "exit", "echo", "complete",
+		"type", "exit", "echo", "complete", "jobs"
 	}
 	if slices.Contains(builtins, s) {
 		fmt.Println(s, "is a shell builtin")
@@ -305,7 +305,6 @@ func complete(args []string) {
 	key := args[1]
 	switch flag {
 	case "-p":
-
 		path, exist := completeMap[key]
 		if exist {
 			fmt.Printf("complete -C '%s' %s\n", path, key)
