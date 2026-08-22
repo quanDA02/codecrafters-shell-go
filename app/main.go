@@ -331,7 +331,7 @@ func execute(name string) {
 		cmd := exec.Command(args[0], args[1:len(args)-2]...)
 		err := cmd.Start()
 		if err != nil {
-			panic(nil)
+			panic(err)
 		}
 		fmt.Printf("[1] %d\n", cmd.Process.Pid)
 		return
