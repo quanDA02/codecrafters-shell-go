@@ -323,18 +323,12 @@ func complete(args []string) {
 func execute(name string) {
 
 	args, _ := shlex.Split(name)
-
+	isBackground := false
 	args, stdout, stderr := redirect(args, os.Stdout, os.Stderr)
 
 	// jobs
 	if args[len(args)-1] == "&" {
-		cmd := exec.Command(args[0], args[1:len(args)-2]...)
-		err := cmd.Start()
-		if err != nil {
-			panic(err)
-		}
-		fmt.Printf("[1] %d\n", cmd.Process.Pid)
-		go cmd.Wait()
+		args = args[0 : len(args)-1]
 	}
 	// check if it is a built in command
 	switch args[0] {
@@ -362,7 +356,16 @@ func execute(name string) {
 	cmd := exec.Command(args[0], args[1:]...)
 	cmd.Stdout = stdout
 	cmd.Stderr = stderr
-	cmd.Run()
+	if isBackground {
+		err := cmd.Start()
+		if err != nil {
+			panic(err)
+		}
+		fmt.Printf("[1] %d\n", cmd.Process.Pid)
+		go cmd.Wait()
+	} else {
+		cmd.Run()
+	}
 }
 
 func main() {
