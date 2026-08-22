@@ -144,7 +144,7 @@ func executableCompletion(prefixes string) []string {
 			if command != prev {
 				suggestion = command + " " + prev + " " + suggestion
 			} else {
-				suggestion = command + " " + suggestion
+				suggestion = command + suggestion
 			}
 			suggestions = append(suggestions, suggestion)
 		}
