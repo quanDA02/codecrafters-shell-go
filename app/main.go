@@ -123,24 +123,23 @@ var lastKey = ""
 func executableCompletion(prefixes string) []string {
 	suggestions := make([]string, 0)
 	prefix := strings.Split(prefixes, " ")
-	if len(prefix) >= 2 {
-		if program, exist := completeMap[prefix[0]]; exist {
-			command, current, prev := externalCommand(prefixes)
-			cmd := exec.Command(program, command, current, prev)
-			cmd.Env = append(cmd.Env,
-				"COMP_LINE="+prefixes,
-				fmt.Sprintf("COMP_POINT=%d", len(prefixes)),
-			)
-			out, err := cmd.Output()
-			if err != nil {
-				panic(err)
-			}
-			output := strings.TrimSpace(string(out))
-			suggestions = append(suggestions, command+" "+prev+" "+output)
-			fmt.Println("ed:", suggestions)
-			return suggestions
+	if program, exist := completeMap[prefix[0]]; exist {
+		command, current, prev := externalCommand(prefixes)
+		cmd := exec.Command(program, command, current, prev)
+		cmd.Env = append(cmd.Env,
+			"COMP_LINE="+prefixes,
+			fmt.Sprintf("COMP_POINT=%d", len(prefixes)),
+		)
+		out, err := cmd.Output()
+		if err != nil {
+			panic(err)
 		}
+		output := strings.TrimSpace(string(out))
+		suggestions = append(suggestions, command+" "+prev+" "+output)
+		fmt.Println("ed:", suggestions)
+		return suggestions
 	}
+
 	first, last := prefix[0], prefix[len(prefix)-1]
 
 	// fmt.Println("prefix:", prefix)
