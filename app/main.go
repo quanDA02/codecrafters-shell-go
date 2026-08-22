@@ -68,10 +68,10 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 			fmt.Println()
 			// print sorted suggestions
 
-			prefix := strings.TrimSpace(string(lline))
+			// prefix := strings.TrimSpace(string(lline))
 
 			for _, suggestion := range newline {
-				fmt.Print(string(prefix), string(suggestion))
+				fmt.Print(string(arr[len(arr)-1]), string(suggestion), " ")
 			}
 			fmt.Print("\n$ " + string(line))
 		}
