@@ -139,10 +139,12 @@ func executableCompletion(prefixes string) []string {
 
 		// suggestion := output
 		for _, suggestion := range output {
+			command = strings.TrimSpace(command)
+			prev = strings.TrimSpace(command)
 			if command != prev {
 				suggestion = command + " " + prev + " " + suggestion
 			} else {
-				suggestion = command + suggestion
+				suggestion = command + " " + suggestion
 			}
 			suggestions = append(suggestions, suggestion)
 		}
