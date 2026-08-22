@@ -139,9 +139,9 @@ func executableCompletion(prefixes string) []string {
 
 		// suggestion := output
 		for _, suggestion := range output {
-			suggestion = command + suggestion
+			suggestion = command + " " + suggestion
 			if command != prev {
-				suggestion = command + prev + suggestion
+				suggestion = command + " " + prev + " " + suggestion
 			}
 			suggestions = append(suggestions, suggestion)
 		}
