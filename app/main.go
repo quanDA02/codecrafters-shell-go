@@ -334,7 +334,6 @@ func jobs() {
 	for id, job := range jobMap {
 		fmt.Printf("[%d]+  Running                 %s", id, job.name)
 	}
-
 }
 func execute(name string) {
 
@@ -362,6 +361,7 @@ func execute(name string) {
 		complete(args[1:])
 		return
 	case "jobs":
+		jobs()
 		return
 	}
 
