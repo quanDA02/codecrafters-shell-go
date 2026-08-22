@@ -335,7 +335,6 @@ func execute(name string) {
 		}
 		fmt.Printf("[1] %d\n", cmd.Process.Pid)
 		go cmd.Wait()
-		return
 	}
 	// check if it is a built in command
 	switch args[0] {
