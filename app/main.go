@@ -96,6 +96,12 @@ func commonPrefix(line [][]rune) []rune {
 	return result
 }
 
+func externalCommand(prefix string) (cmd, current, prev string) {
+	part := strings.Fields(prefix)
+	println(part)
+	return
+}
+
 // caching last completed key used
 var lastKey = ""
 
@@ -104,10 +110,8 @@ func executableCompletion(prefixes string) []string {
 	prefix := strings.Split(prefixes, " ")
 	if len(prefix) >= 2 {
 		if program, exist := completeMap[prefix[0]]; exist {
-			command := prefix[0]
-			previousWord := prefix[1]
-			partial := prefix[2]
-			cmd := exec.Command(program, command, partial, previousWord)
+			command, current, prev := externalCommand(prefixes)
+			cmd := exec.Command(program, command, current, prev)
 			cmd.Env = append(cmd.Env,
 				"COMP_LINE="+prefixes,
 				fmt.Sprintf("COMP_POINT=%d", len(prefixes)),
