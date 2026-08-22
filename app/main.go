@@ -340,6 +340,8 @@ func execute(name string) {
 	case "complete":
 		complete(args[1:])
 		return
+	case "jobs":
+		return
 	}
 
 	if _, err := exec.LookPath(args[0]); err != nil {
