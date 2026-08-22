@@ -326,6 +326,16 @@ func execute(name string) {
 
 	args, stdout, stderr := redirect(args, os.Stdout, os.Stderr)
 
+	// jobs
+	if args[len(args)-1] == "&" {
+		cmd := exec.Command(args[0], args[1:len(args)-2]...)
+		err := cmd.Start()
+		if err != nil {
+			panic(nil)
+		}
+		fmt.Printf("[1] %d\n", cmd.Process.Pid)
+		return
+	}
 	// check if it is a built in command
 	switch args[0] {
 	case "exit":
