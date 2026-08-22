@@ -108,11 +108,9 @@ func executableCompletion(prefixes string) []string {
 			previousWord := prefix[1]
 			partial := prefix[2]
 			cmd := exec.Command(program, command, partial, previousWord)
-			fmt.Println("zuniigga4")
 			out, err := cmd.CombinedOutput()
-			fmt.Println("zuniigga2")
 			if err != nil {
-				panic(err)
+				fmt.Println(err)
 			}
 			output := strings.TrimSpace(string(out))
 			suggestions = append(suggestions, command+" "+previousWord+" "+output)
