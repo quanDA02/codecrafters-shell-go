@@ -103,27 +103,23 @@ func executableCompletion(prefixes string) []string {
 	suggestions := make([]string, 0)
 	prefix := strings.Split(prefixes, " ")
 	if len(prefix) > 2 {
-		fmt.Println("zuniigga")
 		if program, exist := completeMap[prefix[0]]; exist {
 			command := prefix[0]
 			previousWord := prefix[1]
 			partial := prefix[2]
-			fmt.Println("zuniigga2")
 			cmd := exec.Command(program, command, partial, previousWord)
 			fmt.Println("zuniigga4")
 			out, err := cmd.CombinedOutput()
+			fmt.Println("zuniigga2")
 			if err != nil {
 				panic(err)
 			}
-			fmt.Println("zuniigga2")
 			output := strings.TrimSpace(string(out))
 			suggestions = append(suggestions, command+" "+previousWord+" "+output)
-			fmt.Println("zuniigga5")
 		}
 
 		return suggestions
 	}
-	fmt.Println("zuniigga3")
 	first, last := prefix[0], prefix[len(prefix)-1]
 
 	// fmt.Println("prefix:", prefix)
