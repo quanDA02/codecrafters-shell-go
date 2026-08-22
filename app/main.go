@@ -142,7 +142,7 @@ func executableCompletion(prefixes string) []string {
 			suggestion = command + " " + suggestion
 			if command != prev {
 				suggestion = command + " " + prev + " " + suggestion
-				fmt.Println(suggestion, " dsdsd")
+				fmt.Println("\n", suggestion, " dsdsd")
 			}
 			suggestions = append(suggestions, suggestion)
 		}
