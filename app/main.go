@@ -25,13 +25,14 @@ func (c *completerBell) Do(line []rune, pos int) ([][]rune, int) {
 	var newline [][]rune
 	var length int
 	if _, exist := completeMap[arr[0]]; exist {
-		if len(arr) <= 2 {
-			newline, length = c.completer.Do(line, pos)
-			return newline, length
-		} else {
-			fmt.Print("\x07")
-			return nil, 0
-		}
+		newline, length = c.completer.Do(line, pos)
+		// if len(arr) <= 2 {
+		// 	newline, length = c.completer.Do(line, pos)
+		// 	return newline, length
+		// } else {
+		// 	fmt.Print("\x07")
+		// 	return nil, 0
+		// }
 	} else {
 		//seperate line and only take the last part of it
 		if len(arr) > 1 {
