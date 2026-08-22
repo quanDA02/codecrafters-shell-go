@@ -102,7 +102,7 @@ var lastKey = ""
 func executableCompletion(prefixes string) []string {
 	suggestions := make([]string, 0)
 	prefix := strings.Split(prefixes, " ")
-	if len(prefix) > 2 {
+	if len(prefix) >= 2 {
 		if program, exist := completeMap[prefix[0]]; exist {
 			command := prefix[0]
 			previousWord := prefix[1]
@@ -119,9 +119,9 @@ func executableCompletion(prefixes string) []string {
 			output := strings.TrimSpace(string(out))
 			suggestions = append(suggestions, command+" "+previousWord+" "+output)
 			fmt.Println("ed:", suggestions)
+			return suggestions
 		}
 
-		return suggestions
 	}
 	first, last := prefix[0], prefix[len(prefix)-1]
 
