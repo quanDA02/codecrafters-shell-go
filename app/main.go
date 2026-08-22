@@ -137,7 +137,7 @@ func executableCompletion(prefixes string) []string {
 		}
 		output := strings.TrimSpace(string(out))
 		// suggestion := output
-		suggestions = append(suggestions, command+" "+prev+" "+output)
+		suggestions = append(suggestions, output)
 		fmt.Println("l:", prefixes)
 		fmt.Println("s:", suggestions)
 		return suggestions
