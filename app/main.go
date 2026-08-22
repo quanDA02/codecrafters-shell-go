@@ -131,7 +131,7 @@ func executableCompletion(prefixes string) []string {
 			"COMP_LINE="+prefixes,
 			fmt.Sprintf("COMP_POINT=%d", len(prefixes)),
 		)
-		out, err := cmd.Output()
+		out, err := cmd.CombinedOutput()
 		if err != nil {
 			panic(err)
 		}
