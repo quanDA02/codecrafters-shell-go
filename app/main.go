@@ -320,6 +320,22 @@ func complete(args []string) {
 	}
 }
 
+// background jobs
+type Jobs struct {
+	id   int
+	name string
+	cmd  *exec.Cmd
+	done bool
+}
+
+var jobMap = make(map[int]*Jobs)
+
+func jobs() {
+	for id, job := range jobMap {
+		fmt.Printf("[%d]+  Running                 %s", id, job.name)
+	}
+
+}
 func execute(name string) {
 
 	args, _ := shlex.Split(name)
@@ -357,15 +373,22 @@ func execute(name string) {
 	cmd := exec.Command(args[0], args[1:]...)
 	cmd.Stdout = stdout
 	cmd.Stderr = stderr
-	if isBackground {
+	if !isBackground {
+		cmd.Run()
+	} else {
 		err := cmd.Start()
 		if err != nil {
 			panic(err)
 		}
+		jobID := 1
+		job := &Jobs{
+			id:   jobID,
+			name: name,
+			done: false,
+		}
+		jobMap[jobID] = job
 		fmt.Printf("[1] %d\n", cmd.Process.Pid)
 		go cmd.Wait()
-	} else {
-		cmd.Run()
 	}
 }
 
