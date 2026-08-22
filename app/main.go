@@ -103,6 +103,7 @@ func executableCompletion(prefixes string) []string {
 	suggestions := make([]string, 0)
 	prefix := strings.Split(prefixes, " ")
 	if len(prefix) > 2 {
+		fmt.Println("zuniigga")
 		if program, exist := completeMap[prefix[0]]; exist {
 			command := prefix[0]
 			previousWord := prefix[1]
