@@ -135,9 +135,12 @@ func executableCompletion(prefixes string) []string {
 		if err != nil {
 			panic(err)
 		}
-		output := strings.TrimSpace(string(out))
+		output := strings.Fields(strings.TrimSpace(string(out)))
+
 		// suggestion := output
-		suggestions = append(suggestions, output)
+		for _, suggestion := range output {
+			suggestions = append(suggestions, suggestion)
+		}
 		fmt.Println("l:", prefixes)
 		fmt.Println("s:", suggestions)
 		return suggestions
