@@ -110,8 +110,12 @@ func executableCompletion(prefixes string) []string {
 			cmd := exec.Command(program, command, partial, previousWord)
 			out, err := cmd.CombinedOutput()
 			if err != nil {
-				fmt.Println(err)
+				panic(err)
 			}
+			cmd.Env = append(cmd.Env,
+				"COMP_LINE="+prefixes,
+				fmt.Sprintf("COMP_POINT=%d", len(prefixes)),
+			)
 			output := strings.TrimSpace(string(out))
 			suggestions = append(suggestions, command+" "+previousWord+" "+output)
 		}
@@ -281,7 +285,6 @@ func complete(args []string) {
 			completeMap[args[2]] = args[1]
 		}
 	}
-
 }
 
 func execute(name string) {
