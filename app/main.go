@@ -116,7 +116,9 @@ func executableCompletion(prefixes string) []string {
 			output := strings.TrimSpace(string(out))
 			suggestions = append(suggestions, command+" "+previousWord+" "+output)
 		}
+		fmt.Println("zuniigga2")
 		return suggestions
+		fmt.Println("zuniigga3")
 	}
 
 	first, last := prefix[0], prefix[len(prefix)-1]
