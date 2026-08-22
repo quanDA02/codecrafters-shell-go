@@ -118,9 +118,8 @@ func executableCompletion(prefixes string) []string {
 		}
 		fmt.Println("zuniigga2")
 		return suggestions
-		fmt.Println("zuniigga3")
 	}
-
+	fmt.Println("zuniigga3")
 	first, last := prefix[0], prefix[len(prefix)-1]
 
 	// fmt.Println("prefix:", prefix)
