@@ -328,6 +328,7 @@ func execute(name string) {
 
 	// jobs
 	if args[len(args)-1] == "&" {
+		isBackground = true
 		args = args[0 : len(args)-1]
 	}
 	// check if it is a built in command
