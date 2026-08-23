@@ -342,7 +342,7 @@ func jobs() {
 
 		if job.status == "Done" {
 			names := strings.Split(job.name, " ")
-			name := strings.Join(names[0:len(names)-2], " ")
+			name := strings.Join(names[0:len(names)-1], " ")
 			fmt.Println(name)
 		}
 		fmt.Printf("[%d]%s  %-24s%s\n", job.id, mark, job.status, job.name)
