@@ -339,12 +339,6 @@ func jobs() {
 		if id == len(jobMap)-1 {
 			mark = "-"
 		}
-
-		if job.status == "Done" {
-			names := strings.Split(job.name, " ")
-			name := strings.Join(names[0:len(names)-1], " ")
-			job.name = name
-		}
 		fmt.Printf("[%d]%s  %-24s%s\n", job.id, mark, job.status, job.name)
 		if job.status == "Done" {
 			delete(jobMap, job.id)
@@ -415,6 +409,7 @@ func execute(name string) {
 		go func(jobID int) {
 			cmd.Wait()
 			jobMap[jobID].status = "Done"
+			jobmap[jobID].name = strings.Join(args, " ")
 		}(jobID)
 	}
 }
