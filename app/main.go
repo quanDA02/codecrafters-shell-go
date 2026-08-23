@@ -381,6 +381,14 @@ func execute(name string) {
 			panic(err)
 		}
 		jobID := 1
+		for {
+			_, exist := jobMap[jobID]
+			if exist {
+				jobID++
+				continue
+			}
+			break
+		}
 		job := &Jobs{
 			id:   jobID,
 			name: name,
