@@ -324,19 +324,19 @@ func complete(args []string) {
 type Jobs struct {
 	id     int
 	name   string
-	cmd    *exec.Cmd
+	recent int
 	status string
 }
 
 var jobMap = make(map[int]*Jobs)
 
 func jobs() {
-	for id, job := range jobMap {
+	for _, job := range jobMap {
 		mark := " "
-		if id == len(jobMap) {
+		if job.id == 1 {
 			mark = "+"
 		}
-		if id == len(jobMap)-1 {
+		if job.id == 2 {
 			mark = "-"
 		}
 		fmt.Printf("[%d]%s  %-24s%s\n", job.id, mark, job.status, job.name)
@@ -402,9 +402,13 @@ func execute(name string) {
 		job := &Jobs{
 			id:     jobID,
 			name:   name,
+			recent: 0,
 			status: "Running",
 		}
 		jobMap[jobID] = job
+		for _, job := range jobMap {
+			jobMap[job.id].recent++
+		}
 		fmt.Printf("[%d] %d\n", jobID, cmd.Process.Pid)
 		go func(jobID int) {
 			cmd.Wait()
