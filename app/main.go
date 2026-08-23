@@ -404,8 +404,10 @@ func execute(name string) {
 		}
 		jobMap[jobID] = job
 		fmt.Printf("[%d] %d\n", jobID, cmd.Process.Pid)
-		go cmd.Wait()
-		jobMap[jobID].status = "Done"
+		go func(jobID int) {
+			cmd.Wait()
+			jobMap[jobID].status = "Done"
+		}(jobID)
 	}
 }
 
