@@ -411,7 +411,7 @@ func execute(name string) {
 		}
 		jobMap[jobID] = job
 		for _, job := range jobMap {
-			jobMap[job.id].recent++
+			jobMap[job.id].recent += 1
 		}
 		fmt.Printf("[%d] %d\n", jobID, cmd.Process.Pid)
 		go func(jobID int) {
