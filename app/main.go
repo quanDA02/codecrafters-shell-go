@@ -409,7 +409,7 @@ func execute(name string) {
 		go func(jobID int) {
 			cmd.Wait()
 			jobMap[jobID].status = "Done"
-			jobmap[jobID].name = strings.Join(args, " ")
+			jobMap[jobID].name = strings.Join(args, " ")
 		}(jobID)
 	}
 }
