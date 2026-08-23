@@ -322,10 +322,10 @@ func complete(args []string) {
 
 // background jobs
 type Jobs struct {
-	id   int
-	name string
-	cmd  *exec.Cmd
-	done bool
+	id     int
+	name   string
+	cmd    *exec.Cmd
+	status string
 }
 
 var jobMap = make(map[int]*Jobs)
@@ -339,6 +339,7 @@ func jobs() {
 		if id == len(jobMap)-1 {
 			mark = "-"
 		}
+
 		fmt.Printf("[%d]%s  Running                 %s\n", id, mark, job.name)
 	}
 }
@@ -397,13 +398,14 @@ func execute(name string) {
 			break
 		}
 		job := &Jobs{
-			id:   jobID,
-			name: name,
-			done: false,
+			id:     jobID,
+			name:   name,
+			status: "Running",
 		}
 		jobMap[jobID] = job
 		fmt.Printf("[%d] %d\n", jobID, cmd.Process.Pid)
-		go cmd.Wait()
+		cmd.Wait()
+		jobMap[jobID].status = "Done"
 	}
 }
 
