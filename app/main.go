@@ -341,7 +341,7 @@ func jobs() {
 		}
 
 		if job.status == "Done" {
-			job.name = strings.Join(strings.Fields(job.name)[0:len(strings.Fields(job.name))-1], " ")
+			job.name = strings.Join(strings.Fields(job.name)[0:len(strings.Fields(job.name))], " ")
 		}
 		fmt.Printf("[%d]%s  %-24s%s\n", job.id, mark, job.status, job.name)
 	}
