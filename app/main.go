@@ -340,7 +340,7 @@ func jobs() {
 			mark = "-"
 		}
 
-		fmt.Printf("[%d]%s  Running                 %s\n", id, mark, job.name)
+		fmt.Printf("[%d]%s  %-24s%s\n", job.id, mark, job.status, job.name)
 	}
 }
 func execute(name string) {
