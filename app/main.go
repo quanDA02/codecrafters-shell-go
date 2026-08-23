@@ -395,7 +395,7 @@ func execute(name string) {
 			done: false,
 		}
 		jobMap[jobID] = job
-		fmt.Printf("[1] %d\n", cmd.Process.Pid)
+		fmt.Printf("[%d] %d\n", jobID, cmd.Process.Pid)
 		go cmd.Wait()
 	}
 }
