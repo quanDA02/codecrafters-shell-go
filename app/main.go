@@ -333,10 +333,10 @@ var jobMap = make(map[int]*Jobs)
 func jobs() {
 	for _, job := range jobMap {
 		mark := " "
-		if job.id == 1 {
+		if job.recent == 1 {
 			mark = "+"
 		}
-		if job.id == 2 {
+		if job.recent == 2 {
 			mark = "-"
 		}
 		fmt.Printf("[%d]%s  %-24s%s\n", job.id, mark, job.status, job.name)
