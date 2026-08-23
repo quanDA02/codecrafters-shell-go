@@ -331,7 +331,10 @@ type Jobs struct {
 
 var jobMap = make(map[int]*Jobs)
 
-func jobs() {
+func jobs(doneOnly bool) {
+	if len(jobMap) < 1 {
+		return
+	}
 	key := make([]int, 0)
 	for _, job := range jobMap {
 		key = append(key, job.id)
@@ -351,9 +354,16 @@ func jobs() {
 		if len(jobMap) > 1 && job.recent == recents[1] {
 			mark = "-"
 		}
-		fmt.Printf("[%d]%s  %-24s%s\n", job.id, mark, job.status, job.name)
-		if job.status == "Done" {
-			delete(jobMap, job.id)
+		if doneOnly {
+			if job.status == "Done" {
+				fmt.Printf("[%d]%s  %-24s%s\n", job.id, mark, job.status, job.name)
+				delete(jobMap, job.id)
+			}
+		} else {
+			fmt.Printf("[%d]%s  %-24s%s\n", job.id, mark, job.status, job.name)
+			if job.status == "Done" {
+				delete(jobMap, job.id)
+			}
 		}
 	}
 }
@@ -381,7 +391,7 @@ func execute(name string) {
 		complete(args[1:])
 		return
 	case "jobs":
-		jobs()
+		jobs(false)
 		return
 	}
 
@@ -449,5 +459,6 @@ func main() {
 		command = strings.TrimSpace(command)
 
 		execute(command)
+		jobs(true)
 	}
 }
