@@ -337,13 +337,18 @@ func jobs() {
 		key = append(key, job.id)
 	}
 	sort.Ints(key)
+	recents := make([]int, 0)
+	for _, job := range jobMap {
+		recents = append(key, job.recent)
+	}
+	sort.Ints(recents)
 	for _, id := range key {
 		job := jobMap[id]
 		mark := " "
-		if job.recent == 1 {
+		if job.recent == recents[0] {
 			mark = "+"
 		}
-		if job.recent == 2 {
+		if job.recent == recents[1] {
 			mark = "-"
 		}
 		fmt.Printf("[%d]%s  %-24s%s\n", job.id, mark, job.status, job.name)
