@@ -332,7 +332,14 @@ var jobMap = make(map[int]*Jobs)
 
 func jobs() {
 	for id, job := range jobMap {
-		fmt.Printf("[%d]+  Running                 %s\n", id, job.name)
+		mark := " "
+		if id == len(jobMap) {
+			mark = "+"
+		}
+		if id == len(jobMap)-1 {
+			mark = "-"
+		}
+		fmt.Printf("[%d]%s  Running                 %s\n", id, mark, job.name)
 	}
 }
 func execute(name string) {
