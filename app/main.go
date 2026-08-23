@@ -348,7 +348,7 @@ func jobs() {
 		if job.recent == recents[0] {
 			mark = "+"
 		}
-		if job.recent == recents[1] {
+		if len(jobMap) > 1 && job.recent == recents[1] {
 			mark = "-"
 		}
 		fmt.Printf("[%d]%s  %-24s%s\n", job.id, mark, job.status, job.name)
