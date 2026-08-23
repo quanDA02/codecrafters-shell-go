@@ -339,7 +339,7 @@ func jobs() {
 	sort.Ints(key)
 	recents := make([]int, 0)
 	for _, job := range jobMap {
-		recents = append(key, job.recent)
+		recents = append(recents, job.recent)
 	}
 	sort.Ints(recents)
 	for _, id := range key {
