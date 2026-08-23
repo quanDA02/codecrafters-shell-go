@@ -346,6 +346,9 @@ func jobs() {
 			job.name = name
 		}
 		fmt.Printf("[%d]%s  %-24s%s\n", job.id, mark, job.status, job.name)
+		if job.status == "Done" {
+			delete(jobMap, job.id)
+		}
 	}
 }
 func execute(name string) {
