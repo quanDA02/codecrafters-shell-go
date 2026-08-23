@@ -6,6 +6,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"slices"
+	"sort"
 	"strings"
 
 	"github.com/chzyer/readline"
@@ -331,7 +332,13 @@ type Jobs struct {
 var jobMap = make(map[int]*Jobs)
 
 func jobs() {
+	key := make([]int, 0)
 	for _, job := range jobMap {
+		key = append(key, job.id)
+	}
+	sort.Ints(key)
+	for _, id := range key {
+		job := jobMap[id]
 		mark := " "
 		if job.recent == 1 {
 			mark = "+"
@@ -346,11 +353,9 @@ func jobs() {
 	}
 }
 func execute(name string) {
-
 	args, _ := shlex.Split(name)
 	isBackground := false
 	args, stdout, stderr := redirect(args, os.Stdout, os.Stderr)
-
 	// jobs
 	if args[len(args)-1] == "&" {
 		isBackground = true
@@ -379,7 +384,6 @@ func execute(name string) {
 		fmt.Printf("%s: command not found\n", args[0])
 		return
 	}
-
 	cmd := exec.Command(args[0], args[1:]...)
 	cmd.Stdout = stdout
 	cmd.Stderr = stderr
