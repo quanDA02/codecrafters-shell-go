@@ -401,8 +401,8 @@ func execute(name string) {
 		case "type":
 			typeCommand(args[1])
 			return
-		// case "echo":
-		// 	echo(strings.Join(args[1:], " "), stdout)
+		case "echo":
+			echo(strings.Join(args[1:], " "), stdout)
 		case "complete":
 			complete(args[1:])
 			return
