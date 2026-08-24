@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 	"slices"
 	"sort"
+	"strconv"
 	"strings"
 
 	"github.com/chzyer/readline"
@@ -409,7 +410,15 @@ func execute(name string) {
 		case "jobs":
 			jobs(false)
 		case "history":
-			history()
+			index := 0
+			if len(args) > 1 {
+				i, err := strconv.Atoi(args[1])
+				if err != nil {
+					panic(err)
+				}
+				index = i
+			}
+			history(index)
 		default:
 			isBuiltin = false
 		}
@@ -469,10 +478,19 @@ func execute(name string) {
 // cache history
 var cmdHistory = make([]string, 0)
 
-func history() {
-	for i, command := range cmdHistory {
-		fmt.Printf("%d %s\n", i+1, command)
+func history(index int) {
+	if index == 0 {
+		for i, command := range cmdHistory {
+			fmt.Printf("%d %s\n", i+1, command)
+		}
+	} else {
+		for i, command := range cmdHistory {
+			if i == index {
+				fmt.Printf("%d %s\n", i+1, command)
+			}
+		}
 	}
+
 }
 
 func pipelineSplit(name string) (commands []string) {
