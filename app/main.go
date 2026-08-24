@@ -406,11 +406,14 @@ func execute(name string) {
 			r, w, _ := os.Pipe()
 			stdout = w
 			prev = r
+		} else {
+			prev = os.Stdin
 		}
 		cmd.Stdout = stdout
 		cmd.Stderr = stderr
 		cmd.Stdin = prev
 		err := cmd.Start()
+
 		if err != nil {
 			panic(err)
 		}
