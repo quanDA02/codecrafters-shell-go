@@ -244,7 +244,7 @@ func typeCommand(s string) {
 		"type", "exit", "echo", "complete", "jobs",
 	}
 	if len(builtin) > 1 && slices.Contains(builtins, builtin[1]) {
-		fmt.Println(s, "is a shell builtin")
+		fmt.Println(builtin[1], "is a shell builtin")
 	} else {
 		path := findPath(s)
 		if path != "" {
