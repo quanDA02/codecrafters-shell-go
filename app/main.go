@@ -485,10 +485,9 @@ func history(recent int) {
 		}
 	} else {
 		for i := len(cmdHistory) - recent; i < len(cmdHistory); i++ {
-			fmt.Printf("%d %s\n", i, cmdHistory[i-1])
+			fmt.Printf("%d %s\n", i, cmdHistory[i])
 		}
 	}
-
 }
 
 func pipelineSplit(name string) (commands []string) {
