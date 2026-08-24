@@ -368,12 +368,12 @@ func jobs(doneOnly bool) {
 	}
 }
 func execute(name string) {
-	var prev *os.File = os.Stdin
+	var prev, stdout, stderr *os.File
 	commands := pipelineExecute(name)
 	for i, command := range commands {
 		args, _ := shlex.Split(command)
 		isBackground := false
-		args, stdout, stderr := redirect(args, os.Stdout, os.Stderr)
+		args, stdout, stderr = redirect(args, os.Stdout, os.Stderr)
 		// jobs
 		if args[len(args)-1] == "&" {
 			isBackground = true
