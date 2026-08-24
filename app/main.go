@@ -470,13 +470,14 @@ func pipelineExecute(name string) {
 			}
 			cmd.Stdout = w
 			prev = r
-
+			cmd.Start()
 			w.Close()
 		} else {
 			cmd.Stdout = os.Stdout
+			cmd.Start()
 			prev.Close()
 		}
-		cmd.Run()
+		cmd.Wait()
 	}
 }
 
