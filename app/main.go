@@ -448,15 +448,30 @@ func execute(name string) {
 
 func pipelineExecute(name string) {
 	commands := strings.Split(name, "|")
-	if len(commands) == -1 {
+	if len(commands) < 2 {
 		return
 	}
-	for _, command := range commands {
-		cmd := exec.Command(command)
-		cmd.Stdin = os.Stdin
-		cmd.Stdout = os.Stdout
-		cmd.Stderr = os.Stderr
-		cmd.Run()
+	var prev *os.File
+	for i, command := range commands {
+		args, err := shlex.Split(command)
+		if err != nil {
+			return
+		}
+		cmd := exec.Command(args[0], args[1:]...)
+		if i < len(commands)-1 {
+			r, w, e := os.Pipe()
+			if e != nil {
+				panic(e)
+			}
+			cmd.Stdout = w
+			prev = r
+
+			w.Close()
+		} else {
+			cmd.Stdout = os.Stdout
+			prev.Close()
+		}
+
 	}
 }
 
