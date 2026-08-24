@@ -381,31 +381,27 @@ func execute(name string) {
 			args = args[0 : len(args)-1]
 		}
 		// check if it is a built in command
+		switch args[0] {
+		case "exit":
+			os.Exit(0)
+		case "type":
+			typeCommand(name[5:])
+		case "echo":
+			echo(strings.Join(args[1:], " "), stdout)
+		case "complete":
+			complete(args[1:])
+		case "jobs":
+			jobs(false)
+		}
+		var cmd *exec.Cmd
 		if _, err := exec.LookPath(args[0]); err != nil {
-			isBuiltin := false
-			switch args[0] {
-			case "exit":
-				os.Exit(0)
-				isBuiltin = true
-			case "type":
-				typeCommand(name[5:])
-				isBuiltin = true
-			case "echo":
-				echo(strings.Join(args[1:], " "), stdout)
-			case "complete":
-				complete(args[1:])
-				isBuiltin = true
-			case "jobs":
-				jobs(false)
-				isBuiltin = true
-			}
-			if !isBuiltin {
-				fmt.Printf("%s: command not found\n", args[0])
-				return
-			}
+			fmt.Printf("%s: command not found\n", args[0])
+			return
+		} else {
+			cmd = exec.Command(args[0], args[1:]...)
 		}
 		var prevWriter *os.File
-		cmd := exec.Command(args[0], args[1:]...)
+
 		if i < len(commands)-1 {
 			r, w, _ := os.Pipe()
 			stdout = w
