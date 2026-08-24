@@ -380,40 +380,44 @@ func execute(name string) {
 			isBackground = true
 			args = args[0 : len(args)-1]
 		}
+		// check if it is a built in command
+		switch args[0] {
+		case "exit":
+			os.Exit(0)
+			return
+		case "type":
+			typeCommand(name[5:])
+			return
+		case "echo":
+			echo(strings.Join(args[1:], " "), stdout)
+			return
+		case "complete":
+			complete(args[1:])
+			return
+		case "jobs":
+			jobs(false)
+			return
+		}
+		if _, err := exec.LookPath(args[0]); err != nil {
+			fmt.Printf("%s: command not found\n", args[0])
+			return
+		}
 		var prevWriter *os.File
-		var cmd *exec.Cmd
+		cmd := exec.Command(args[0], args[1:]...)
 		if i < len(commands)-1 {
 			r, w, _ := os.Pipe()
 			stdout = w
 			prevWriter = w
 			prevReader = r
 		}
-		// check if it is a built in command
-		switch args[0] {
-		case "exit":
-			os.Exit(0)
-		case "type":
-			typeCommand(name[5:])
-		case "echo":
-			echo(strings.Join(args[1:], " "), stdout)
-		case "complete":
-			complete(args[1:])
-		case "jobs":
-			jobs(false)
-		}
-		if _, err := exec.LookPath(args[0]); err != nil {
-			fmt.Printf("%s: command not found\n", args[0])
-			return
-		} else {
-			cmd = exec.Command(args[0], args[1:]...)
-			err := cmd.Start()
-			if err != nil {
-				panic(err)
-			}
-		}
 		cmd.Stdout = stdout
 		cmd.Stderr = stderr
 		cmd.Stdin = prevReader
+
+		err := cmd.Start()
+		if err != nil {
+			panic(err)
+		}
 		if prevWriter != nil {
 			prevWriter.Close()
 		}
