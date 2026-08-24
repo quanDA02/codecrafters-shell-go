@@ -447,7 +447,7 @@ func execute(name string) {
 				jobMap[jobID].name = strings.Join(args, " ")
 			}(jobID)
 		} else {
-			cmd.Wait()
+			go cmd.Wait()
 		}
 	}
 }
