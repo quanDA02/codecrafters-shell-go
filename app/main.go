@@ -289,6 +289,8 @@ func redirect(args []string, stdout, stderr *os.File) ([]string, *os.File, *os.F
 			os.O_APPEND|os.O_CREATE|os.O_WRONLY,
 			0644)
 		stderr = outputFile
+	case "|":
+		fmt.Println("test")
 	default:
 		return args, stdout, stderr
 	}
