@@ -290,12 +290,12 @@ func redirect(args []string, stdout, stderr *os.File) ([]string, *os.File, *os.F
 			0644)
 		stderr = outputFile
 	case "|":
-		r, w, err := os.Pipe()
+		_, w, err := os.Pipe()
 		if err != nil {
 			panic(err)
 		}
 		stdout = w
-		fmt.Println(r)
+		return args, stdout, stderr
 	default:
 		return args, stdout, stderr
 	}
