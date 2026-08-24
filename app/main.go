@@ -384,19 +384,14 @@ func execute(name string) {
 		switch args[0] {
 		case "exit":
 			os.Exit(0)
-			return
 		case "type":
 			typeCommand(name[5:])
-			return
 		case "echo":
 			echo(strings.Join(args[1:], " "), stdout)
-			return
 		case "complete":
 			complete(args[1:])
-			return
 		case "jobs":
 			jobs(false)
-			return
 		}
 		if _, err := exec.LookPath(args[0]); err != nil {
 			fmt.Printf("%s: command not found\n", args[0])
