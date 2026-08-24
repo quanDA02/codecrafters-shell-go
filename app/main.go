@@ -368,7 +368,7 @@ func jobs(doneOnly bool) {
 	}
 }
 func execute(name string) {
-	var prev *os.File
+	prev := os.Stdin
 	commands := pipelineExecute(name)
 	for i, command := range commands {
 		args, _ := shlex.Split(command)
