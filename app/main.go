@@ -410,10 +410,10 @@ func execute(name string) {
 			if err != nil {
 				panic(err)
 			}
-			cmd.Stdout = stdout
-			cmd.Stderr = stderr
-			cmd.Stdin = prevReader
 		}
+		cmd.Stdout = stdout
+		cmd.Stderr = stderr
+		cmd.Stdin = prevReader
 		if prevWriter != nil {
 			prevWriter.Close()
 		}
