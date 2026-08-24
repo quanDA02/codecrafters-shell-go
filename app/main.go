@@ -476,7 +476,7 @@ func pipelineExecute(name string) {
 			cmd.Stdout = os.Stdout
 			prev.Close()
 		}
-
+		cmd.Run()
 	}
 }
 
