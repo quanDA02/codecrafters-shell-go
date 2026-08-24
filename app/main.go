@@ -262,9 +262,9 @@ func findPath(file string) string {
 	return path
 }
 
-func redirect(args []string, stdout, stderr *os.File) ([]string, *os.File, *os.File) {
+func redirect(args []string, stdin, stdout, stderr *os.File) ([]string, *os.File, *os.File, *os.File) {
 	if len(args) <= 2 {
-		return args, stdout, stderr
+		return args, stdin, stdout, stderr
 	}
 	operator := args[len(args)-2]
 	filename := args[len(args)-1]
@@ -290,18 +290,19 @@ func redirect(args []string, stdout, stderr *os.File) ([]string, *os.File, *os.F
 			0644)
 		stderr = outputFile
 	case "|":
-		_, w, err := os.Pipe()
+		r, w, err := os.Pipe()
 		if err != nil {
 			panic(err)
 		}
 		stdout = w
+		stdin = r
 		args = args[len(args)-1:]
-		return args, stdout, stderr
+		return args, stdin, stdout, stderr
 	default:
-		return args, stdout, stderr
+		return args, stdin, stdout, stderr
 	}
 	args = args[:len(args)-2]
-	return args, stdout, stderr
+	return args, stdin, stdout, stderr
 }
 
 var completeMap = make(map[string]string)
@@ -378,7 +379,7 @@ func jobs(doneOnly bool) {
 func execute(name string) {
 	args, _ := shlex.Split(name)
 	isBackground := false
-	args, stdout, stderr := redirect(args, os.Stdout, os.Stderr)
+	args, stdin, stdout, stderr := redirect(args, os.Stdin, os.Stdout, os.Stderr)
 	// jobs
 	if args[len(args)-1] == "&" {
 		isBackground = true
