@@ -368,115 +368,82 @@ func jobs(doneOnly bool) {
 	}
 }
 func execute(name string) {
-	args, _ := shlex.Split(name)
-	for _, arg := range args {
-		if arg == "|" {
-			pipelineExecute(name)
+
+	commands := pipelineExecute(name)
+	for _, command := range commands {
+		args, _ := shlex.Split(command)
+		isBackground := false
+
+		args, stdout, stderr := redirect(args, os.Stdout, os.Stderr)
+		// jobs
+		if args[len(args)-1] == "&" {
+			isBackground = true
+			args = args[0 : len(args)-1]
+		}
+		// check if it is a built in command
+		switch args[0] {
+		case "exit":
+			os.Exit(0)
+			return
+		case "type":
+			typeCommand(name[5:])
+			return
+		case "echo":
+			echo(strings.Join(args[1:], " "), stdout)
+			return
+		case "complete":
+			complete(args[1:])
+			return
+		case "jobs":
+			jobs(false)
 			return
 		}
-	}
-	isBackground := false
-
-	args, stdout, stderr := redirect(args, os.Stdout, os.Stderr)
-
-	// jobs
-	if args[len(args)-1] == "&" {
-		isBackground = true
-		args = args[0 : len(args)-1]
-	}
-	// check if it is a built in command
-	switch args[0] {
-	case "exit":
-		os.Exit(0)
-		return
-	case "type":
-		typeCommand(name[5:])
-		return
-	case "echo":
-		echo(strings.Join(args[1:], " "), stdout)
-		return
-	case "complete":
-		complete(args[1:])
-		return
-	case "jobs":
-		jobs(false)
-		return
-	}
-
-	if _, err := exec.LookPath(args[0]); err != nil {
-		fmt.Printf("%s: command not found\n", args[0])
-		return
-	}
-
-	cmd := exec.Command(args[0], args[1:]...)
-	cmd.Stdout = stdout
-	cmd.Stderr = stderr
-	if !isBackground {
-		cmd.Run()
-	} else {
-		err := cmd.Start()
-		if err != nil {
-			panic(err)
-		}
-		jobID := 1
-		for {
-			_, exist := jobMap[jobID]
-			if exist {
-				jobID++
-				continue
-			}
-			break
-		}
-		job := &Jobs{
-			id:     jobID,
-			name:   name,
-			recent: 0,
-			status: "Running",
-		}
-		jobMap[jobID] = job
-		for _, job := range jobMap {
-			jobMap[job.id].recent += 1
-		}
-		fmt.Printf("[%d] %d\n", jobID, cmd.Process.Pid)
-		go func(jobID int) {
-			cmd.Wait()
-			jobMap[jobID].status = "Done"
-			jobMap[jobID].name = strings.Join(args, " ")
-		}(jobID)
-	}
-}
-
-func pipelineExecute(name string) {
-	commands := strings.Split(name, "|")
-	if len(commands) < 2 {
-		return
-	}
-	var prev *os.File
-	for i, command := range commands {
-		args, err := shlex.Split(command)
-		if err != nil {
+		if _, err := exec.LookPath(args[0]); err != nil {
+			fmt.Printf("%s: command not found\n", args[0])
 			return
 		}
 		cmd := exec.Command(args[0], args[1:]...)
-		if prev == nil {
-			cmd.Stdin = os.Stdin
+		cmd.Stdout = stdout
+		cmd.Stderr = stderr
+		if !isBackground {
+			cmd.Run()
 		} else {
-			cmd.Stdin = prev
-		}
-		if i < len(commands)-1 {
-			r, w, e := os.Pipe()
-			if e != nil {
-				panic(e)
+			err := cmd.Start()
+			if err != nil {
+				panic(err)
 			}
-			cmd.Stdout = w
-			prev = r
-			cmd.Start()
-		} else {
-			cmd.Stdout = os.Stdout
-			cmd.Start()
+			jobID := 1
+			for {
+				_, exist := jobMap[jobID]
+				if exist {
+					jobID++
+					continue
+				}
+				break
+			}
+			job := &Jobs{
+				id:     jobID,
+				name:   name,
+				recent: 0,
+				status: "Running",
+			}
+			jobMap[jobID] = job
+			for _, job := range jobMap {
+				jobMap[job.id].recent += 1
+			}
+			fmt.Printf("[%d] %d\n", jobID, cmd.Process.Pid)
+			go func(jobID int) {
+				cmd.Wait()
+				jobMap[jobID].status = "Done"
+				jobMap[jobID].name = strings.Join(args, " ")
+			}(jobID)
 		}
-		cmd.Wait()
 	}
+}
+
+func pipelineExecute(name string) (commands []string) {
+	commands = strings.Split(name, "|")
+	return
 }
 
 func main() {
