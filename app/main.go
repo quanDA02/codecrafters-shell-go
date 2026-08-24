@@ -388,9 +388,6 @@ func execute(name string) {
 			prevWriter = w
 			prevReader = r
 		}
-		cmd.Stdout = stdout
-		cmd.Stderr = stderr
-		cmd.Stdin = prevReader
 		// check if it is a built in command
 		switch args[0] {
 		case "exit":
@@ -413,6 +410,9 @@ func execute(name string) {
 			if err != nil {
 				panic(err)
 			}
+			cmd.Stdout = stdout
+			cmd.Stderr = stderr
+			cmd.Stdin = prevReader
 		}
 		if prevWriter != nil {
 			prevWriter.Close()
