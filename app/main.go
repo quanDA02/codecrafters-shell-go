@@ -384,11 +384,12 @@ func execute(name string) {
 		}
 		cmd := exec.Command(args[0], args[1:]...)
 		var prevWriter *os.File
+		var Reader *os.File = os.Stdin
 		if i < len(commands)-1 {
 			r, w, _ := os.Pipe()
 			stdout = w
 			prevWriter = w
-			prevReader = r
+			Reader = r
 		}
 		cmd.Stdout = stdout
 		cmd.Stderr = stderr
@@ -456,6 +457,7 @@ func execute(name string) {
 		} else {
 			processes = append(processes, cmd)
 		}
+		prevReader = Reader
 	}
 	for _, cmd := range processes {
 		cmd.Wait()
