@@ -407,8 +407,11 @@ func execute(name string) {
 		if i < len(commands) {
 			r, w, _ := os.Pipe()
 			cmd.Stdout = w
-			cmd.Stdin = r
+			prev = r
+		} else {
+			prev = os.Stdin
 		}
+		cmd.Stdin = prev
 		if !isBackground {
 			cmd.Run()
 		} else {
