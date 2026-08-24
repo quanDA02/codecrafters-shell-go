@@ -478,16 +478,17 @@ func execute(name string) {
 // cache history
 var cmdHistory = make([]string, 0)
 
-func history(index int) {
-	if index == 0 {
+func history(recent int) {
+	if recent == 0 {
 		for i, command := range cmdHistory {
 			fmt.Printf("%d %s\n", i+1, command)
 		}
 	} else {
-		for i, command := range cmdHistory {
-			if i == index {
-				fmt.Printf("%d %s\n", i+1, command)
-			}
+		index := len(cmdHistory)
+		for recent == 0 {
+			fmt.Printf("%d %s\n", index, cmdHistory[index-1])
+			index--
+			recent--
 		}
 	}
 
