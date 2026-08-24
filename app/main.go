@@ -372,9 +372,17 @@ func execute(name string) {
 	var processes []*exec.Cmd
 	commands := pipelineExecute(name)
 	for i, command := range commands {
+		var cmd *exec.Cmd
 		args, _ := shlex.Split(command)
 		isBackground := false
 		args, stdout, stderr := redirect(args, os.Stdout, os.Stderr)
+		var prevWriter *os.File
+		if i < len(commands)-1 {
+			r, w, _ := os.Pipe()
+			stdout = w
+			prevWriter = w
+			prevReader = r
+		}
 		// jobs
 		if args[len(args)-1] == "&" {
 			isBackground = true
@@ -393,18 +401,12 @@ func execute(name string) {
 		case "jobs":
 			jobs(false)
 		}
-		// if _, err := exec.LookPath(args[0]); err != nil {
-		// 	fmt.Printf("%s: command not found\n", args[0])
-		// 	return
-		// }
-		var prevWriter *os.File
-		cmd := exec.Command(args[0], args[1:]...)
-		if i < len(commands)-1 {
-			r, w, _ := os.Pipe()
-			stdout = w
-			prevWriter = w
-			prevReader = r
+		if _, err := exec.LookPath(args[0]); err != nil {
+			fmt.Printf("%s: command not found\n", args[0])
+			return
 		}
+
+		cmd = exec.Command(args[0], args[1:]...)
 		cmd.Stdout = stdout
 		cmd.Stderr = stderr
 		cmd.Stdin = prevReader
