@@ -373,6 +373,7 @@ func execute(name string) {
 	var processes []*exec.Cmd
 	commands := pipelineExecute(name)
 	for i, command := range commands {
+		fmt.Println(command)
 		args, _ := shlex.Split(command)
 		isBackground := false
 		args, stdout, stderr := redirect(args, os.Stdout, os.Stderr)
