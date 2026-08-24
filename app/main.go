@@ -239,10 +239,11 @@ func echo(s string, output *os.File) {
 }
 
 func typeCommand(s string) {
+	builtin := strings.Split(s, " ")
 	builtins := []string{
 		"type", "exit", "echo", "complete", "jobs",
 	}
-	if slices.Contains(builtins, s) {
+	if len(builtin) > 1 && slices.Contains(builtins, builtin[1]) {
 		fmt.Println(s, "is a shell builtin")
 	} else {
 		path := findPath(s)
