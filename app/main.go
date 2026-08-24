@@ -410,13 +410,11 @@ func execute(name string) {
 		cmd.Stdout = stdout
 		cmd.Stderr = stderr
 		cmd.Stdin = prev
-		if !isBackground {
-			cmd.Run()
-		} else {
-			err := cmd.Start()
-			if err != nil {
-				panic(err)
-			}
+		err := cmd.Start()
+		if err != nil {
+			panic(err)
+		}
+		if isBackground {
 			jobID := 1
 			for {
 				_, exist := jobMap[jobID]
