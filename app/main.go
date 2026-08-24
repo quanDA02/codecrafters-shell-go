@@ -394,35 +394,32 @@ func execute(name string) {
 		cmd.Stdin = prevReader
 
 		// check if it is a built in command
+		isBuiltin := true
 		switch args[0] {
 		case "exit":
 			os.Exit(0)
-			return
 		case "type":
 			typeCommand(args[1])
-			return
 		case "echo":
 			echo(strings.Join(args[1:], " "), stdout)
-			if prevWriter != nil {
-				prevWriter.Close()
-			}
-			continue
 		case "complete":
 			complete(args[1:])
-			return
 		case "jobs":
 			jobs(false)
-			return
+		default:
+			isBuiltin = false
 		}
-		if _, err := exec.LookPath(args[0]); err != nil {
-			fmt.Printf("%s: command not found\n", args[0])
-			return
+		if !isBuiltin {
+			if _, err := exec.LookPath(args[0]); err != nil {
+				fmt.Printf("%s: command not found\n", args[0])
+				return
+			}
+			err := cmd.Start()
+			if err != nil {
+				panic(err)
+			}
 		}
 
-		err := cmd.Start()
-		if err != nil {
-			panic(err)
-		}
 		if prevWriter != nil {
 			prevWriter.Close()
 		}
