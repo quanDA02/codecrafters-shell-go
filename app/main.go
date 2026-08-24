@@ -380,6 +380,8 @@ func execute(name string) {
 			isBackground = true
 			args = args[0 : len(args)-1]
 		}
+		cmd := exec.Command(args[0], args[1:]...)
+
 		// check if it is a built in command
 		switch args[0] {
 		case "exit":
@@ -403,7 +405,6 @@ func execute(name string) {
 			return
 		}
 		var prevWriter *os.File
-		cmd := exec.Command(args[0], args[1:]...)
 		if i < len(commands)-1 {
 			r, w, _ := os.Pipe()
 			stdout = w
