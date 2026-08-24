@@ -369,6 +369,7 @@ func jobs(doneOnly bool) {
 }
 func execute(name string) {
 	var prevReader *os.File = os.Stdin
+	var processes []*exec.Cmd
 	commands := pipelineExecute(name)
 	for i, command := range commands {
 		args, _ := shlex.Split(command)
@@ -447,8 +448,11 @@ func execute(name string) {
 				jobMap[jobID].name = strings.Join(args, " ")
 			}(jobID)
 		} else {
-			go cmd.Wait()
+			processes = append(processes, cmd)
 		}
+	}
+	for _, cmd := range processes {
+		cmd.Wait()
 	}
 }
 
