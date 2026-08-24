@@ -411,7 +411,7 @@ func execute(name string) {
 		cmd.Stderr = stderr
 		cmd.Stdin = prev
 		if !isBackground {
-			cmd.Start()
+			cmd.Run()
 		} else {
 			err := cmd.Start()
 			if err != nil {
