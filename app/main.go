@@ -368,7 +368,7 @@ func jobs(doneOnly bool) {
 	}
 }
 func execute(name string) {
-	var prev *os.File = os.Stdin
+	var prevReader *os.File = os.Stdin
 	commands := pipelineExecute(name)
 	for i, command := range commands {
 		args, _ := shlex.Split(command)
@@ -401,24 +401,24 @@ func execute(name string) {
 			fmt.Printf("%s: command not found\n", args[0])
 			return
 		}
-		var pipeWriter *os.File
+		var prevWriter *os.File
 		cmd := exec.Command(args[0], args[1:]...)
 		if i < len(commands)-1 {
 			r, w, _ := os.Pipe()
 			stdout = w
-			prev = r
-			pipeWriter = w
+			prevWriter = w
+			prevReader = r
 		}
 		cmd.Stdout = stdout
 		cmd.Stderr = stderr
-		cmd.Stdin = prev
+		cmd.Stdin = prevReader
 
 		err := cmd.Start()
 		if err != nil {
 			panic(err)
 		}
-		if pipeWriter != nil {
-			pipeWriter.Close()
+		if prevWriter != nil {
+			prevWriter.Close()
 		}
 		if isBackground {
 			jobID := 1
