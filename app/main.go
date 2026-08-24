@@ -424,6 +424,9 @@ func execute(name string) {
 		if prevWriter != nil {
 			prevWriter.Close()
 		}
+		if prevReader != os.Stdin {
+			prevReader.Close()
+		}
 		if isBackground {
 			jobID := 1
 			for {
