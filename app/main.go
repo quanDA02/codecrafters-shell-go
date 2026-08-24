@@ -296,7 +296,7 @@ func redirect(args []string, stdin, stdout, stderr *os.File) ([]string, *os.File
 		}
 		stdout = w
 		stdin = r
-		args = args[len(args)-1:]
+		args = append(args[:len(args)-2], args[len(args)-1])
 		return args, stdin, stdout, stderr
 	default:
 		return args, stdin, stdout, stderr
