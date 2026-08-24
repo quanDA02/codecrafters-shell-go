@@ -446,6 +446,8 @@ func execute(name string) {
 				jobMap[jobID].status = "Done"
 				jobMap[jobID].name = strings.Join(args, " ")
 			}(jobID)
+		} else {
+			cmd.Wait()
 		}
 	}
 }
