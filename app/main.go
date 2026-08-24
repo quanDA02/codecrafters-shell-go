@@ -404,8 +404,7 @@ func execute(name string) {
 		cmd := exec.Command(args[0], args[1:]...)
 		prev = os.Stdin
 
-		if i < len(commands) {
-			println("dsadasd")
+		if i < len(commands)-1 {
 			r, w, _ := os.Pipe()
 			cmd.Stdout = w
 			prev = r
