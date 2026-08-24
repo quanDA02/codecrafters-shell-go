@@ -241,7 +241,7 @@ func echo(s string, output *os.File) {
 func typeCommand(s string) {
 	s = strings.TrimSpace(s)
 	builtins := []string{
-		"type", "exit", "echo", "complete", "jobs",
+		"type", "exit", "echo", "complete", "jobs", "history",
 	}
 	if slices.Contains(builtins, s) {
 		fmt.Println(s, "is a shell builtin")
@@ -408,6 +408,8 @@ func execute(name string) {
 			complete(args[1:])
 		case "jobs":
 			jobs(false)
+		case "history":
+			history()
 		default:
 			isBuiltin = false
 		}
@@ -464,6 +466,15 @@ func execute(name string) {
 	}
 }
 
+// cache history
+var cmdHistory = make([]string, 0)
+
+func history() {
+	for i, command := range cmdHistory {
+		fmt.Printf("%d %s\n", i+1, command)
+	}
+}
+
 func pipelineSplit(name string) (commands []string) {
 	commands = strings.Split(name, "|")
 	return
@@ -489,7 +500,7 @@ func main() {
 	for {
 		command, _ := l.Readline()
 		command = strings.TrimSpace(command)
-
+		cmdHistory = append(cmdHistory, command)
 		execute(command)
 		jobs(true)
 	}
