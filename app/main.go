@@ -403,14 +403,13 @@ func execute(name string) {
 		}
 		cmd := exec.Command(args[0], args[1:]...)
 		prev = os.Stdin
-
+		cmd.Stdout = stdout
+		cmd.Stderr = stderr
 		if i < len(commands)-1 {
 			r, w, _ := os.Pipe()
 			cmd.Stdout = w
 			prev = r
 		}
-		cmd.Stdout = stdout
-		cmd.Stderr = stderr
 		cmd.Stdin = prev
 		if !isBackground {
 			cmd.Start()
