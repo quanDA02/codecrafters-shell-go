@@ -262,9 +262,9 @@ func findPath(file string) string {
 	return path
 }
 
-func redirect(args []string, stdin, stdout, stderr *os.File) ([]string, *os.File, *os.File, *os.File) {
+func redirect(args []string, stdout, stderr *os.File) ([]string, *os.File, *os.File) {
 	if len(args) <= 2 {
-		return args, stdin, stdout, stderr
+		return args, stdout, stderr
 	}
 	operator := args[len(args)-2]
 	filename := args[len(args)-1]
@@ -289,20 +289,11 @@ func redirect(args []string, stdin, stdout, stderr *os.File) ([]string, *os.File
 			os.O_APPEND|os.O_CREATE|os.O_WRONLY,
 			0644)
 		stderr = outputFile
-	case "|":
-		r, w, err := os.Pipe()
-		if err != nil {
-			panic(err)
-		}
-		stdout = w
-		stdin = r
-		// args = append(args[:len(args)-2], args[len(args)-1])
-		// return args, stdin, stdout, stderr
 	default:
-		return args, stdin, stdout, stderr
+		return args, stdout, stderr
 	}
 	args = args[:len(args)-2]
-	return args, stdin, stdout, stderr
+	return args, stdout, stderr
 }
 
 var completeMap = make(map[string]string)
@@ -378,8 +369,15 @@ func jobs(doneOnly bool) {
 }
 func execute(name string) {
 	args, _ := shlex.Split(name)
+	for _, arg := range args {
+		if arg == "|" {
+			fmt.Println("yo shihide")
+		}
+	}
 	isBackground := false
-	args, stdin, stdout, stderr := redirect(args, os.Stdin, os.Stdout, os.Stderr)
+
+	args, stdout, stderr := redirect(args, os.Stdout, os.Stderr)
+
 	// jobs
 	if args[len(args)-1] == "&" {
 		isBackground = true
@@ -408,8 +406,8 @@ func execute(name string) {
 		fmt.Printf("%s: command not found\n", args[0])
 		return
 	}
+
 	cmd := exec.Command(args[0], args[1:]...)
-	cmd.Stdin = stdin
 	cmd.Stdout = stdout
 	cmd.Stderr = stderr
 	if !isBackground {
