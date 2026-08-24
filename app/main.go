@@ -371,7 +371,8 @@ func execute(name string) {
 	args, _ := shlex.Split(name)
 	for _, arg := range args {
 		if arg == "|" {
-			fmt.Println("yo shihide")
+			pipelineExecute(name)
+			return
 		}
 	}
 	isBackground := false
@@ -442,6 +443,20 @@ func execute(name string) {
 			jobMap[jobID].status = "Done"
 			jobMap[jobID].name = strings.Join(args, " ")
 		}(jobID)
+	}
+}
+
+func pipelineExecute(name string) {
+	commands := strings.Split(name, "|")
+	if len(commands) == -1 {
+		return
+	}
+	for _, command := range commands {
+		cmd := exec.Command(command)
+		cmd.Stdin = os.Stdin
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		cmd.Run()
 	}
 }
 
