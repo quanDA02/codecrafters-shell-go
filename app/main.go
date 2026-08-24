@@ -374,7 +374,6 @@ func execute(name string) {
 	commands := pipelineSplit(name)
 	for i, command := range commands {
 		command = strings.TrimSpace(command)
-		fmt.Printf("\n|%s\n", command)
 		args, _ := shlex.Split(command)
 		isBackground := false
 		args, stdout, stderr := redirect(args, os.Stdout, os.Stderr)
