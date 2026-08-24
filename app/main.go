@@ -409,11 +409,10 @@ func execute(name string) {
 			return
 		} else {
 			cmd = exec.Command(args[0], args[1:]...)
-		}
-
-		err := cmd.Start()
-		if err != nil {
-			panic(err)
+			err := cmd.Start()
+			if err != nil {
+				panic(err)
+			}
 		}
 		if prevWriter != nil {
 			prevWriter.Close()
