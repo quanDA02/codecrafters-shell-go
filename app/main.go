@@ -409,6 +409,7 @@ func execute(name string) {
 		return
 	}
 	cmd := exec.Command(args[0], args[1:]...)
+	cmd.Stdin = stdin
 	cmd.Stdout = stdout
 	cmd.Stderr = stderr
 	if !isBackground {
