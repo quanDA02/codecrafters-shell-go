@@ -368,12 +368,11 @@ func jobs(doneOnly bool) {
 	}
 }
 func execute(name string) {
-
+	var prev *os.File
 	commands := pipelineExecute(name)
 	for _, command := range commands {
 		args, _ := shlex.Split(command)
 		isBackground := false
-
 		args, stdout, stderr := redirect(args, os.Stdout, os.Stderr)
 		// jobs
 		if args[len(args)-1] == "&" {
@@ -405,6 +404,11 @@ func execute(name string) {
 		cmd := exec.Command(args[0], args[1:]...)
 		cmd.Stdout = stdout
 		cmd.Stderr = stderr
+		if prev != nil {
+			r, w, _ := os.Pipe()
+			cmd.Stdout = r
+			cmd.Stderr = w
+		}
 		if !isBackground {
 			cmd.Run()
 		} else {
