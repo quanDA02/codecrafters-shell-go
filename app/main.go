@@ -414,7 +414,7 @@ func execute(name string) {
 		if err != nil {
 			panic(err)
 		}
-		if prev == nil {
+		if prev != nil {
 			prev.Close()
 		}
 		if isBackground {
