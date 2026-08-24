@@ -381,18 +381,18 @@ func execute(name string) {
 			args = args[0 : len(args)-1]
 		}
 		// check if it is a built in command
-		// switch args[0] {
-		// case "exit":
-		// 	os.Exit(0)
-		// case "type":
-		// 	typeCommand(name[5:])
+		switch args[0] {
+		case "exit":
+			os.Exit(0)
+		case "type":
+			typeCommand(name[5:])
 		// case "echo":
 		// 	echo(strings.Join(args[1:], " "), stdout)
-		// case "complete":
-		// 	complete(args[1:])
-		// case "jobs":
-		// 	jobs(false)
-		// }
+		case "complete":
+			complete(args[1:])
+		case "jobs":
+			jobs(false)
+		}
 		if _, err := exec.LookPath(args[0]); err != nil {
 			fmt.Printf("%s: command not found\n", args[0])
 			return
