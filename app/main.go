@@ -407,7 +407,7 @@ func execute(name string) {
 		if prev != nil {
 			r, w, _ := os.Pipe()
 			cmd.Stdout = r
-			cmd.Stderr = w
+			cmd.Stdin = w
 		}
 		if !isBackground {
 			cmd.Run()
