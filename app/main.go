@@ -399,7 +399,7 @@ func execute(name string) {
 			os.Exit(0)
 			return
 		case "type":
-			typeCommand(name[5:])
+			typeCommand(args[1])
 			return
 		// case "echo":
 		// 	echo(strings.Join(args[1:], " "), stdout)
