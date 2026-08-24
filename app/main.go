@@ -485,7 +485,7 @@ func history(recent int) {
 		}
 	} else {
 		index := len(cmdHistory)
-		for recent == 0 {
+		for recent != 0 {
 			fmt.Printf("%d %s\n", index, cmdHistory[index-1])
 			index--
 			recent--
