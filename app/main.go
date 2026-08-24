@@ -393,10 +393,10 @@ func execute(name string) {
 		case "jobs":
 			jobs(false)
 		}
-		if _, err := exec.LookPath(args[0]); err != nil {
-			fmt.Printf("%s: command not found\n", args[0])
-			return
-		}
+		// if _, err := exec.LookPath(args[0]); err != nil {
+		// 	fmt.Printf("%s: command not found\n", args[0])
+		// 	return
+		// }
 		var prevWriter *os.File
 		cmd := exec.Command(args[0], args[1:]...)
 		if i < len(commands)-1 {
