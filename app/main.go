@@ -458,6 +458,11 @@ func pipelineExecute(name string) {
 			return
 		}
 		cmd := exec.Command(args[0], args[1:]...)
+		if prev == nil {
+			cmd.Stdin = os.Stdin
+		} else {
+			cmd.Stdin = prev
+		}
 		if i < len(commands)-1 {
 			r, w, e := os.Pipe()
 			if e != nil {
