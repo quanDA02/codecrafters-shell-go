@@ -371,9 +371,9 @@ func jobs(doneOnly bool) {
 func execute(name string) {
 	var prevReader *os.File = os.Stdin
 	var processes []*exec.Cmd
-	commands := pipelineExecute(name)
+	commands := pipelineSplit(name)
 	for i, command := range commands {
-		fmt.Println(command)
+		fmt.Printf("\n|%s\n", command)
 		args, _ := shlex.Split(command)
 		isBackground := false
 		args, stdout, stderr := redirect(args, os.Stdout, os.Stderr)
@@ -459,7 +459,7 @@ func execute(name string) {
 	}
 }
 
-func pipelineExecute(name string) (commands []string) {
+func pipelineSplit(name string) (commands []string) {
 	commands = strings.Split(name, "|")
 	return
 }
