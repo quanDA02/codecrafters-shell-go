@@ -413,7 +413,6 @@ func execute(name string) {
 		cmd.Stdout = stdout
 		cmd.Stderr = stderr
 		cmd.Stdin = prevReader
-
 		err := cmd.Start()
 		if err != nil {
 			panic(err)
