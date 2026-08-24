@@ -295,6 +295,7 @@ func redirect(args []string, stdout, stderr *os.File) ([]string, *os.File, *os.F
 			panic(err)
 		}
 		stdout = w
+		args = args[len(args)-2:]
 		return args, stdout, stderr
 	default:
 		return args, stdout, stderr
