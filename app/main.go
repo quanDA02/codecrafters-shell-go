@@ -239,12 +239,12 @@ func echo(s string, output *os.File) {
 }
 
 func typeCommand(s string) {
-	builtin := strings.Split(s, " ")
+	s = strings.TrimSpace(s)
 	builtins := []string{
 		"type", "exit", "echo", "complete", "jobs ",
 	}
-	if len(builtin) > 1 && slices.Contains(builtins, s) {
-		fmt.Println(builtin[1], "is a shell builtin")
+	if slices.Contains(builtins, s) {
+		fmt.Println(s, "is a shell builtin")
 	} else {
 		path := findPath(s)
 		if path != "" {
