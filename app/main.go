@@ -381,6 +381,16 @@ func execute(name string) {
 			args = args[0 : len(args)-1]
 		}
 		cmd := exec.Command(args[0], args[1:]...)
+		var prevWriter *os.File
+		if i < len(commands)-1 {
+			r, w, _ := os.Pipe()
+			stdout = w
+			prevWriter = w
+			prevReader = r
+		}
+		cmd.Stdout = stdout
+		cmd.Stderr = stderr
+		cmd.Stdin = prevReader
 
 		// check if it is a built in command
 		switch args[0] {
@@ -404,16 +414,6 @@ func execute(name string) {
 			fmt.Printf("%s: command not found\n", args[0])
 			return
 		}
-		var prevWriter *os.File
-		if i < len(commands)-1 {
-			r, w, _ := os.Pipe()
-			stdout = w
-			prevWriter = w
-			prevReader = r
-		}
-		cmd.Stdout = stdout
-		cmd.Stderr = stderr
-		cmd.Stdin = prevReader
 
 		err := cmd.Start()
 		if err != nil {
