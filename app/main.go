@@ -403,6 +403,9 @@ func execute(name string) {
 			return
 		case "echo":
 			echo(strings.Join(args[1:], " "), stdout)
+			if prevWriter != nil {
+				prevWriter.Close()
+			}
 			continue
 		case "complete":
 			complete(args[1:])
