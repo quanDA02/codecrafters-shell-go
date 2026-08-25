@@ -487,7 +487,7 @@ func history(recent string) {
 				panic(err)
 			}
 			command := strings.TrimSpace(string(data))
-			fmt.Println(command)
+			cmdHistory = append(cmdHistory, command)
 			return
 		}
 	}
