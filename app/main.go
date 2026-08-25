@@ -554,6 +554,7 @@ func declare(command string) {
 	switch args[0] {
 	case "-p":
 		key := args[1]
+		fmt.Println(key)
 		if value, exist := variables[key]; exist {
 			fmt.Printf("declare -- %s=%s", key, value)
 		} else {
@@ -563,7 +564,6 @@ func declare(command string) {
 		s := strings.Split(strings.TrimSpace(args[0]), "=")
 		key, value := s[0], s[1]
 		variables[key] = value
-		fmt.Println(variables[key])
 	}
 }
 
