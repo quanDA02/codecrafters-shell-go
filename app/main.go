@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 	"slices"
 	"sort"
+	"strconv"
 	"strings"
 
 	"github.com/chzyer/readline"
@@ -474,12 +475,18 @@ func execute(name string) {
 var cmdHistory = make([]string, 0)
 
 func history(recent string) {
-	if recent == 0 {
+	index := 0
+	args, _ := shlex.Split(recent)
+	if _, err := strconv.Atoi(args[0]); err != nil {
+		index, _ = strconv.Atoi(args[0])
+	}
+
+	if index == 0 {
 		for i, command := range cmdHistory {
 			fmt.Printf("%d %s\n", i+1, command)
 		}
 	} else {
-		for i := len(cmdHistory) - recent; i < len(cmdHistory); i++ {
+		for i := len(cmdHistory) - index; i < len(cmdHistory); i++ {
 			fmt.Printf("%d %s\n", i, cmdHistory[i])
 		}
 	}
