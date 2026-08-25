@@ -548,7 +548,7 @@ var variables = make(map[string]string)
 
 func declare(command string) {
 	args, _ := shlex.Split(command)
-	if len(args) < 2 {
+	if len(args) < 1 {
 		return
 	}
 	switch args[0] {
