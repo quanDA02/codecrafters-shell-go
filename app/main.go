@@ -502,6 +502,10 @@ func history(recent string) {
 			}
 			defer file.Close()
 			text := strings.Join(cmdHistory, "\n") + "\n"
+			if HISTFILE != "" {
+				text = strings.Join(cmdHistory, "\n")
+			}
+
 			file.Write([]byte(text))
 			return
 		case "-a":
@@ -512,6 +516,7 @@ func history(recent string) {
 				panic(err)
 			}
 			defer file.Close()
+
 			text := strings.Join(cmdHistory[appendIndex:], "\n") + "\n"
 			file.Write([]byte(text))
 			appendIndex = len(cmdHistory)
