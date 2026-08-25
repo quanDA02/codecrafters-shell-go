@@ -477,10 +477,10 @@ var cmdHistory = make([]string, 0)
 func history(recent string) {
 	index := 0
 	args, _ := shlex.Split(recent)
-	if _, err := strconv.Atoi(args[0]); err != nil {
-		index, _ = strconv.Atoi(args[0])
-	}
 	if len(args) > 0 {
+		if _, err := strconv.Atoi(args[0]); err != nil {
+			index, _ = strconv.Atoi(args[0])
+		}
 		if args[0] == "-r" {
 			cmdHistory = append([]string{recent}, cmdHistory...)
 			return
