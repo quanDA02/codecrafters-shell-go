@@ -509,9 +509,6 @@ func history(recent string) {
 			file.Write([]byte(text))
 			return
 		case "-a":
-			for i, c := range cmdHistory {
-				fmt.Println(c, "|", i)
-			}
 			file, err := os.OpenFile(args[1],
 				os.O_APPEND|os.O_CREATE|os.O_WRONLY,
 				0644)
