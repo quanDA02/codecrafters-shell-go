@@ -425,7 +425,8 @@ func execute(name string) {
 			}
 			history(recent)
 		case "declare":
-			declare(args[1:])
+			command = strings.Join(args[1:], " ")
+			declare(command)
 		default:
 			isBuiltin = false
 		}
@@ -542,11 +543,27 @@ func history(recent string) {
 		}
 	}
 }
-func declare(args []string) {
-	if len(args) < 1 {
+
+var variables = make(map[string]string)
+
+func declare(command string) {
+	args, _ := shlex.Split(command)
+	if len(args) < 2 {
 		return
 	}
-	fmt.Printf("declare: %s: not found\n", args[1])
+	switch args[0] {
+	case "-p":
+		key := args[1]
+		if value, exist := variables[key]; exist {
+			fmt.Printf("declare -- %s=%s", key, value)
+		} else {
+			fmt.Printf("declare: %s: not found\n", args[1])
+		}
+	default:
+		s := strings.Split(strings.TrimSpace(args[1]), "=")
+		key, value := s[0], s[1]
+		variables[key] = value
+	}
 }
 
 func pipelineSplit(name string) (commands []string) {
