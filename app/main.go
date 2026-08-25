@@ -372,6 +372,7 @@ func jobs(doneOnly bool) {
 	}
 }
 func execute(name string) {
+	cmdHistory = append(cmdHistory, name)
 	var prevReader *os.File = os.Stdin
 	var processes []*exec.Cmd
 	commands := pipelineSplit(name)
@@ -564,7 +565,6 @@ func main() {
 	for {
 		command, _ := l.Readline()
 		command = strings.TrimSpace(command)
-		cmdHistory = append(cmdHistory, command)
 		execute(command)
 		jobs(true)
 	}
