@@ -554,8 +554,8 @@ func main() {
 	}
 
 	if HISTFILE != "" {
-		command := "-r" + HISTFILE
-		fmt.Println(command)
+		command := "-r " + HISTFILE
+		history(command)
 	}
 
 	for {
