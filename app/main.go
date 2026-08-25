@@ -482,17 +482,17 @@ func history(recent string) {
 			index, _ = strconv.Atoi(args[0])
 		}
 		if args[0] == "-r" {
-			cmdHistory = append([]string{recent}, cmdHistory...)
+			cmdHistory = append([]string{"history" + recent}, cmdHistory...)
 			return
 		}
 	}
 	if index == 0 {
 		for i, command := range cmdHistory {
-			fmt.Printf("%4d %s\n", i+1, command)
+			fmt.Printf("%5d %s\n", i+1, command)
 		}
 	} else {
 		for i := len(cmdHistory) - index; i < len(cmdHistory); i++ {
-			fmt.Printf("%4d %s\n", i, cmdHistory[i])
+			fmt.Printf("%5d %s\n", i, cmdHistory[i])
 		}
 	}
 }
