@@ -552,6 +552,11 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	if HISTFILE != "" {
+		fmt.Println(HISTFILE)
+	}
+
 	for {
 		command, _ := l.Readline()
 		command = strings.TrimSpace(command)
