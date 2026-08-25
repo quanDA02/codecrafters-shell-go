@@ -424,6 +424,8 @@ func execute(name string) {
 				recent = strings.Join(args[1:], " ")
 			}
 			history(recent)
+		case "declare":
+			return
 		default:
 			isBuiltin = false
 		}
@@ -539,6 +541,13 @@ func history(recent string) {
 			fmt.Printf("%5d  %s\n", i, cmdHistory[i])
 		}
 	}
+}
+func declare(command string) {
+	args, _ := shlex.Split(command)
+	if len(args) < 1 {
+		return
+	}
+	fmt.Printf("declare: %s: not found\n", args[1])
 }
 
 func pipelineSplit(name string) (commands []string) {
