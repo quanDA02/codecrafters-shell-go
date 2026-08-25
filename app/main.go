@@ -506,7 +506,7 @@ func history(recent string) {
 			return
 		case "-a":
 			for _, c := range cmdHistory {
-				println(c, "|")
+				fmt.Println(c, "|")
 			}
 			file, err := os.OpenFile(args[1],
 				os.O_APPEND|os.O_CREATE|os.O_WRONLY,
