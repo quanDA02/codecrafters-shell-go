@@ -486,9 +486,8 @@ func history(recent string) {
 			if err != nil {
 				panic(err)
 			}
-			for _, command := range data {
-				fmt.Println(string(command))
-			}
+			command := strings.TrimSpace(string(data))
+			fmt.Println(command)
 			return
 		}
 	}
