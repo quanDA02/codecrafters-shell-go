@@ -560,9 +560,8 @@ func declare(command string) {
 			fmt.Printf("declare: %s: not found\n", args[1])
 		}
 	default:
-		s := strings.Split(strings.TrimSpace(args[1]), "=")
+		s := strings.Split(strings.TrimSpace(args[0]), "=")
 		key, value := s[0], s[1]
-		fmt.Println("k:", key, "v:", value)
 		variables[key] = value
 	}
 }
