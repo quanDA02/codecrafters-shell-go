@@ -563,9 +563,6 @@ func main() {
 		command := "-r " + HISTFILE
 		history(command)
 		appendIndex = len(cmdHistory)
-		for i, c := range cmdHistory {
-			fmt.Println(i, "|", c)
-		}
 	}
 
 	for {
