@@ -425,7 +425,7 @@ func execute(name string) {
 			}
 			history(recent)
 		case "declare":
-			return
+			declare(args[1:])
 		default:
 			isBuiltin = false
 		}
@@ -542,8 +542,7 @@ func history(recent string) {
 		}
 	}
 }
-func declare(command string) {
-	args, _ := shlex.Split(command)
+func declare(args []string) {
 	if len(args) < 1 {
 		return
 	}
