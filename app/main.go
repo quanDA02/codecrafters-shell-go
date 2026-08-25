@@ -483,6 +483,7 @@ func history(recent string) {
 		}
 		if args[0] == "-r" {
 			cmdHistory = append([]string{" history " + recent}, cmdHistory...)
+			cmdHistory = cmdHistory[:len(cmdHistory)-1]
 			return
 		}
 	}
