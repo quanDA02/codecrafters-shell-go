@@ -509,16 +509,24 @@ func history(recent string) {
 			file.Write([]byte(text))
 			return
 		case "-a":
-			file, err := os.OpenFile(args[1],
-				os.O_APPEND|os.O_CREATE|os.O_WRONLY,
-				0644)
-			if err != nil {
-				panic(err)
-			}
-			defer file.Close()
-			text := strings.Join(cmdHistory[appendIndex:], "\n") + "\n"
-			file.Write([]byte(text))
-			appendIndex = len(cmdHistory)
+			// data, err := os.ReadFile(args[1])
+			// if err != nil {
+			// 	panic(err)
+			// }
+			// commands := strings.Split((strings.TrimSpace(string(data))), "\n")
+			// data.Write()
+			text := strings.Join(cmdHistory, "\n") + "\n"
+			os.WriteFile(args[1], []byte(text), 0644)
+			// file, err := os.OpenFile(args[1],
+			// 	os.O_APPEND|os.O_CREATE|os.O_WRONLY,
+			// 	0644)
+			// if err != nil {
+			// 	panic(err)
+			// }
+			// defer file.Close()
+			// text := strings.Join(cmdHistory[appendIndex:], "\n") + "\n"
+			// file.Write([]byte(text))
+			// appendIndex = len(cmdHistory)
 			return
 		}
 
@@ -560,7 +568,7 @@ func main() {
 	if HISTFILE != "" {
 		command := "-r " + HISTFILE
 		history(command)
-		cmdHistory = cmdHistory[1:]
+		cmdHistory = cmdHistory[:len(cmdHistory)-1]
 	}
 
 	for {
