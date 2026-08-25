@@ -481,6 +481,11 @@ func history(recent string) {
 		index, _ = strconv.Atoi(args[0])
 	}
 
+	if args[0] == "-r" {
+		cmdHistory = append([]string{recent}, cmdHistory...)
+		return
+	}
+
 	if index == 0 {
 		for i, command := range cmdHistory {
 			fmt.Printf("%d %s\n", i+1, command)
