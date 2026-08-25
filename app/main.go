@@ -562,7 +562,7 @@ func declare(command string) {
 	default:
 		s := strings.Split(strings.TrimSpace(args[1]), "=")
 		key, value := s[0], s[1]
-		fmt.Println(key)
+		fmt.Println("k:", key, "v:", value)
 		variables[key] = value
 	}
 }
