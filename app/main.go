@@ -482,8 +482,13 @@ func history(recent string) {
 			index, _ = strconv.Atoi(args[0])
 		}
 		if args[0] == "-r" {
-			cmdHistory = append([]string{" history " + recent}, cmdHistory...)
-			cmdHistory = cmdHistory[:len(cmdHistory)-1]
+			data, err := os.ReadFile(args[1])
+			if err != nil {
+				panic(err)
+			}
+			for _, command := range data {
+				println(command)
+			}
 			return
 		}
 	}
