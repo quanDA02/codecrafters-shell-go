@@ -500,7 +500,6 @@ func history(recent string) {
 					cmdHistory = append(cmdHistory, command)
 				}
 			}
-
 			return
 		case "-w":
 			file, err := os.Create(args[1])
