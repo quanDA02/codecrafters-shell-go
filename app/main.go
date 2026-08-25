@@ -493,7 +493,6 @@ func history(recent string) {
 			commands := strings.Split((strings.TrimSpace(string(data))), "\n")
 			for _, command := range commands {
 				cmdHistory = append(cmdHistory, command)
-				fmt.Println(command, "+++")
 			}
 			return
 		case "-w":
@@ -516,7 +515,7 @@ func history(recent string) {
 
 			text := strings.Join(cmdHistory[appendIndex:], "\n") + "\n"
 			file.Write([]byte(text))
-			appendIndex = len(cmdHistory)
+			appendIndex = len(cmdHistory) - 1
 			return
 		}
 
