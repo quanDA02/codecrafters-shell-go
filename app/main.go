@@ -491,6 +491,7 @@ func history(recent string) {
 				panic(err)
 			}
 			commands := strings.Split((strings.TrimSpace(string(data))), "\n")
+			fmt.Println(commands)
 			for _, command := range commands {
 				cmdHistory = append(cmdHistory, command)
 			}
@@ -501,7 +502,7 @@ func history(recent string) {
 				panic(err)
 			}
 			defer file.Close()
-			text := strings.Join(cmdHistory, "\n")
+			text := strings.Join(cmdHistory, "\n") + "\n"
 			file.Write([]byte(text))
 			return
 		case "-a":
