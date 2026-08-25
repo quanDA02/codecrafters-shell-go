@@ -481,7 +481,8 @@ func history(recent string) {
 		if _, err := strconv.Atoi(args[0]); err == nil {
 			index, _ = strconv.Atoi(args[0])
 		}
-		if args[0] == "-r" {
+		switch args[0] {
+		case "-r":
 			data, err := os.ReadFile(args[1])
 			if err != nil {
 				panic(err)
@@ -491,10 +492,17 @@ func history(recent string) {
 				cmdHistory = append(cmdHistory, command)
 			}
 			return
-		}
-		if args[0] == "-w" {
+		case "-w":
+			text := strings.Join(cmdHistory, "\n")
+			file, err := os.Create(args[1])
+			if err != nil {
+				panic(err)
+			}
+			defer file.Close()
+			file.Write([]byte(text))
 			return
 		}
+
 	}
 	if index == 0 {
 		for i, command := range cmdHistory {
