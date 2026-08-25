@@ -493,12 +493,23 @@ func history(recent string) {
 			}
 			return
 		case "-w":
-			text := strings.Join(cmdHistory, "\n") + "\n"
 			file, err := os.Create(args[1])
 			if err != nil {
 				panic(err)
 			}
 			defer file.Close()
+			text := strings.Join(cmdHistory, "\n") + "\n"
+			file.Write([]byte(text))
+			return
+		case "-a":
+			file, err := os.OpenFile(args[1],
+				os.O_APPEND|os.O_CREATE|os.O_WRONLY,
+				0644)
+			if err != nil {
+				panic(err)
+			}
+			defer file.Close()
+			text := strings.Join(cmdHistory, "\n") + "\n"
 			file.Write([]byte(text))
 			return
 		}
