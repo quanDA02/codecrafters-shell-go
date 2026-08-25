@@ -9,6 +9,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"unicode"
 
 	"github.com/chzyer/readline"
 	"github.com/google/shlex"
@@ -563,7 +564,7 @@ func declare(command string) {
 
 		s := strings.Split(strings.TrimSpace(args[0]), "=")
 		key, value := s[0], s[1]
-		if _, err := strconv.Atoi(string(key[0])); err != nil {
+		if unicode.IsDigit(rune(key[0])) {
 			fmt.Printf("declare: `%s=%s': not a valid identifier\n", key, value)
 			return
 		}
