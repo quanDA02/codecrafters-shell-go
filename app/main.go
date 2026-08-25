@@ -372,6 +372,9 @@ func jobs(doneOnly bool) {
 	}
 }
 func execute(name string) {
+	if name == "" {
+		return
+	}
 	cmdHistory = append(cmdHistory, name)
 	var prevReader *os.File = os.Stdin
 	var processes []*exec.Cmd
