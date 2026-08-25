@@ -492,7 +492,7 @@ func history(recent string) {
 		}
 	} else {
 		for i := len(cmdHistory) - index; i < len(cmdHistory); i++ {
-			fmt.Printf("%d %s\n", i, cmdHistory[i])
+			fmt.Printf("    %d %s\n", i, cmdHistory[i])
 		}
 	}
 }
