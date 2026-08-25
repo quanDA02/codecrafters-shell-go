@@ -560,8 +560,13 @@ func declare(command string) {
 			fmt.Printf("declare: %s: not found\n", args[1])
 		}
 	default:
+
 		s := strings.Split(strings.TrimSpace(args[0]), "=")
 		key, value := s[0], s[1]
+		if _, err := strconv.Atoi(string(key[0])); err != nil {
+			fmt.Printf("declare: `%s=%s': not a valid identifier\n", key, value)
+		}
+
 		variables[key] = value
 	}
 }
@@ -570,7 +575,6 @@ func pipelineSplit(name string) (commands []string) {
 	commands = strings.Split(name, "|")
 	return
 }
-
 func main() {
 
 	completer := readline.NewPrefixCompleter(
