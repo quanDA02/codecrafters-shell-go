@@ -407,7 +407,7 @@ func execute(name string) {
 		switch args[0] {
 		case "exit":
 			if HISTFILE != "" {
-				history("-w " + HISTFILE)
+				history("-a " + HISTFILE)
 			}
 			os.Exit(0)
 		case "type":
