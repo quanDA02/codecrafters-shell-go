@@ -480,6 +480,7 @@ func history(recent string) {
 	if len(args) > 0 {
 		if _, err := strconv.Atoi(args[0]); err != nil {
 			index, _ = strconv.Atoi(args[0])
+			println("index : ", index)
 		}
 		if args[0] == "-r" {
 			data, err := os.ReadFile(args[1])
