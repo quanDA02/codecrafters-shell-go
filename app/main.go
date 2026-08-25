@@ -486,8 +486,10 @@ func history(recent string) {
 			if err != nil {
 				panic(err)
 			}
-			command := strings.TrimSpace(string(data))
-			cmdHistory = append(cmdHistory, command)
+			commands := strings.Split((strings.TrimSpace(string(data))), "\n")
+			for _, command := range commands {
+				cmdHistory = append(cmdHistory, command)
+			}
 			return
 		}
 	}
