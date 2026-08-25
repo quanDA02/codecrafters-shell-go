@@ -406,6 +406,9 @@ func execute(name string) {
 		isBuiltin := true
 		switch args[0] {
 		case "exit":
+			if HISTFILE != "" {
+				history("-w " + HISTFILE)
+			}
 			os.Exit(0)
 		case "type":
 			typeCommand(args[1])
