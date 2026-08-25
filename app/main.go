@@ -564,7 +564,7 @@ func declare(command string) {
 
 		s := strings.Split(strings.TrimSpace(args[0]), "=")
 		key, value := s[0], s[1]
-		if regexp.MustCompile(`^[a-zA-Z_]\w*$`).MatchString(key) {
+		if regexp.MustCompile(`^[a-zA-Z_][a-zA-Z0-9_]*$`).MatchString(key) {
 			fmt.Printf("declare: `%s=%s': not a valid identifier\n", key, value)
 			return
 		}
