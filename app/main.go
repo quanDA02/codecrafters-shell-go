@@ -473,7 +473,8 @@ func execute(name string) {
 
 // cache history
 var cmdHistory = make([]string, 0)
-appendIndex := 0
+var appendIndex = 0
+
 func history(recent string) {
 	index := 0
 	args, _ := shlex.Split(recent)
@@ -511,7 +512,7 @@ func history(recent string) {
 			defer file.Close()
 			text := strings.Join(cmdHistory[appendIndex:], "\n") + "\n"
 			file.Write([]byte(text))
-			appendIndex = len(cmdHistory)-1
+			appendIndex = len(cmdHistory) - 1
 			return
 		}
 
