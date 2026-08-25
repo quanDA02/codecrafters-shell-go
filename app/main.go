@@ -487,7 +487,7 @@ func history(recent string) {
 				panic(err)
 			}
 			for _, command := range data {
-				println(command)
+				fmt.Println(command)
 			}
 			return
 		}
