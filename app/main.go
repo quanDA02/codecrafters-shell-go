@@ -563,6 +563,7 @@ func main() {
 	if HISTFILE != "" {
 		command := "-r " + HISTFILE
 		history(command)
+		cmdHistory = cmdHistory[1:]
 	}
 
 	for {
