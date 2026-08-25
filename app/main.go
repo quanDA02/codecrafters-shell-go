@@ -555,7 +555,7 @@ func declare(command string) {
 	case "-p":
 		key := args[1]
 		if value, exist := variables[key]; exist {
-			fmt.Printf("declare -- %s=%s\n", key, value)
+			fmt.Printf("declare -- %s=\"%s\"\n", key, value)
 		} else {
 			fmt.Printf("declare: %s: not found\n", args[1])
 		}
