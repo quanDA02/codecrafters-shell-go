@@ -491,9 +491,9 @@ func history(recent string) {
 				panic(err)
 			}
 			commands := strings.Split((strings.TrimSpace(string(data))), "\n")
-			fmt.Println(commands)
 			for _, command := range commands {
 				cmdHistory = append(cmdHistory, command)
+				fmt.Println(command)
 			}
 			return
 		case "-w":
