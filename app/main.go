@@ -492,6 +492,9 @@ func history(recent string) {
 			}
 			return
 		}
+		if args[0] == "-w" {
+			return
+		}
 	}
 	if index == 0 {
 		for i, command := range cmdHistory {
