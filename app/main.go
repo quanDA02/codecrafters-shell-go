@@ -482,7 +482,7 @@ func history(recent string) {
 			index, _ = strconv.Atoi(args[0])
 		}
 		if args[0] == "-r" {
-			cmdHistory = append([]string{" history" + recent}, cmdHistory...)
+			cmdHistory = append([]string{" history " + recent}, cmdHistory...)
 			return
 		}
 	}
