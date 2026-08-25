@@ -488,7 +488,7 @@ func history(recent string) {
 	}
 	if index == 0 {
 		for i, command := range cmdHistory {
-			fmt.Printf("%d %s\n", i+1, command)
+			fmt.Printf("%4d %s\n", i+1, command)
 		}
 	} else {
 		for i := len(cmdHistory) - index; i < len(cmdHistory); i++ {
