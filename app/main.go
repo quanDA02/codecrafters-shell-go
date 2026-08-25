@@ -500,7 +500,8 @@ func history(recent string) {
 			}
 			defer file.Close()
 			file.Write([]byte(text))
-			fmt.Println("tttt")
+			file.Write([]byte("\n"))
+
 			return
 		}
 
