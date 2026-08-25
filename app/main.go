@@ -14,6 +14,8 @@ import (
 	"github.com/google/shlex"
 )
 
+var HISTFILE = os.Getenv("HISTFILE")
+
 // wrap autocompele from chzyer/readline and add bell sound
 type completerBell struct {
 	completer readline.AutoCompleter
