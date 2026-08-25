@@ -565,8 +565,8 @@ func declare(command string) {
 		key, value := s[0], s[1]
 		if _, err := strconv.Atoi(string(key[0])); err != nil {
 			fmt.Printf("declare: `%s=%s': not a valid identifier\n", key, value)
+			return
 		}
-
 		variables[key] = value
 	}
 }
