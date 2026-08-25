@@ -495,9 +495,12 @@ func history(recent string) {
 				panic(err)
 			}
 			commands := strings.Split((strings.TrimSpace(string(data))), "\n")
-			for _, command := range commands {
-				cmdHistory = append(cmdHistory, command)
+			if commands[0] != "" {
+				for _, command := range commands {
+					cmdHistory = append(cmdHistory, command)
+				}
 			}
+
 			return
 		case "-w":
 			file, err := os.Create(args[1])
