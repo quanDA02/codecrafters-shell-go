@@ -516,9 +516,11 @@ func history(recent string) {
 				panic(err)
 			}
 			defer file.Close()
-			text := strings.Join(cmdHistory[appendIndex:], "\n") + "\n"
-			file.Write([]byte(text))
-			appendIndex = len(cmdHistory)
+			if appendIndex < len(cmdHistory) {
+				text := strings.Join(cmdHistory[appendIndex:], "\n") + "\n"
+				file.Write([]byte(text))
+				appendIndex = len(cmdHistory)
+			}
 			return
 		}
 
