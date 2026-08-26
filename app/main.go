@@ -553,6 +553,9 @@ var variables = make(map[string]string)
 func variableExpand(input string) {
 	vars := regexp.MustCompile(`\$(({)?[a-zA-Z_]\w*(})?)`).FindAllString(input, -1)
 	for _, cmd := range vars {
+		cmd = strings.TrimPrefix(cmd, "$")
+		cmd = strings.TrimPrefix(cmd, "{")
+		cmd = strings.TrimSuffix(cmd, "}")
 		fmt.Println(cmd + "|")
 	}
 }
