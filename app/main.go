@@ -386,7 +386,7 @@ func execute(name string) {
 		//$
 		for i, arg := range args {
 			if string(arg[0]) == "$" {
-				args[i], _ = variables[arg]
+				args[i], _ = variables[arg[1:]]
 			}
 		}
 
