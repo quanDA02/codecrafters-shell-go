@@ -245,7 +245,7 @@ func echo(s string, output *os.File) {
 func typeCommand(s string) {
 	s = strings.TrimSpace(s)
 	builtins := []string{
-		"type", "exit", "echo", "complete", "jobs", "history", "declare", "pwd",
+		"type", "exit", "echo", "complete", "jobs", "history", "declare", "pwd", "cd",
 	}
 	if slices.Contains(builtins, s) {
 		fmt.Println(s, "is a shell builtin")
@@ -431,6 +431,8 @@ func execute(input string) {
 			declare(command)
 		case "pwd":
 			pwd()
+		case "cd":
+			cd(strings.Join(args[1:], ""))
 		default:
 			isBuiltin = false
 		}
@@ -493,6 +495,13 @@ func pwd() {
 		panic(err)
 	}
 	fmt.Println(path)
+}
+
+func cd(path string) {
+	err := os.Chdir(path)
+	if err != nil {
+		panic(err)
+	}
 }
 
 // cache history
