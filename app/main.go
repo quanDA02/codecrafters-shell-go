@@ -429,6 +429,8 @@ func execute(input string) {
 		case "declare":
 			command = strings.Join(args[1:], " ")
 			declare(command)
+		case "pwd":
+			pwd()
 		default:
 			isBuiltin = false
 		}
@@ -483,6 +485,14 @@ func execute(input string) {
 	for _, cmd := range processes {
 		cmd.Wait()
 	}
+}
+
+func pwd() {
+	path, err := os.Getwd()
+	if err != nil {
+		panic(err)
+	}
+	println(path)
 }
 
 // cache history
