@@ -500,7 +500,8 @@ func pwd() {
 func cd(path string) {
 	err := os.Chdir(path)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
+		return
 	}
 }
 
