@@ -389,7 +389,7 @@ func execute(name string) {
 				str := strings.Split(arg, "$")
 				str[1] = variables[str[1]]
 				arg = strings.Join(str, "")
-				args[i], _ = arg
+				args[i] = arg
 			}
 		}
 
