@@ -383,6 +383,13 @@ func execute(name string) {
 	for i, command := range commands {
 		command = strings.TrimSpace(command)
 		args, _ := shlex.Split(command)
+		//$
+		for i, arg := range args {
+			if string(arg[0]) == "$" {
+				args[i], _ = variables[arg]
+			}
+		}
+
 		isBackground := false
 		args, stdout, stderr := redirect(args, os.Stdout, os.Stderr)
 		// jobs
