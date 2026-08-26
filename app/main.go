@@ -492,7 +492,7 @@ func pwd() {
 	if err != nil {
 		panic(err)
 	}
-	println(path)
+	fmt.Println(path)
 }
 
 // cache history
