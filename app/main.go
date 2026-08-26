@@ -551,7 +551,7 @@ func history(recent string) {
 var variables = make(map[string]string)
 
 func variableExpand(input string) {
-	vars := regexp.MustCompile(`^\$(({)?[a-zA-Z_]\w*(})?)$`).FindAllString(input, -1)
+	vars := regexp.MustCompile(`^\$(({)?[a-zA-Z_]\w*(})?)`).FindAllString(input, -1)
 	for _, cmd := range vars {
 		fmt.Println(cmd + "|")
 	}
