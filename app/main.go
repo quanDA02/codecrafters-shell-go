@@ -384,7 +384,7 @@ func execute(name string) {
 		command = strings.TrimSpace(command)
 		args, _ := shlex.Split(command)
 		//$
-		variableExpand(args[1:])
+		variableExpand(name)
 
 		isBackground := false
 		args, stdout, stderr := redirect(args, os.Stdout, os.Stderr)
@@ -550,9 +550,8 @@ func history(recent string) {
 
 var variables = make(map[string]string)
 
-func variableExpand(command []string) {
-	commands := strings.Join(command, "")
-	vars := regexp.MustCompile(`^\$(({)?[a-zA-Z_]\w*(})?)$`).FindAllString(commands, -1)
+func variableExpand(input string) {
+	vars := regexp.MustCompile(`^\$(({)?[a-zA-Z_]\w*(})?)$`).FindAllString(input, -1)
 	for _, cmd := range vars {
 		fmt.Println(cmd + "|")
 	}
