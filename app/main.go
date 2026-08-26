@@ -433,6 +433,7 @@ func execute(input string) {
 			pwd()
 		case "cd":
 			cd(strings.Join(args[1:], ""))
+			return
 		default:
 			isBuiltin = false
 		}
