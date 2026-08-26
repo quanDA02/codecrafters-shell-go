@@ -556,7 +556,8 @@ func variableExpand(input string) {
 		v := strings.TrimPrefix(cmd, "$")
 		v = strings.TrimPrefix(v, "{")
 		v = strings.TrimSuffix(v, "}")
-		input = strings.ReplaceAll(input, cmd, v)
+		value, _ := variables[v]
+		input = strings.ReplaceAll(input, cmd, value)
 		fmt.Println(input)
 	}
 
