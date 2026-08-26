@@ -500,7 +500,7 @@ func pwd() {
 func cd(path string) {
 	err := os.Chdir(path)
 	if err != nil {
-		fmt.Printf("cd: %s: no such file or directory\n", path)
+		fmt.Printf("cd: %s: No such file or directory\n", path)
 		return
 	}
 }
