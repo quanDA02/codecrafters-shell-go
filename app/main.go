@@ -385,8 +385,11 @@ func execute(name string) {
 		args, _ := shlex.Split(command)
 		//$
 		for i, arg := range args {
-			if string(arg[0]) == "$" {
-				args[i], _ = variables[arg[1:]]
+			if strings.Contains(arg, "$") {
+				str := strings.Split(arg, "$")
+				str[1] = variables[str[1]]
+				arg = strings.Join(str, "")
+				args[i], _ = variables[arg]
 			}
 		}
 
