@@ -372,20 +372,18 @@ func jobs(doneOnly bool) {
 		}
 	}
 }
-func execute(name string) {
-	if name == "" {
+func execute(input string) {
+	if input == "" {
 		return
 	}
-	cmdHistory = append(cmdHistory, name)
+	cmdHistory = append(cmdHistory, input)
 	var prevReader *os.File = os.Stdin
 	var processes []*exec.Cmd
-	commands := pipelineSplit(name)
+	input = variableExpand(input)
+	commands := pipelineSplit(input)
 	for i, command := range commands {
 		command = strings.TrimSpace(command)
 		args, _ := shlex.Split(command)
-		//$
-		variableExpand(name)
-
 		isBackground := false
 		args, stdout, stderr := redirect(args, os.Stdout, os.Stderr)
 		// jobs
@@ -463,7 +461,7 @@ func execute(name string) {
 			}
 			job := &Jobs{
 				id:     jobID,
-				name:   name,
+				name:   input,
 				recent: 0,
 				status: "Running",
 			}
@@ -550,7 +548,7 @@ func history(recent string) {
 
 var variables = make(map[string]string)
 
-func variableExpand(input string) {
+func variableExpand(input string) string {
 	vars := regexp.MustCompile(`\$(({)?[a-zA-Z_]\w*(})?)`).FindAllString(input, -1)
 	for _, cmd := range vars {
 		v := strings.TrimPrefix(cmd, "$")
@@ -558,9 +556,8 @@ func variableExpand(input string) {
 		v = strings.TrimSuffix(v, "}")
 		value, _ := variables[v]
 		input = strings.ReplaceAll(input, cmd, value)
-		fmt.Println(input)
 	}
-
+	return input
 }
 
 func declare(command string) {
