@@ -22,13 +22,10 @@ func Execute(input string) {
 	for i, command := range commands {
 		command = strings.TrimSpace(command)
 		args, _ := shlex.Split(command)
-		isBackground := false
+
 		args, stdout, stderr := redirect(args, os.Stdout, os.Stderr)
 		// jobs
-		if args[len(args)-1] == "&" {
-			isBackground = true
-			args = args[0 : len(args)-1]
-		}
+		args, isBackground := builtin.IsBackground(args)
 		cmd := exec.Command(args[0], args[1:]...)
 		var prevWriter *os.File
 		var Reader *os.File = os.Stdin
@@ -42,7 +39,6 @@ func Execute(input string) {
 		cmd.Stderr = stderr
 		cmd.Stdin = prevReader
 		// check if it is a built in command
-		fmt.Println("hello")
 		isBuiltin := executeBuiltins(args, stdout)
 		if !isBuiltin {
 			if _, err := exec.LookPath(args[0]); err != nil {

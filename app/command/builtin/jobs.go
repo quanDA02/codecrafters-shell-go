@@ -54,6 +54,15 @@ func Jobs(doneOnly bool) {
 	}
 }
 
+func IsBackground(args []string) ([]string, bool) {
+	isBackground := false
+	if args[len(args)-1] == "&" {
+		isBackground = true
+		args = args[0 : len(args)-1]
+	}
+	return args, isBackground
+}
+
 func CreateJob(args []string, cmd *exec.Cmd, input string) {
 	jobID := 1
 	for {
