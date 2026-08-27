@@ -42,6 +42,7 @@ func Execute(input string) {
 		cmd.Stderr = stderr
 		cmd.Stdin = prevReader
 		// check if it is a built in command
+		fmt.Println("hello")
 		isBuiltin := executeBuiltins(args, stdout)
 		if !isBuiltin {
 			if _, err := exec.LookPath(args[0]); err != nil {
