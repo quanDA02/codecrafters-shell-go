@@ -42,31 +42,7 @@ func Execute(input string) {
 		cmd.Stderr = stderr
 		cmd.Stdin = prevReader
 		// check if it is a built in command
-		isBuiltin := true
-		switch args[0] {
-		case "exit":
-			builtin.Exit()
-		case "type":
-			builtin.Type(args[1])
-		case "echo":
-			builtin.Echo(strings.Join(args[1:], " "), stdout)
-		case "complete":
-			builtin.Complete(args[1:])
-		case "jobs":
-			builtin.Jobs(false)
-		case "history":
-			builtin.History(args)
-		case "declare":
-			command = strings.Join(args[1:], " ")
-			builtin.Declare(command)
-		case "pwd":
-			builtin.Pwd()
-		case "cd":
-			builtin.Cd(strings.Join(args[1:], ""))
-			return
-		default:
-			isBuiltin = false
-		}
+		isBuiltin := executeBuiltins(args, stdout)
 		if !isBuiltin {
 			if _, err := exec.LookPath(args[0]); err != nil {
 				fmt.Printf("%s: command not found\n", args[0])
